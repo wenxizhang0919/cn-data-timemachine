@@ -77,18 +77,21 @@ def test_end_to_end(tmp_path, monkeypatch):
     monkeypatch.setattr(collect, "STATUS_DIR", tmp_path / "_status")
     fake = FakeSession()
     monkeypatch.setattr(collect, "make_session", lambda: fake)
+    monkeypatch.setattr(appstore_cn, "PAUSE_SECONDS", 0)
 
+    n_feeds = len(appstore_cn.CHARTS) * len(appstore_cn.GENRES)
     assert collect.main(["appstore_cn"]) == 0
-    assert len(fake.urls) == 6  # 3 个榜 x (总榜 + 游戏)
-    assert "genre=6014" in fake.urls[1]
+    assert len(fake.urls) == n_feeds
+    assert any("genre=6014" in u for u in fake.urls)
+    assert all("limit=100" in u for u in fake.urls)
     files = list(tmp_path.glob("appstore_cn/*/*.csv"))
     assert len(files) == 1
     with files[0].open(encoding="utf-8-sig") as f:
         rows = list(csv.DictReader(f))
-    assert len(rows) == 12
+    assert len(rows) == 2 * n_feeds
     assert rows[0]["date"] and rows[0]["fetched_at_utc"].endswith("Z")
     status = json.loads(next((tmp_path / "_status").glob("*.json")).read_text("utf-8"))
-    assert status["sources"]["appstore_cn"]["rows"] == 12
+    assert status["sources"]["appstore_cn"]["rows"] == 2 * n_feeds
 
     # 同一天再跑一次应跳过，不重复请求
     fake.urls.clear()
@@ -96,10 +99,28 @@ def test_end_to_end(tmp_path, monkeypatch):
     assert fake.urls == []
 
 
+def test_partial_failure_keeps_other_charts(tmp_path, monkeypatch):
+    monkeypatch.setattr(collect, "DATA_DIR", tmp_path)
+    monkeypatch.setattr(collect, "STATUS_DIR", tmp_path / "_status")
+    monkeypatch.setattr(collect.time, "sleep", lambda s: None)
+    monkeypatch.setattr(appstore_cn, "PAUSE_SECONDS", 0)
+
+    class Flaky(FakeSession):
+        def get(self, url, timeout=None, **kw):
+            if "genre=6000" in url:
+                raise ConnectionError("one feed down")
+            return FakeResp(SAMPLE)
+
+    monkeypatch.setattr(collect, "make_session", lambda: Flaky())
+    assert collect.main(["appstore_cn"]) == 0
+    assert list(tmp_path.glob("appstore_cn/*/*.csv"))
+
+
 def test_failure_returns_nonzero(tmp_path, monkeypatch):
     monkeypatch.setattr(collect, "DATA_DIR", tmp_path)
     monkeypatch.setattr(collect, "STATUS_DIR", tmp_path / "_status")
     monkeypatch.setattr(collect.time, "sleep", lambda s: None)
+    monkeypatch.setattr(appstore_cn, "PAUSE_SECONDS", 0)
 
     class Boom(FakeSession):
         def get(self, url, timeout=None, **kw):

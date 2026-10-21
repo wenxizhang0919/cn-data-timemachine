@@ -4,7 +4,12 @@ on:
   schedule:
     # 每天北京时间 10:17（UTC 02:17）。避开整点，GitHub 整点排队最严重。
     - cron: "17 2 * * *"
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "当天已采集也重新采集"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -29,7 +34,7 @@ jobs:
       - name: Collect
         id: collect
         continue-on-error: true
-        run: python collect.py
+        run: python collect.py ${{ inputs.force && '--force' || '' }}
 
       - name: Commit data
         run: |
