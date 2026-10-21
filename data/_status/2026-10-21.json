@@ -1,11 +1,11 @@
 {
   "date": "2026-10-21",
-  "fetched_at_utc": "2026-10-21T13:51:06Z",
+  "fetched_at_utc": "2026-10-21T13:53:28Z",
   "sources": {
     "appstore_cn": {
       "ok": true,
-      "rows": 597,
-      "seconds": 5.5
+      "rows": 7342,
+      "seconds": 94.1
     }
   }
 }
