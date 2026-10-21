@@ -79,7 +79,7 @@ def test_end_to_end(tmp_path, monkeypatch):
     monkeypatch.setattr(collect, "make_session", lambda: fake)
     monkeypatch.setattr(appstore_cn, "PAUSE_SECONDS", 0)
 
-    n_feeds = len(appstore_cn.CHARTS) * len(appstore_cn.GENRES)
+    n_feeds = len(appstore_cn.feeds())
     assert collect.main(["appstore_cn"]) == 0
     assert len(fake.urls) == n_feeds
     assert any("genre=6014" in u for u in fake.urls)
@@ -129,3 +129,33 @@ def test_failure_returns_nonzero(tmp_path, monkeypatch):
     monkeypatch.setattr(collect, "make_session", lambda: Boom())
     assert collect.main(["appstore_cn"]) == 1
     assert not list(tmp_path.glob("appstore_cn/*/*.csv"))
+
+
+def test_podcasts_end_to_end(tmp_path, monkeypatch):
+    from sources import apple_podcasts_cn
+
+    monkeypatch.setattr(collect, "DATA_DIR", tmp_path)
+    monkeypatch.setattr(collect, "STATUS_DIR", tmp_path / "_status")
+    monkeypatch.setattr(apple_podcasts_cn, "PAUSE_SECONDS", 0)
+    sample = {"feed": {"title": {"label": "iTunes Store：热门播客"}, "entry": SAMPLE["feed"]["entry"]}}
+
+    class S(FakeSession):
+        def get(self, url, timeout=None, **kw):
+            self.urls.append(url)
+            return FakeResp(sample)
+
+    fake = S()
+    monkeypatch.setattr(collect, "make_session", lambda: fake)
+    assert collect.main(["apple_podcasts_cn"]) == 0
+    assert all("/toppodcasts/" in u for u in fake.urls)
+    assert len(fake.urls) == len(apple_podcasts_cn.GENRE_IDS)
+    f = next(tmp_path.glob("apple_podcasts_cn/*/*.csv"))
+    with f.open(encoding="utf-8-sig") as fh:
+        rows = list(csv.DictReader(fh))
+    assert rows[0]["chart_title"] == "iTunes Store：热门播客"
+    assert rows[0]["podcast_id"] == "1142110895"
+
+
+def test_private_modules_not_sources():
+    assert "_apple" not in collect.discover_sources()
+    assert {"appstore_cn", "apple_podcasts_cn"} <= set(collect.discover_sources())

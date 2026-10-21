@@ -1,21 +1,30 @@
-"""App Store 中国区排行榜（免费榜 / 付费榜 / 畅销榜 × 总榜 + 全部分类，各前 100 名）。
+"""App Store 中国区排行榜。
 
-来源：Apple 官方公开 RSS 接口，只提供当前榜单，不提供历史。
+- iPhone：免费榜 / 付费榜 / 畅销榜 × 总榜 + 全部 25 个分类
+- iPad：免费榜 / 付费榜 / 畅销榜 × 总榜 + 游戏
+- Mac：免费榜（中国区 Mac 付费榜、畅销榜为空）
+- 新上架：新 App / 新免费 / 新付费
+
+来源：Apple 官方公开 RSS 接口，只提供当前榜单，不提供历史。每个榜单最多 100 条。
 每天存一次，就得到每个 App 的日度排名面板数据。
-注：该接口每个榜单最多返回 100 条。
 """
 
-import time
+from sources import _apple
 
 NAME = "appstore_cn"
 TITLE = "App Store 中国区排行榜"
 
-BASE = "https://itunes.apple.com/cn/rss/{chart}/limit={limit}{genre}/json"
-
 CHARTS = {
-    "topfreeapplications": "免费榜",
-    "toppaidapplications": "付费榜",
-    "topgrossingapplications": "畅销榜",
+    "topfreeapplications": "iPhone 免费榜",
+    "toppaidapplications": "iPhone 付费榜",
+    "topgrossingapplications": "iPhone 畅销榜",
+    "topfreeipadapplications": "iPad 免费榜",
+    "toppaidipadapplications": "iPad 付费榜",
+    "topgrossingipadapplications": "iPad 畅销榜",
+    "topfreemacapps": "Mac 免费榜",
+    "newapplications": "新上架",
+    "newfreeapplications": "新上架免费",
+    "newpaidapplications": "新上架付费",
 }
 GENRES = {
     "": "总榜",
@@ -45,62 +54,52 @@ GENRES = {
     "6026": "开发者工具",
     "6027": "图形和设计",
 }
-LIMIT = 100
+IPHONE_CHARTS = ["topfreeapplications", "toppaidapplications", "topgrossingapplications"]
+IPAD_CHARTS = ["topfreeipadapplications", "toppaidipadapplications", "topgrossingipadapplications"]
+OTHER_CHARTS = ["topfreemacapps", "newapplications", "newfreeapplications", "newpaidapplications"]
+
 PAUSE_SECONDS = 0.5  # 请求之间稍作停顿，对接口友好
 
 
-def _label(d, *path, default=""):
-    for p in path:
-        if not isinstance(d, dict):
-            return default
-        d = d.get(p)
-    return d if d is not None else default
+def feeds():
+    out = [(c, g) for c in IPHONE_CHARTS for g in GENRES]
+    out += [(c, g) for c in IPAD_CHARTS for g in ("", "6014")]
+    out += [(c, "") for c in OTHER_CHARTS]
+    return out
 
 
-def parse(feed_json: dict, chart: str, genre: str) -> list[dict]:
-    entries = _label(feed_json, "feed", "entry", default=[])
-    if isinstance(entries, dict):  # 只有一条时 Apple 返回对象而不是数组
-        entries = [entries]
-    rows = []
-    for rank, e in enumerate(entries, start=1):
-        rows.append(
-            {
-                "chart": chart,
-                "chart_name": CHARTS.get(chart, chart),
-                "genre_id": genre or "all",
-                "genre_name": GENRES.get(genre, genre),
-                "rank": rank,
-                "app_id": _label(e, "id", "attributes", "im:id"),
-                "bundle_id": _label(e, "id", "attributes", "im:bundleId"),
-                "name": _label(e, "im:name", "label"),
-                "artist": _label(e, "im:artist", "label"),
-                "category_id": _label(e, "category", "attributes", "im:id"),
-                "category": _label(e, "category", "attributes", "label"),
-                "price": _label(e, "im:price", "attributes", "amount"),
-                "currency": _label(e, "im:price", "attributes", "currency"),
-                "release_date": _label(e, "im:releaseDate", "label")[:10],
-            }
-        )
-    return rows
+def to_rows(chart, genre, items):
+    return [
+        {
+            "chart": chart,
+            "chart_name": CHARTS.get(chart, chart),
+            "genre_id": genre or "all",
+            "genre_name": GENRES.get(genre, genre),
+            "rank": it["rank"],
+            "app_id": it["id"],
+            "bundle_id": it["bundle_id"],
+            "name": it["name"],
+            "artist": it["artist"],
+            "category_id": it["category_id"],
+            "category": it["category"],
+            "price": it["price"],
+            "currency": it["currency"],
+            "release_date": it["release_date"],
+        }
+        for it in items
+    ]
+
+
+def parse(feed_json, chart, genre):
+    """兼容旧测试：解析单个榜单为输出行。"""
+    _, items = _apple.parse(feed_json)
+    return to_rows(chart, genre, items)
 
 
 def collect(session, run) -> list[dict]:
-    from collect import get_json
-
     rows = []
-    errors = []
-    for chart in CHARTS:
-        for genre in GENRES:
-            url = BASE.format(
-                chart=chart, limit=LIMIT, genre=f"/genre={genre}" if genre else ""
-            )
-            try:
-                rows.extend(parse(get_json(session, url), chart, genre))
-            except Exception as e:  # noqa: BLE001  单个榜单失败不影响其他榜单
-                errors.append(f"{chart}/{genre or 'all'}: {e!r}")
-            time.sleep(PAUSE_SECONDS)
-    if errors and not rows:
-        raise RuntimeError("; ".join(errors[:5]))
-    for msg in errors:
-        print(f"  [warn] {msg}")
+    for chart, genre, _title, items in _apple.fetch_feeds(
+        session, feeds(), pause=PAUSE_SECONDS
+    ):
+        rows.extend(to_rows(chart, genre, items))
     return rows
