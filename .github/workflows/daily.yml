@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       force:
-        description: "当天已采集也重新采集"
+        description: "当天已采集也重新采集（只会覆盖当天的文件）"
         type: boolean
         default: false
 
@@ -21,7 +21,7 @@ concurrency:
 jobs:
   collect:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
 
@@ -29,28 +29,51 @@ jobs:
         with:
           python-version: "3.12"
 
-      - run: pip install -r requirements.txt
+      - run: pip install -r requirements.txt opentimestamps-client
+
+      - name: Date (Asia/Shanghai)
+        id: d
+        run: echo "date=$(TZ=Asia/Shanghai date +%F)" >> "$GITHUB_OUTPUT"
 
       - name: Collect
         id: collect
         continue-on-error: true
         run: python collect.py ${{ inputs.force && '--force' || '' }}
 
-      - name: Commit data
+      - name: Ledger (hash chain) and catalog
+        run: |
+          python ledger.py "${{ steps.d.outputs.date }}"
+          python make_catalog.py
+
+      # 公共时间戳：把当天账本的哈希提交给 OpenTimestamps 日历服务器，几小时后锚定到比特币区块。
+      # 之后每天顺便把旧的时间戳证明升级为完整证明。失败不影响采集。
+      - name: OpenTimestamps
+        continue-on-error: true
+        run: |
+          rm -f "ledger/${{ steps.d.outputs.date }}.json.ots"
+          ots stamp "ledger/${{ steps.d.outputs.date }}.json"
+          for f in ledger/*.json.ots; do ots upgrade "$f" || true; done
+
+      - name: Verify and commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data
+          git add data ledger DATASETS.md datasets.json
+          python scripts/check_immutable.py "${{ steps.d.outputs.date }}"
+          python scripts/verify.py
           if git diff --cached --quiet; then
-            echo "no changes"
-          else
-            git commit -m "data: $(TZ=Asia/Shanghai date +%F)"
-            # 运行期间仓库可能有新提交（例如新增了数据源），先变基再推，最多重试 3 次
-            for i in 1 2 3; do
-              git pull --rebase -q origin main && git push && break
-              sleep 5
-            done
+            echo "no changes"; exit 0
           fi
+          git commit -m "data: ${{ steps.d.outputs.date }}"
+          # 运行期间仓库可能有新提交（例如新增了数据源），先变基再推，最多重试 3 次
+          for i in 1 2 3; do
+            git pull --rebase -q origin main && git push && break
+            sleep 5
+          done
+          # 当日版本标签：论文可引用到某一天的确切版本
+          tag="snapshot-${{ steps.d.outputs.date }}"
+          git tag -f "$tag"
+          git push -f origin "refs/tags/$tag"
 
       # 有数据源失败时让整个任务标红，GitHub 会发邮件提醒仓库主人
       - name: Fail if any source failed

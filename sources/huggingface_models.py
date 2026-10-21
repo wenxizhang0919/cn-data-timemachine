@@ -11,6 +11,21 @@ import time
 
 NAME = "huggingface_models"
 TITLE = "Hugging Face 热度（模型/数据集/应用）"
+SOURCE_URL = 'https://huggingface.co/api/'
+LICENSE = '🟢 Hugging Face 公开 API。仅存档公开仓库的统计数字（下载量、点赞数、热度）。'
+FIELDS = {
+    'kind': '类型：model / dataset / space',
+    'list': '榜单：trending、top_downloads、top_likes 或 org:<机构>',
+    'rank': '名次（1 起）',
+    'repo_id': '仓库 ID（机构/名称）',
+    'author': '发布机构或账号',
+    'downloads_30d': '近 30 天下载量（接口口径）',
+    'likes': '点赞数',
+    'trending_score': '当前热度分',
+    'pipeline_tag': '任务类型',
+    'library_or_sdk': '框架（模型）或 SDK（Spaces）',
+    'created_at': '仓库创建日期',
+}
 
 API = "https://huggingface.co/api/{kind}"
 

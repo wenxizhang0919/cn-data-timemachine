@@ -6,6 +6,20 @@
 
 NAME = "hk_carpark_vacancy"
 TITLE = "香港停车场实时空位"
+SOURCE_URL = 'https://api.data.gov.hk/v1/carpark-info-vacancy'
+LICENSE = '🟢 香港运输署开放数据（DATA.GOV.HK 使用条款），来源：运输署。'
+FIELDS = {
+    'park_id': '停车场 ID',
+    'name': '停车场名称',
+    'district': '所在区',
+    'vehicle_type': '车辆类型（privateCar、LGV 等）',
+    'vacancy_type': '空位类型代码',
+    'vacancy': '空位数',
+    'vacancy_ev': '电动车空位数',
+    'vacancy_dis': '残疾人士空位数',
+    'category': '细分类别',
+    'last_update': '该停车场数据的更新时间',
+}
 
 URL = "https://api.data.gov.hk/v1/carpark-info-vacancy"
 

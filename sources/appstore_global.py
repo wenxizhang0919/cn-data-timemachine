@@ -8,6 +8,21 @@ from sources import _apple
 
 NAME = "appstore_global"
 TITLE = "全球 App Store 排行榜"
+SOURCE_URL = 'https://itunes.apple.com/{country}/rss/'
+LICENSE = '🟢 Apple 官方公开 RSS 接口。仅存档排名、价格等事实数据；App 名称、商标归各自权利人。'
+FIELDS = {
+    'country': '国家/地区代码（Apple 商店区）',
+    'country_name': '国家/地区中文名',
+    'chart': '榜单（免费榜/畅销榜/游戏免费榜/游戏畅销榜）',
+    'rank': '名次（1 起）',
+    'app_id': 'App Store 应用 ID',
+    'bundle_id': '应用包名',
+    'name': '应用名称',
+    'artist': '开发者',
+    'category': '应用主分类',
+    'price': '价格',
+    'currency': '币种',
+}
 
 COUNTRIES = {
     "us": "美国", "ca": "加拿大", "mx": "墨西哥", "br": "巴西", "ar": "阿根廷",

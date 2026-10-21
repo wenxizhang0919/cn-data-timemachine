@@ -8,6 +8,19 @@ from sources import _apple
 
 NAME = "apple_podcasts_cn"
 TITLE = "Apple 播客中国区排行榜"
+SOURCE_URL = 'https://itunes.apple.com/cn/rss/toppodcasts/'
+LICENSE = '🟢 Apple 官方公开 RSS 接口。仅存档排名等事实数据；节目名称归各自权利人。'
+FIELDS = {
+    'genre_id': '请求的分类 ID，all 为总榜',
+    'chart_title': '接口返回的榜单标题',
+    'rank': '名次（1 起）',
+    'podcast_id': 'Apple 播客 ID',
+    'name': '节目名称',
+    'artist': '制作方',
+    'category_id': '节目所属细分类 ID',
+    'category': '节目所属细分类',
+    'release_date': '最近更新日期',
+}
 
 # 顶层分类编号；名称以接口返回的榜单标题为准（chart_title 列），避免手写对照表出错
 GENRE_IDS = [

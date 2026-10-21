@@ -13,6 +13,24 @@ from sources import _apple
 
 NAME = "appstore_cn"
 TITLE = "App Store 中国区排行榜"
+SOURCE_URL = 'https://itunes.apple.com/cn/rss/'
+LICENSE = '🟢 Apple 官方公开 RSS 接口。仅存档排名、价格等事实数据；App 名称、商标归各自权利人。'
+FIELDS = {
+    'chart': '榜单接口名',
+    'chart_name': '榜单中文名（iPhone 免费榜等）',
+    'genre_id': '分类 ID，all 为总榜',
+    'genre_name': '分类中文名',
+    'rank': '名次（1 起）',
+    'app_id': 'App Store 应用 ID',
+    'bundle_id': '应用包名',
+    'name': '应用名称',
+    'artist': '开发者',
+    'category_id': '应用主分类 ID',
+    'category': '应用主分类',
+    'price': '价格',
+    'currency': '币种',
+    'release_date': '首次上架日期',
+}
 
 CHARTS = {
     "topfreeapplications": "iPhone 免费榜",

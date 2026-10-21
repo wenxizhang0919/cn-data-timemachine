@@ -3,11 +3,17 @@
 用法:
     python collect.py                 # 运行全部数据源
     python collect.py appstore_cn     # 只运行指定数据源
-    python collect.py --force         # 当天文件已存在也重新采集
+    python collect.py --force         # 当天文件已存在也重新采集（只会覆盖"当天"的文件）
+
+原始层 data/raw/ 的规则：每天一个文件，只在当天写入；过了当天永不修改。
+每次采集都在 data/raw/_status/<日期>.json 里记录行数、耗时和文件的 sha256。
 
 每个数据源是 sources/ 下的一个模块，需提供：
-    NAME: str            数据源标识，也是 data/ 下的目录名
+    NAME: str            数据集固定 ID，也是 data/raw/ 下的目录名
     TITLE: str           中文名
+    SOURCE_URL: str      数据来源（原始服务的地址）
+    LICENSE: str         许可/使用条款说明（含 🟢/🟡 等级）
+    FIELDS: dict         字段名 -> 字段说明
     collect(session, run) -> list[dict]
         返回当天采集到的行；每行是扁平的 dict。
 """
@@ -16,6 +22,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import importlib
 import json
 import pkgutil
@@ -29,14 +36,18 @@ from pathlib import Path
 import requests
 
 ROOT = Path(__file__).resolve().parent
-DATA_DIR = ROOT / "data"
+DATA_DIR = ROOT / "data" / "raw"
 STATUS_DIR = DATA_DIR / "_status"
 CST = timezone(timedelta(hours=8))  # 以北京时间划分"哪一天"
 
-USER_AGENT = (
-    "cn-data-timemachine/0.1 (daily public-data snapshot for research; "
-    "+https://github.com/)"
-)
+REPO_URL = "https://github.com/wenxizhang0919/cn-data-timemachine"
+USER_AGENT = f"cn-data-timemachine/0.2 (daily snapshot archive for research; +{REPO_URL})"
+
+# 每行都会自动加上的公共字段
+COMMON_FIELDS = {
+    "date": "采集日期（北京时间），即数据版本日期",
+    "fetched_at_utc": "实际采集时刻（UTC）",
+}
 
 
 @dataclass
@@ -96,6 +107,14 @@ def write_csv(path: Path, rows: list[dict]) -> None:
     tmp.replace(path)
 
 
+def sha256(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("only", nargs="*", help="只运行这些数据源")
@@ -111,7 +130,10 @@ def main(argv=None) -> int:
     selected = args.only or sorted(sources)
     session = make_session()
 
-    status = {"date": run.date, "fetched_at_utc": run.fetched_at_utc, "sources": {}}
+    status_path = STATUS_DIR / f"{run.date}.json"
+    status = {"date": run.date, "sources": {}}
+    if status_path.exists():  # 同一天多次运行（如只补采一个源）时保留其他源的记录
+        status = json.loads(status_path.read_text(encoding="utf-8"))
     failed = 0
     for name in selected:
         mod = sources.get(name)
@@ -121,7 +143,6 @@ def main(argv=None) -> int:
         path = out_path(name, run.date)
         if path.exists() and not args.force:
             print(f"[skip] {name}: 今天已采集")
-            status["sources"][name] = {"ok": True, "skipped": True}
             continue
         t0 = time.time()
         try:
@@ -136,18 +157,23 @@ def main(argv=None) -> int:
                 "ok": True,
                 "rows": len(rows),
                 "seconds": round(time.time() - t0, 1),
+                "fetched_at_utc": run.fetched_at_utc,
+                "file": path.relative_to(DATA_DIR).as_posix(),
+                "sha256": sha256(path),
             }
             print(f"[ok]   {name}: {len(rows)} 行 -> {path}")
         except Exception as e:  # noqa: BLE001
             failed += 1
-            status["sources"][name] = {"ok": False, "error": repr(e)[:500]}
+            status["sources"][name] = {
+                "ok": False,
+                "fetched_at_utc": run.fetched_at_utc,
+                "error": repr(e)[:500],
+            }
             print(f"[fail] {name}: {e!r}")
             traceback.print_exc()
 
     STATUS_DIR.mkdir(parents=True, exist_ok=True)
-    (STATUS_DIR / f"{run.date}.json").write_text(
-        json.dumps(status, ensure_ascii=False, indent=2), encoding="utf-8"
-    )
+    status_path.write_text(json.dumps(status, ensure_ascii=False, indent=2), encoding="utf-8")
     return 1 if failed else 0
 
 

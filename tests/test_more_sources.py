@@ -78,6 +78,7 @@ def test_appstore_global(monkeypatch):
     assert len(rows) == n_ok * len(appstore_global.FEEDS)
     assert {r["country"] for r in rows} == set(appstore_global.COUNTRIES) - {"jp"}
     assert rows[0]["name"] == "TikTok" and rows[0]["chart"] == "免费榜"
+    assert set(rows[0]) == set(appstore_global.FIELDS)
     assert any(r["chart"] == "游戏畅销榜" for r in rows)
 
 
@@ -101,6 +102,7 @@ def test_huggingface(monkeypatch):
     assert r["downloads_30d"] == 17924 and r["created_at"] == "2026-10-17" and r["rank"] == 1
     assert any(p.get("author") == "Qwen" for _, p in s.calls)
     assert {r["kind"] for r in rows} == {"model", "dataset", "space"}
+    assert set(rows[0]) == set(huggingface_models.FIELDS)
     assert any(u.endswith("/api/spaces") for u, _ in s.calls)
 
 
@@ -124,6 +126,7 @@ def test_hk_weather():
         ],
     }
     rows = hk_weather_forecast.collect(Router(lambda u, p: data), RUN)
+    assert set(rows[0]) == set(hk_weather_forecast.FIELDS)
     assert rows == [
         {
             "issued_at": "2026-10-21T11:30:00+08:00",
@@ -159,6 +162,7 @@ def test_hk_carpark():
     rows = hk_carpark_vacancy.collect(s, RUN)
     assert len(rows) == 2
     assert rows[0]["name"] == "大會堂停車場" and rows[0]["vacancy"] == 37
+    assert set(rows[0]) == set(hk_carpark_vacancy.FIELDS)
     assert {r["vehicle_type"] for r in rows} == {"privateCar", "LGV"}
 
     # 名称接口失败也照常返回空位
@@ -216,6 +220,7 @@ def test_steam_collect_dedup_and_rank(monkeypatch):
     # 每个榜单翻两页，但同样的 2 个游戏去重后只保留 2 条
     assert len(rows) == 2 * len(steam_cn.LISTS)
     assert [r["rank"] for r in rows[:2]] == [1, 2]
+    assert set(rows[0]) == set(steam_cn.FIELDS)
     assert all(p["cc"] == "cn" for _, p in s.calls)
 
 
@@ -243,6 +248,7 @@ def test_llm_prices():
     }
     rows = llm_api_prices.collect(Router(lambda u, p: data), RUN)
     a, b = rows
+    assert set(a) == set(llm_api_prices.FIELDS)
     assert a["vendor"] == "deepseek" and a["prompt_usd_per_m"] == 0.3 and a["completion_usd_per_m"] == 1.2
     assert a["cache_read_usd_per_m"] == 0.006 and a["has_time_based_pricing"] is True
     assert a["created"].startswith("2026-")

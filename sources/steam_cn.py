@@ -10,6 +10,22 @@ import time
 
 NAME = "steam_cn"
 TITLE = "Steam 中国区畅销榜"
+SOURCE_URL = 'https://store.steampowered.com/search/?filter=topsellers&cc=cn'
+LICENSE = '🟡 Steam 商店公开页面（遵守 robots.txt，每日 4 次请求）。仅存档排名、价格、评测数等事实数据；游戏名称归各自权利人。'
+FIELDS = {
+    'list': '榜单（畅销榜/热门新品）',
+    'rank': '名次（1 起）',
+    'appid': 'Steam 应用 ID',
+    'title': '游戏名称',
+    'released': '发售日期（原文）',
+    'review_summary': '评测总结（如特别好评）',
+    'review_count': '评测数（简中口径）',
+    'review_positive_pct': '好评率（%）',
+    'price_cny': '当前人民币价格（元）',
+    'discount_pct': '折扣（%）',
+    'prepurchase': '是否预购',
+    'tag_ids': 'Steam 标签 ID 列表',
+}
 
 URL = "https://store.steampowered.com/search/results/"
 LISTS = {
@@ -17,8 +33,9 @@ LISTS = {
     "popularnew": "热门新品",
 }
 TOP_N = 100
-PAGE = 50
-PAUSE_SECONDS = 1.0
+PAGE = 25
+PAUSE_SECONDS = 2.0
+RETRIES = 5  # Steam 偶发 502，多试几次
 
 _ROW = re.compile(r'<a\s+href="[^"]*"\s+data-ds-appid="([^"]+)"(.*?)</a>', re.S)
 _TITLE = re.compile(r'<span class="title">(.*?)</span>', re.S)
@@ -72,6 +89,7 @@ def collect(session, run) -> list[dict]:
                 data = get_json(
                     session,
                     URL,
+                    retries=RETRIES,
                     params={
                         "filter": key, "cc": "cn", "l": "schinese",
                         "start": start, "count": PAGE, "infinite": 1,

@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "如使用本存档中的数据，请按以下信息引用，并注明数据集 ID 与版本日期（snapshot-YYYY-MM-DD）。"
+title: "每日数据时光机：公开数据日度快照存档 (cn-data-timemachine)"
+type: dataset
+authors:
+  - alias: wenxizhang0919
+repository-code: "https://github.com/wenxizhang0919/cn-data-timemachine"
+url: "https://github.com/wenxizhang0919/cn-data-timemachine"
+date-released: 2026-10-21
+keywords:
+  - daily snapshot
+  - panel data
+  - App Store rankings
+  - hash chain
+  - reproducible archive
+abstract: >-
+  对只提供当前数据、不提供历史的公开数据源进行每日快照存档。原始快照只增不改，
+  每日账本以 SHA-256 哈希链串联并以 OpenTimestamps 做公共时间戳，任何人可独立验证。

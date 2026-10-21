@@ -43,6 +43,7 @@ def test_parse_ranks_and_fields():
     assert rows[0]["release_date"] == "2016-09-25"
     assert rows[1]["price"] == ""  # 缺字段不报错
     assert rows[1]["genre_name"] == "总榜"
+    assert set(rows[0]) == set(appstore_cn.FIELDS)
 
 
 def test_single_entry_object():
@@ -154,6 +155,7 @@ def test_podcasts_end_to_end(tmp_path, monkeypatch):
         rows = list(csv.DictReader(fh))
     assert rows[0]["chart_title"] == "iTunes Store：热门播客"
     assert rows[0]["podcast_id"] == "1142110895"
+    assert set(rows[0]) - {"date", "fetched_at_utc"} == set(apple_podcasts_cn.FIELDS)
 
 
 def test_private_modules_not_sources():
