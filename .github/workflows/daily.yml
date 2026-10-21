@@ -45,7 +45,11 @@ jobs:
             echo "no changes"
           else
             git commit -m "data: $(TZ=Asia/Shanghai date +%F)"
-            git push
+            # 运行期间仓库可能有新提交（例如新增了数据源），先变基再推，最多重试 3 次
+            for i in 1 2 3; do
+              git pull --rebase -q origin main && git push && break
+              sleep 5
+            done
           fi
 
       # 有数据源失败时让整个任务标红，GitHub 会发邮件提醒仓库主人

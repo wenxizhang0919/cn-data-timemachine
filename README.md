@@ -12,6 +12,10 @@
 |---|---|---|---|---|
 | `appstore_cn` | App Store 中国区：iPhone 免费/付费/畅销榜（总榜 + 全部 25 个分类）、iPad 三榜（总榜 + 游戏）、Mac 免费榜、新上架榜，各前 100 名 | 每日 | 2026-10-21 | 🟢 Apple 官方公开 RSS |
 | `apple_podcasts_cn` | Apple 播客中国区排行榜（总榜 + 18 个分类，各前 100 名） | 每日 | 2026-10-21 | 🟢 Apple 官方公开 RSS |
+| `appstore_global` | 全球 37 个国家/地区 App Store 免费榜、畅销榜、游戏免费榜、游戏畅销榜（各前 100 名），可追踪中国应用出海 | 每日 | 2026-10-21 | 🟢 Apple 官方公开 RSS |
+| `huggingface_models` | Hugging Face 热门/下载/点赞榜各前 100，及 DeepSeek、通义千问、智谱、Kimi、MiniMax 等中国 AI 机构模型的近 30 天下载量、点赞数 | 每日 | 2026-10-21 | 🟢 Hugging Face 公开 API |
+| `hk_weather_forecast` | 香港天文台九天预报（每天存下当天发布的预报，可研究预报准确率） | 每日 | 2026-10-21 | 🟢 香港天文台开放数据 |
+| `hk_carpark_vacancy` | 香港约 430 个停车场的实时空位（每天固定时点快照） | 每日 | 2026-10-21 | 🟢 香港运输署开放数据 |
 
 更多数据源正在陆续加入，见 [Issues](../../issues)。
 
