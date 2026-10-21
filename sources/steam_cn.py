@@ -9,6 +9,8 @@ import re
 import time
 
 NAME = "steam_cn"
+# 暂停：Steam 对 GitHub Actions 服务器返回 502（2026-10-21 起），待迁移到国内服务器后恢复
+ENABLED = False
 TITLE = "Steam 中国区畅销榜"
 SOURCE_URL = 'https://store.steampowered.com/search/?filter=topsellers&cc=cn'
 LICENSE = '🟡 Steam 商店公开页面（遵守 robots.txt，每日 4 次请求）。仅存档排名、价格、评测数等事实数据；游戏名称归各自权利人。'

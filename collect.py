@@ -127,7 +127,8 @@ def main(argv=None) -> int:
         fetched_at_utc=now.strftime("%Y-%m-%dT%H:%M:%SZ"),
     )
     sources = discover_sources()
-    selected = args.only or sorted(sources)
+    # 未指定时只运行启用的数据源；ENABLED = False 的数据源可手动指定运行
+    selected = args.only or sorted(n for n, m in sources.items() if getattr(m, "ENABLED", True))
     session = make_session()
 
     status_path = STATUS_DIR / f"{run.date}.json"

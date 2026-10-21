@@ -36,6 +36,7 @@ def build() -> list[dict]:
             {
                 "id": name,
                 "title": mod.TITLE,
+                "enabled": getattr(mod, "ENABLED", True),
                 "description": (mod.__doc__ or "").strip(),
                 "source_url": mod.SOURCE_URL,
                 "license": mod.LICENSE,
@@ -61,7 +62,7 @@ def render_md(cat: list[dict]) -> str:
     ]
     for d in cat:
         lines.append(
-            f"| [`{d['id']}`](#{d['id']}) | {d['title']} | {d['first_snapshot'] or '—'} | "
+            f"| [`{d['id']}`](#{d['id']}) | {d['title']}{'' if d['enabled'] else '（暂停）'} | {d['first_snapshot'] or '—'} | "
             f"{d['latest_snapshot'] or '—'} | {d['days_archived']} | {d['days_missing']} |"
         )
     for d in cat:
@@ -75,6 +76,7 @@ def render_md(cat: list[dict]) -> str:
             "",
             f"- 来源：<{d['source_url']}>" if "{" not in d["source_url"] else f"- 来源：`{d['source_url']}`",
             f"- 许可：{d['license']}",
+            *([] if d["enabled"] else ["- 状态：**暂停采集**（原因见 CHANGELOG.md）"]),
             f"- 文件：`{d['path']}`",
             "",
             "| 字段 | 说明 |",

@@ -2,6 +2,7 @@
   {
     "id": "apple_podcasts_cn",
     "title": "Apple 播客中国区排行榜",
+    "enabled": true,
     "description": "Apple 播客中国区排行榜（总榜 + 各分类，各前 100 名）。\n\n来源：Apple 官方公开 RSS 接口，只提供当前榜单，不提供历史。\n可用于研究中文播客的热度变化、新节目崛起、分类竞争格局等。",
     "source_url": "https://itunes.apple.com/cn/rss/toppodcasts/",
     "license": "🟢 Apple 官方公开 RSS 接口。仅存档排名等事实数据；节目名称归各自权利人。",
@@ -27,6 +28,7 @@
   {
     "id": "appstore_cn",
     "title": "App Store 中国区排行榜",
+    "enabled": true,
     "description": "App Store 中国区排行榜。\n\n- iPhone：免费榜 / 付费榜 / 畅销榜 × 总榜 + 全部 25 个分类\n- iPad：免费榜 / 付费榜 / 畅销榜 × 总榜 + 游戏\n- Mac：免费榜（中国区 Mac 付费榜、畅销榜为空）\n- 新上架：新 App / 新免费 / 新付费\n\n来源：Apple 官方公开 RSS 接口，只提供当前榜单，不提供历史。每个榜单最多 100 条。\n每天存一次，就得到每个 App 的日度排名面板数据。",
     "source_url": "https://itunes.apple.com/cn/rss/",
     "license": "🟢 Apple 官方公开 RSS 接口。仅存档排名、价格等事实数据；App 名称、商标归各自权利人。",
@@ -57,6 +59,7 @@
   {
     "id": "appstore_global",
     "title": "全球 App Store 排行榜",
+    "enabled": true,
     "description": "全球 App Store 排行榜（约 35 个国家/地区 × 免费榜/畅销榜 × 总榜/游戏，各前 100 名）。\n\n来源：Apple 官方公开 RSS 接口，只提供当天榜单。海外榜单的历史排名\n目前只能从付费平台购买。可用于研究中国应用/游戏出海的排名变化。",
     "source_url": "https://itunes.apple.com/{country}/rss/",
     "license": "🟢 Apple 官方公开 RSS 接口。仅存档排名、价格等事实数据；App 名称、商标归各自权利人。",
@@ -84,6 +87,7 @@
   {
     "id": "hk_carpark_vacancy",
     "title": "香港停车场实时空位",
+    "enabled": true,
     "description": "香港停车场实时空位（每天一个固定时点的快照）。\n\n来源：香港运输署开放数据 API（DATA.GOV.HK），只提供实时空位，不提供历史。\n每天同一时刻存一次，可得到各停车场的日度占用面板。",
     "source_url": "https://api.data.gov.hk/v1/carpark-info-vacancy",
     "license": "🟢 香港运输署开放数据（DATA.GOV.HK 使用条款），来源：运输署。",
@@ -110,6 +114,7 @@
   {
     "id": "hk_weather_forecast",
     "title": "香港天文台九天预报",
+    "enabled": true,
     "description": "香港天文台九天天气预报。\n\n来源：香港天文台开放数据 API（DATA.GOV.HK）。接口只提供\"最新一版\"预报，\n过去发布过的预报不存档。每天存一次，就能研究预报准确率、预报修正等。",
     "source_url": "https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd",
     "license": "🟢 香港天文台开放数据（DATA.GOV.HK 使用条款），来源：香港天文台。",
@@ -139,6 +144,7 @@
   {
     "id": "huggingface_models",
     "title": "Hugging Face 热度（模型/数据集/应用）",
+    "enabled": true,
     "description": "Hugging Face 热度快照（模型 / 数据集 / 应用）。\n\n- 模型：全站热门榜、下载榜、点赞榜各前 100；中国主要 AI 机构的模型（按下载量各前 50）\n- 数据集、Spaces 应用：热门榜各前 100\n\n来源：Hugging Face 公开 API。downloads 是\"近 30 天下载量\"，trendingScore\n是当前热度，接口都不提供历史值；每天存一次即可得到日度变化。",
     "source_url": "https://huggingface.co/api/",
     "license": "🟢 Hugging Face 公开 API。仅存档公开仓库的统计数字（下载量、点赞数、热度）。",
@@ -166,6 +172,7 @@
   {
     "id": "llm_api_prices",
     "title": "大模型 API 价格（OpenRouter）",
+    "enabled": true,
     "description": "大模型 API 价格与上架情况（OpenRouter 全部模型）。\n\n来源：OpenRouter 公开模型列表接口，只给当前价格。各家模型调价、限时免费、\n下架都很频繁，价格历史没有公开来源。每天存一次即可得到价格变化史。\n价格单位统一换算为\"美元 / 百万 token\"。",
     "source_url": "https://openrouter.ai/api/v1/models",
     "license": "🟢 OpenRouter 公开 API。仅存档价格、上下文长度等事实数据。",
@@ -194,6 +201,7 @@
   {
     "id": "steam_cn",
     "title": "Steam 中国区畅销榜",
+    "enabled": false,
     "description": "Steam 中国区畅销榜 / 热门新品榜（各前 100 名，含价格、折扣、评测数与好评率）。\n\n来源：Steam 商店公开搜索结果（中国区定价）。商店只显示当前榜单，\n畅销排名、折扣、评测数的历史没有免费公开来源。",
     "source_url": "https://store.steampowered.com/search/?filter=topsellers&cc=cn",
     "license": "🟡 Steam 商店公开页面（遵守 robots.txt，每日 4 次请求）。仅存档排名、价格、评测数等事实数据；游戏名称归各自权利人。",

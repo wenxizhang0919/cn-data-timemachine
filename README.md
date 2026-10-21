@@ -47,7 +47,7 @@ ots verify ledger/2026-10-21.json.ots         # 核验某天账本的公共时�
 | `apple_podcasts_cn` | Apple 播客中国区排行榜（总榜 + 18 个分类） | 🟢 Apple 官方公开 RSS |
 | `huggingface_models` | Hugging Face 模型、数据集、Spaces 应用热度，及中国主要 AI 机构模型的下载量 | 🟢 Hugging Face 公开 API |
 | `llm_api_prices` | OpenRouter 上全部大模型的 API 价格、上下文长度、免费与否 | 🟢 OpenRouter 公开 API |
-| `steam_cn` | Steam 中国区畅销榜、热门新品榜，含价格、折扣、评测数、好评率 | 🟡 Steam 商店公开页面 |
+| `steam_cn` | Steam 中国区畅销榜、热门新品榜，含价格、折扣、评测数、好评率 | 🟡 Steam 商店公开页面（暂停，见 CHANGELOG） |
 | `hk_weather_forecast` | 香港天文台九天预报（存下每天发布的预报，可研究预报准确率） | 🟢 香港天文台开放数据 |
 | `hk_carpark_vacancy` | 香港约 430 个停车场实时空位（每日固定时点快照） | 🟢 香港运输署开放数据 |
 

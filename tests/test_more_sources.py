@@ -253,3 +253,18 @@ def test_llm_prices():
     assert a["cache_read_usd_per_m"] == 0.006 and a["has_time_based_pricing"] is True
     assert a["created"].startswith("2026-")
     assert b["is_free_variant"] is True and b["prompt_usd_per_m"] == 0.0 and b["created"] == ""
+
+
+def test_disabled_source_skipped_by_default(tmp_path, monkeypatch):
+    import collect
+
+    monkeypatch.setattr(collect, "DATA_DIR", tmp_path)
+    monkeypatch.setattr(collect, "STATUS_DIR", tmp_path / "_status")
+    ran = []
+    fake = {
+        "on": SimpleNamespace(NAME="on", collect=lambda s, r: ran.append("on") or [{"x": 1}]),
+        "off": SimpleNamespace(NAME="off", ENABLED=False, collect=lambda s, r: ran.append("off") or [{"x": 1}]),
+    }
+    monkeypatch.setattr(collect, "discover_sources", lambda: fake)
+    assert collect.main([]) == 0 and ran == ["on"]
+    assert collect.main(["off"]) == 0 and ran == ["on", "off"]

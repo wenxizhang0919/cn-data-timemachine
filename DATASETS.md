@@ -11,7 +11,7 @@
 | [`hk_weather_forecast`](#hk_weather_forecast) | 香港天文台九天预报 | 2026-10-21 | 2026-10-21 | 1 | 0 |
 | [`huggingface_models`](#huggingface_models) | Hugging Face 热度（模型/数据集/应用） | 2026-10-21 | 2026-10-21 | 1 | 0 |
 | [`llm_api_prices`](#llm_api_prices) | 大模型 API 价格（OpenRouter） | 2026-10-21 | 2026-10-21 | 1 | 0 |
-| [`steam_cn`](#steam_cn) | Steam 中国区畅销榜 | — | — | 0 | 0 |
+| [`steam_cn`](#steam_cn) | Steam 中国区畅销榜（暂停） | — | — | 0 | 0 |
 
 ## apple_podcasts_cn
 
@@ -267,6 +267,7 @@ Steam 中国区畅销榜 / 热门新品榜（各前 100 名，含价格、折扣
 
 - 来源：<https://store.steampowered.com/search/?filter=topsellers&cc=cn>
 - 许可：🟡 Steam 商店公开页面（遵守 robots.txt，每日 4 次请求）。仅存档排名、价格、评测数等事实数据；游戏名称归各自权利人。
+- 状态：**暂停采集**（原因见 CHANGELOG.md）
 - 文件：`data/raw/steam_cn/<YYYY-MM>/<YYYY-MM-DD>.csv`
 
 | 字段 | 说明 |
