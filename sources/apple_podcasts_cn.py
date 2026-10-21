@@ -7,6 +7,7 @@
 from sources import _apple
 
 NAME = "apple_podcasts_cn"
+CATEGORY = "media"
 TITLE = "Apple 播客中国区排行榜"
 SOURCE_URL = 'https://itunes.apple.com/cn/rss/toppodcasts/'
 LICENSE = '🟢 Apple 官方公开 RSS 接口。仅存档排名等事实数据；节目名称归各自权利人。'

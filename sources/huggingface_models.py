@@ -10,6 +10,7 @@
 import time
 
 NAME = "huggingface_models"
+CATEGORY = "ai"
 TITLE = "Hugging Face 热度（模型/数据集/应用）"
 SOURCE_URL = 'https://huggingface.co/api/'
 LICENSE = '🟢 Hugging Face 公开 API。仅存档公开仓库的统计数字（下载量、点赞数、热度）。'

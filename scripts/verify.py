@@ -58,7 +58,7 @@ def main() -> int:
                 errors.append(f"{lp.name}: 文件被改动 {f['path']}")
         prev = lp
 
-    for p in RAW.glob("*/*/*.csv"):
+    for p in RAW.glob("*/*/*/*.csv"):
         if p.resolve() not in registered:
             errors.append(f"未登记在账本中的数据文件: {p.relative_to(ROOT).as_posix()}")
 

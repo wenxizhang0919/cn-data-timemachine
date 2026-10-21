@@ -5,6 +5,7 @@
 """
 
 NAME = "hk_carpark_vacancy"
+CATEGORY = "transport"
 TITLE = "香港停车场实时空位"
 SOURCE_URL = 'https://api.data.gov.hk/v1/carpark-info-vacancy'
 LICENSE = '🟢 香港运输署开放数据（DATA.GOV.HK 使用条款），来源：运输署。'

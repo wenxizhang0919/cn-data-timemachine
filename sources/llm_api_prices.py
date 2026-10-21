@@ -8,6 +8,7 @@
 from datetime import datetime, timezone
 
 NAME = "llm_api_prices"
+CATEGORY = "ai"
 TITLE = "大模型 API 价格（OpenRouter）"
 SOURCE_URL = 'https://openrouter.ai/api/v1/models'
 LICENSE = '🟢 OpenRouter 公开 API。仅存档价格、上下文长度等事实数据。'

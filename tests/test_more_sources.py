@@ -262,8 +262,8 @@ def test_disabled_source_skipped_by_default(tmp_path, monkeypatch):
     monkeypatch.setattr(collect, "STATUS_DIR", tmp_path / "_status")
     ran = []
     fake = {
-        "on": SimpleNamespace(NAME="on", collect=lambda s, r: ran.append("on") or [{"x": 1}]),
-        "off": SimpleNamespace(NAME="off", ENABLED=False, collect=lambda s, r: ran.append("off") or [{"x": 1}]),
+        "on": SimpleNamespace(NAME="on", CATEGORY="c", collect=lambda s, r: ran.append("on") or [{"x": 1}]),
+        "off": SimpleNamespace(NAME="off", CATEGORY="c", ENABLED=False, collect=lambda s, r: ran.append("off") or [{"x": 1}]),
     }
     monkeypatch.setattr(collect, "discover_sources", lambda: fake)
     assert collect.main([]) == 0 and ran == ["on"]

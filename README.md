@@ -38,7 +38,15 @@ ots verify ledger/2026-10-21.json.ots         # 核验某天账本的公共时�
 
 ## 已收录的数据
 
-完整字段说明和每个数据集的覆盖天数，见自动生成的 **[数据集目录](DATASETS.md)**（机器可读版本：[`datasets.json`](datasets.json)）。
+数据按分类存放，每个数据集一个独立文件夹，点进去就有它自己的说明页。按分类分组的完整目录见 **[DATASETS.md](DATASETS.md)**（机器可读版本：[`datasets.json`](datasets.json)）。
+
+| 分类 | 目录 |
+|---|---|
+| 应用与游戏 | [`data/raw/apps/`](data/raw/apps/) |
+| 内容与媒体 | [`data/raw/media/`](data/raw/media/) |
+| 人工智能 | [`data/raw/ai/`](data/raw/ai/) |
+| 天气与环境 | [`data/raw/weather/`](data/raw/weather/) |
+| 交通出行 | [`data/raw/transport/`](data/raw/transport/) |
 
 | ID | 内容 | 许可 |
 |---|---|---|
@@ -54,8 +62,10 @@ ots verify ledger/2026-10-21.json.ots         # 核验某天账本的公共时�
 ## 目录结构
 
 ```
-data/raw/<数据集ID>/<年-月>/<日期>.csv    原始快照（UTF-8，Excel 可直接打开），过了当天永不修改
-data/raw/_status/<日期>.json              每天的采集日志：行数、耗时、sha256、失败原因
+data/raw/<分类>/<数据集ID>/<年-月>/<日期>.csv   原始快照（UTF-8，Excel 可直接打开），过了当天永不修改
+data/raw/<分类>/<数据集ID>/README.md           该数据集的说明：来源、许可、字段、覆盖天数、引用方式
+data/raw/<分类>/README.md                      该分类下的数据集一览
+data/raw/_status/<日期>.json                   每天的采集日志：行数、耗时、sha256、失败原因
 ledger/<日期>.json                        当天账本（哈希链的一环）
 ledger/<日期>.json.ots                    当天账本的 OpenTimestamps 时间戳证明
 ledger/HEAD                               最新账本的日期和哈希
@@ -66,7 +76,7 @@ DATASETS.md / datasets.json               数据集目录（自动生成）
 
 ```python
 import pandas as pd, glob
-df = pd.concat(pd.read_csv(f) for f in sorted(glob.glob("data/raw/appstore_cn/*/*.csv")))
+df = pd.concat(pd.read_csv(f) for f in sorted(glob.glob("data/raw/apps/appstore_cn/*/*.csv")))
 panel = df[df.chart_name == "iPhone 畅销榜"].pivot_table(index="date", columns="name", values="rank")
 ```
 
@@ -97,7 +107,7 @@ python ledger.py               # 生成当天账本
 python scripts/verify.py       # 验证整条链
 ```
 
-新增数据源：在 `sources/` 下新建一个模块，提供 `NAME`、`TITLE`、`SOURCE_URL`、`LICENSE`、`FIELDS` 和 `collect(session, run)`，参考 [`sources/appstore_cn.py`](sources/appstore_cn.py)。欢迎在 Issue 里推荐"只有实时、没有历史"的数据源。
+新增数据源：在 `sources/` 下新建一个模块，提供 `NAME`、`CATEGORY`（见 [`sources/_categories.py`](sources/_categories.py)）、`TITLE`、`SOURCE_URL`、`LICENSE`、`FIELDS` 和 `collect(session, run)`，参考 [`sources/appstore_cn.py`](sources/appstore_cn.py)。欢迎在 Issue 里推荐"只有实时、没有历史"的数据源。
 
 ## 许可
 

@@ -85,7 +85,7 @@ def test_end_to_end(tmp_path, monkeypatch):
     assert len(fake.urls) == n_feeds
     assert any("genre=6014" in u for u in fake.urls)
     assert all("limit=100" in u for u in fake.urls)
-    files = list(tmp_path.glob("appstore_cn/*/*.csv"))
+    files = list(tmp_path.glob("apps/appstore_cn/*/*.csv"))
     assert len(files) == 1
     with files[0].open(encoding="utf-8-sig") as f:
         rows = list(csv.DictReader(f))
@@ -114,7 +114,7 @@ def test_partial_failure_keeps_other_charts(tmp_path, monkeypatch):
 
     monkeypatch.setattr(collect, "make_session", lambda: Flaky())
     assert collect.main(["appstore_cn"]) == 0
-    assert list(tmp_path.glob("appstore_cn/*/*.csv"))
+    assert list(tmp_path.glob("apps/appstore_cn/*/*.csv"))
 
 
 def test_failure_returns_nonzero(tmp_path, monkeypatch):
@@ -129,7 +129,7 @@ def test_failure_returns_nonzero(tmp_path, monkeypatch):
 
     monkeypatch.setattr(collect, "make_session", lambda: Boom())
     assert collect.main(["appstore_cn"]) == 1
-    assert not list(tmp_path.glob("appstore_cn/*/*.csv"))
+    assert not list(tmp_path.glob("apps/appstore_cn/*/*.csv"))
 
 
 def test_podcasts_end_to_end(tmp_path, monkeypatch):
@@ -150,7 +150,7 @@ def test_podcasts_end_to_end(tmp_path, monkeypatch):
     assert collect.main(["apple_podcasts_cn"]) == 0
     assert all("/toppodcasts/" in u for u in fake.urls)
     assert len(fake.urls) == len(apple_podcasts_cn.GENRE_IDS)
-    f = next(tmp_path.glob("apple_podcasts_cn/*/*.csv"))
+    f = next(tmp_path.glob("media/apple_podcasts_cn/*/*.csv"))
     with f.open(encoding="utf-8-sig") as fh:
         rows = list(csv.DictReader(fh))
     assert rows[0]["chart_title"] == "iTunes Store：热门播客"

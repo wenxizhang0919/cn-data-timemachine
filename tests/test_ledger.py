@@ -32,7 +32,7 @@ def setup_repo(tmp_path, monkeypatch):
 
 def add_day(raw, date, datasets=("a", "b")):
     for ds in datasets:
-        p = raw / ds / date[:7] / f"{date}.csv"
+        p = raw / "cat" / ds / date[:7] / f"{date}.csv"
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_text(f"﻿x,date\n1,{date}\n2,{date}\n", encoding="utf-8")
     st = raw / "_status" / f"{date}.json"
@@ -54,6 +54,7 @@ def test_chain_builds_and_verifies(tmp_path, monkeypatch):
     assert e2["prev_ledger_sha256"] == ledger.sha256_file(p1)
     assert e1["files"][0]["rows"] == 2
     assert e1["files"][0]["content_id"].startswith("a@2026-10-21#")
+    assert e1["files"][0]["category"] == "cat"
     assert (led / "HEAD").read_text().startswith("2026-10-22 ")
     assert verify.main() == 0
 
@@ -62,7 +63,7 @@ def test_tampering_with_data_is_detected(tmp_path, monkeypatch):
     raw, _ = setup_repo(tmp_path, monkeypatch)
     add_day(raw, "2026-10-21")
     ledger.write("2026-10-21")
-    f = raw / "a" / "2026-10" / "2026-10-21.csv"
+    f = raw / "cat" / "a" / "2026-10" / "2026-10-21.csv"
     f.write_text(f.read_text("utf-8").replace("1,2026", "9,2026"), encoding="utf-8")
     assert verify.main() == 1
 
@@ -111,6 +112,7 @@ def test_check_immutable_rules():
         "A\tledger/2026-10-22.json\n"
         "M\tledger/HEAD\n"
         "M\tledger/2026-10-21.json.ots\n"
+        "M\tdata/raw/apps/appstore_cn/README.md\n"
     )
     assert check_immutable.violations(ok, today) == []
     bad = "M\tdata/raw/a/2026-10/2026-10-21.csv\nD\tledger/2026-10-20.json\n"
@@ -124,6 +126,9 @@ def test_every_source_has_citation_metadata():
         assert mod.LICENSE[:1] in "🟢🟡"
         assert isinstance(mod.FIELDS, dict) and mod.FIELDS
         assert mod.__doc__
+        from sources._categories import CATEGORIES
+
+        assert mod.CATEGORY in CATEGORIES
 
 
 def test_catalog_renders(tmp_path, monkeypatch):
@@ -138,5 +143,8 @@ def test_catalog_renders(tmp_path, monkeypatch):
     a = next(d for d in cat if d["id"] == "appstore_cn")
     assert a["first_snapshot"] == "2026-10-21" and a["days_archived"] == 2 and a["days_missing"] == 1
     assert "date" in a["fields"] and "rank" in a["fields"]
+    assert a["category"] == "apps" and a["path"].startswith("data/raw/apps/appstore_cn/")
     md = make_catalog.render_md(cat)
-    assert "## appstore_cn" in md and "版本 YYYY-MM-DD" in md
+    assert "## 应用与游戏" in md and "data/raw/apps/appstore_cn/" in md
+    page = make_catalog.render_dataset(a)
+    assert "数据集 ID：`appstore_cn`" in page and "snapshot-YYYY-MM-DD" in page and "| `rank` |" in page

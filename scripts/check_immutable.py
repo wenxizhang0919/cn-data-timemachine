@@ -4,6 +4,7 @@
 - 文件名含今天日期的文件（当天的数据、状态、账本）
 - ledger/HEAD（指向最新账本）
 - *.ots 时间戳文件（OpenTimestamps 升级证明时会更新，不影响数据）
+- *.md 说明文件（每个数据集文件夹里自动生成的 README，属于文档不属于数据）
 
 用法（在 git add 之后运行）：python scripts/check_immutable.py [YYYY-MM-DD]
 发现改动了历史文件就以非零状态退出，阻止提交。
@@ -20,7 +21,7 @@ def violations(name_status: str, today: str) -> list[str]:
         status, *paths = line.split("\t")
         for p in paths:
             base = p.rsplit("/", 1)[-1]
-            if p == "ledger/HEAD" or base.endswith(".ots") or today in base:
+            if p == "ledger/HEAD" or base.endswith((".ots", ".md")) or today in base:
                 continue
             bad.append(f"{status}\t{p}")
     return bad

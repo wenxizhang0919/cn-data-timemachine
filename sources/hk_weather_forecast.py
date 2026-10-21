@@ -5,6 +5,7 @@
 """
 
 NAME = "hk_weather_forecast"
+CATEGORY = "weather"
 TITLE = "香港天文台九天预报"
 SOURCE_URL = 'https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd'
 LICENSE = '🟢 香港天文台开放数据（DATA.GOV.HK 使用条款），来源：香港天文台。'

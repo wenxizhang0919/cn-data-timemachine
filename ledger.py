@@ -73,12 +73,13 @@ def build(date: str) -> dict:
     status = json.loads(status_path.read_text(encoding="utf-8")) if status_path.exists() else {}
 
     files = []
-    for path in sorted(RAW.glob(f"*/{date[:7]}/{date}.csv")):
-        dataset = path.relative_to(RAW).parts[0]
+    for path in sorted(RAW.glob(f"*/*/{date[:7]}/{date}.csv")):
+        category, dataset = path.relative_to(RAW).parts[:2]
         digest = sha256_file(path)
         files.append(
             {
                 "dataset": dataset,
+                "category": category,
                 "path": path.relative_to(ROOT).as_posix(),
                 "sha256": digest,
                 "bytes": path.stat().st_size,

@@ -9,6 +9,7 @@ import re
 import time
 
 NAME = "steam_cn"
+CATEGORY = "apps"
 # 暂停：Steam 对 GitHub Actions 服务器返回 502（2026-10-21 起），待迁移到国内服务器后恢复
 ENABLED = False
 TITLE = "Steam 中国区畅销榜"

@@ -7,6 +7,7 @@
 from sources import _apple
 
 NAME = "appstore_global"
+CATEGORY = "apps"
 TITLE = "全球 App Store 排行榜"
 SOURCE_URL = 'https://itunes.apple.com/{country}/rss/'
 LICENSE = '🟢 Apple 官方公开 RSS 接口。仅存档排名、价格等事实数据；App 名称、商标归各自权利人。'

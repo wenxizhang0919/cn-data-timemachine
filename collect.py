@@ -5,11 +5,12 @@
     python collect.py appstore_cn     # 只运行指定数据源
     python collect.py --force         # 当天文件已存在也重新采集（只会覆盖"当天"的文件）
 
-原始层 data/raw/ 的规则：每天一个文件，只在当天写入；过了当天永不修改。
+原始层 data/raw/<分类>/<数据集ID>/ 的规则：每天一个文件，只在当天写入；过了当天永不修改。
 每次采集都在 data/raw/_status/<日期>.json 里记录行数、耗时和文件的 sha256。
 
 每个数据源是 sources/ 下的一个模块，需提供：
-    NAME: str            数据集固定 ID，也是 data/raw/ 下的目录名
+    NAME: str            数据集固定 ID（永不改变）
+    CATEGORY: str        分类目录名，见 sources/_categories.py
     TITLE: str           中文名
     SOURCE_URL: str      数据来源（原始服务的地址）
     LICENSE: str         许可/使用条款说明（含 🟢/🟡 等级）
@@ -88,8 +89,9 @@ def discover_sources() -> dict:
     return mods
 
 
-def out_path(name: str, date: str) -> Path:
-    return DATA_DIR / name / date[:7] / f"{date}.csv"
+def out_path(mod, date: str) -> Path:
+    """data/raw/<分类>/<数据集ID>/<年-月>/<日期>.csv"""
+    return DATA_DIR / mod.CATEGORY / mod.NAME / date[:7] / f"{date}.csv"
 
 
 def write_csv(path: Path, rows: list[dict]) -> None:
@@ -141,7 +143,7 @@ def main(argv=None) -> int:
         if mod is None:
             print(f"[skip] 未知数据源: {name}")
             continue
-        path = out_path(name, run.date)
+        path = out_path(mod, run.date)
         if path.exists() and not args.force:
             print(f"[skip] {name}: 今天已采集")
             continue
