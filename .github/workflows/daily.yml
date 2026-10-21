@@ -1,0 +1,49 @@
+name: daily-snapshot
+
+on:
+  schedule:
+    # 每天北京时间 10:17（UTC 02:17）。避开整点，GitHub 整点排队最严重。
+    - cron: "17 2 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-snapshot
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - name: Collect
+        id: collect
+        continue-on-error: true
+        run: python collect.py
+
+      - name: Commit data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data
+          if git diff --cached --quiet; then
+            echo "no changes"
+          else
+            git commit -m "data: $(TZ=Asia/Shanghai date +%F)"
+            git push
+          fi
+
+      # 有数据源失败时让整个任务标红，GitHub 会发邮件提醒仓库主人
+      - name: Fail if any source failed
+        if: steps.collect.outcome == 'failure'
+        run: exit 1
