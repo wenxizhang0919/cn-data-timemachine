@@ -1,0 +1,101 @@
+{
+  "code_commit": "804e1b97f0a5442a9b9bfba3373e8ab6af8843ff",
+  "created_at_utc": "2026-10-21T14:17:01Z",
+  "date": "2026-10-21",
+  "files": [
+    {
+      "bytes": 295652,
+      "content_id": "apple_podcasts_cn@2026-10-21#3a1be2f8a570",
+      "dataset": "apple_podcasts_cn",
+      "path": "data/raw/apple_podcasts_cn/2026-10/2026-10-21.csv",
+      "rows": 1900,
+      "sha256": "3a1be2f8a5700bd32a36b677c05174864561449e0da9edd4c4312bc570eebc7c"
+    },
+    {
+      "bytes": 1759898,
+      "content_id": "appstore_cn@2026-10-21#db3022533073",
+      "dataset": "appstore_cn",
+      "path": "data/raw/appstore_cn/2026-10/2026-10-21.csv",
+      "rows": 8352,
+      "sha256": "db3022533073d738b1d360d71cc1a12024d5f1a419aac45c4219cdaeac22f368"
+    },
+    {
+      "bytes": 2280047,
+      "content_id": "appstore_global@2026-10-21#b2ba0b091c8d",
+      "dataset": "appstore_global",
+      "path": "data/raw/appstore_global/2026-10/2026-10-21.csv",
+      "rows": 14800,
+      "sha256": "b2ba0b091c8d75e0cd7e08fbe8728b6a531cea106c2a135199c9bbc8788f0af4"
+    },
+    {
+      "bytes": 88353,
+      "content_id": "hk_carpark_vacancy@2026-10-21#0b910688b8cf",
+      "dataset": "hk_carpark_vacancy",
+      "path": "data/raw/hk_carpark_vacancy/2026-10/2026-10-21.csv",
+      "rows": 755,
+      "sha256": "0b910688b8cf5cc61dea141605b4ac605bbccd101184188cd817ea5aba220b6b"
+    },
+    {
+      "bytes": 6278,
+      "content_id": "hk_weather_forecast@2026-10-21#5ba5eb4c7ac0",
+      "dataset": "hk_weather_forecast",
+      "path": "data/raw/hk_weather_forecast/2026-10/2026-10-21.csv",
+      "rows": 9,
+      "sha256": "5ba5eb4c7ac058f09deb7d7d14ecfdaba74f5cad8a871267d421dda118f3e2ff"
+    },
+    {
+      "bytes": 164976,
+      "content_id": "huggingface_models@2026-10-21#8a16b8ba730a",
+      "dataset": "huggingface_models",
+      "path": "data/raw/huggingface_models/2026-10/2026-10-21.csv",
+      "rows": 1195,
+      "sha256": "8a16b8ba730a3315a003b57e445d50ec8a3fa4ca965df1d445d379d933f4b5d4"
+    },
+    {
+      "bytes": 64565,
+      "content_id": "llm_api_prices@2026-10-21#88f4e321837c",
+      "dataset": "llm_api_prices",
+      "path": "data/raw/llm_api_prices/2026-10/2026-10-21.csv",
+      "rows": 468,
+      "sha256": "88f4e321837c4c7634f48269471230f3ae48daf2e4181d7912d4b19e1bf8e862"
+    }
+  ],
+  "prev_date": null,
+  "prev_ledger_sha256": null,
+  "schema": "cn-data-timemachine/ledger/v1",
+  "sources": {
+    "apple_podcasts_cn": {
+      "ok": true,
+      "rows": 1900
+    },
+    "appstore_cn": {
+      "ok": true,
+      "rows": 8352
+    },
+    "appstore_global": {
+      "ok": true,
+      "rows": 14800
+    },
+    "hk_carpark_vacancy": {
+      "ok": true,
+      "rows": 755
+    },
+    "hk_weather_forecast": {
+      "ok": true,
+      "rows": 9
+    },
+    "huggingface_models": {
+      "ok": true,
+      "rows": 1195
+    },
+    "llm_api_prices": {
+      "ok": true,
+      "rows": 468
+    },
+    "steam_cn": {
+      "error": "RuntimeError(\"topsellers: HTTPError('502 Server Error: Bad Gateway for url: https://store.steampowered.com/search/results/?filter=topsellers&cc=cn&l=schinese&start=0&count=25&infinite=1'); popularnew: HTTPError('502 Server Error: Bad Gateway for url: https://store.steampowered.com/search/results/?filter=popularnew&cc=cn&l=schinese&start=0&count=25&infinite=1')\")",
+      "fetched_at_utc": "2026-10-21T14:16:00Z",
+      "ok": false
+    }
+  }
+}

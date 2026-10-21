@@ -39,7 +39,8 @@
     },
     "steam_cn": {
       "ok": false,
-      "error": "RuntimeError(\"topsellers: HTTPError('502 Server Error: Bad Gateway for url: https://store.steampowered.com/search/results/?filter=topsellers&cc=cn&l=schinese&start=0&count=50&infinite=1'); popularnew: HTTPError('502 Server Error: Bad Gateway for url: https://store.steampowered.com/search/results/?filter=popularnew&cc=cn&l=schinese&start=0&count=50&infinite=1')\")"
+      "fetched_at_utc": "2026-10-21T14:16:00Z",
+      "error": "RuntimeError(\"topsellers: HTTPError('502 Server Error: Bad Gateway for url: https://store.steampowered.com/search/results/?filter=topsellers&cc=cn&l=schinese&start=0&count=25&infinite=1'); popularnew: HTTPError('502 Server Error: Bad Gateway for url: https://store.steampowered.com/search/results/?filter=popularnew&cc=cn&l=schinese&start=0&count=25&infinite=1')\")"
     }
   }
 }
