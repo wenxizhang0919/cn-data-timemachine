@@ -1,11 +1,45 @@
 {
   "date": "2026-10-21",
-  "fetched_at_utc": "2026-10-21T13:53:28Z",
+  "fetched_at_utc": "2026-10-21T14:08:34Z",
   "sources": {
+    "apple_podcasts_cn": {
+      "ok": true,
+      "rows": 1900,
+      "seconds": 10.4
+    },
     "appstore_cn": {
       "ok": true,
-      "rows": 7342,
-      "seconds": 94.1
+      "rows": 8352,
+      "seconds": 49.8
+    },
+    "appstore_global": {
+      "ok": true,
+      "rows": 14800,
+      "seconds": 141.6
+    },
+    "hk_carpark_vacancy": {
+      "ok": true,
+      "rows": 755,
+      "seconds": 2.7
+    },
+    "hk_weather_forecast": {
+      "ok": true,
+      "rows": 9,
+      "seconds": 2.6
+    },
+    "huggingface_models": {
+      "ok": true,
+      "rows": 1195,
+      "seconds": 12.7
+    },
+    "llm_api_prices": {
+      "ok": true,
+      "rows": 468,
+      "seconds": 0.2
+    },
+    "steam_cn": {
+      "ok": false,
+      "error": "RuntimeError(\"topsellers: HTTPError('502 Server Error: Bad Gateway for url: https://store.steampowered.com/search/results/?filter=topsellers&cc=cn&l=schinese&start=0&count=50&infinite=1'); popularnew: HTTPError('502 Server Error: Bad Gateway for url: https://store.steampowered.com/search/results/?filter=popularnew&cc=cn&l=schinese&start=0&count=50&infinite=1')\")"
     }
   }
 }
