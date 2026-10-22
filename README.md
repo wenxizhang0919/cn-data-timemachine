@@ -47,6 +47,7 @@ ots verify ledger/2026-10-21.json.ots         # 核验某天账本的公共时�
 | 单个数据源请求失败 | 自动重试；失败时整次运行标红，GitHub 发邮件提醒 |
 | 数据源改版导致"采到了但数据不对" | 异常检测：行数低于前一次的一半即报警（数据照常如实保存，问题记入 CHANGELOG） |
 | 改代码改坏了采集 | 每次推送代码自动运行测试和整链验证（[`tests.yml`](.github/workflows/tests.yml)） |
+| 部分数据源拒绝海外机房访问 | 国内云服务器专门采集这些数据源（[`deploy/server/`](deploy/server/)），推送后自动并入当天账本 |
 | GitHub 仓库或账号出问题 | 每周自动提交给 [Software Heritage](https://www.softwareheritage.org/) 永久存档（[`archive.yml`](.github/workflows/archive.yml)）；也欢迎 fork 作为分布式备份 |
 
 手动补触发：在 GitHub 网页上编辑 `.github/kick`（改任意内容）并提交即可。
@@ -70,7 +71,7 @@ ots verify ledger/2026-10-21.json.ots         # 核验某天账本的公共时�
 | `apple_podcasts_cn` | Apple 播客中国区排行榜（总榜 + 18 个分类） | 🟢 Apple 官方公开 RSS |
 | `huggingface_models` | Hugging Face 模型、数据集、Spaces 应用热度，及中国主要 AI 机构模型的下载量 | 🟢 Hugging Face 公开 API |
 | `llm_api_prices` | OpenRouter 上全部大模型的 API 价格、上下文长度、免费与否 | 🟢 OpenRouter 公开 API |
-| `steam_cn` | Steam 中国区畅销榜、热门新品榜，含价格、折扣、评测数、好评率 | 🟡 Steam 商店公开页面（暂停，见 CHANGELOG） |
+| `steam_cn` | Steam 中国区畅销榜、热门新品榜，含价格、折扣、评测数、好评率 | 🟡 Steam 商店公开页面（由国内服务器采集，部署中） |
 | `hk_weather_forecast` | 香港天文台九天预报（存下每天发布的预报，可研究预报准确率） | 🟢 香港天文台开放数据 |
 | `hk_carpark_vacancy` | 香港约 430 个停车场实时空位（每日固定时点快照） | 🟢 香港运输署开放数据 |
 

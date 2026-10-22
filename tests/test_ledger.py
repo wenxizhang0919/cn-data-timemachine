@@ -148,3 +148,56 @@ def test_catalog_renders(tmp_path, monkeypatch):
     assert "## 应用与游戏" in md and "data/raw/apps/appstore_cn/" in md
     page = make_catalog.render_dataset(a)
     assert "数据集 ID：`appstore_cn`" in page and "snapshot-YYYY-MM-DD" in page and "| `rank` |" in page
+
+
+def test_ledger_merges_server_status_and_detects_staleness(tmp_path, monkeypatch):
+    raw, _ = setup_repo(tmp_path, monkeypatch)
+    add_day(raw, "2026-10-23", datasets=("a",))
+    ledger.write("2026-10-23")
+    assert ledger.is_stale("2026-10-23") is False
+
+    # 国内服务器稍后推送了当天另一个数据集，并写了自己的状态文件
+    p = raw / "cat" / "steam" / "2026-10" / "2026-10-23.csv"
+    p.parent.mkdir(parents=True)
+    p.write_text("﻿x\n1\n", encoding="utf-8")
+    (raw / "_status" / "2026-10-23.server.json").write_text(
+        json.dumps({"date": "2026-10-23", "runner": "server", "sources": {"steam": {"ok": True, "rows": 1}}})
+    )
+    assert ledger.is_stale("2026-10-23") is True
+    assert verify.main() == 1  # 未登记的新文件会被发现
+
+    e = json.loads(ledger.write("2026-10-23").read_text("utf-8"))
+    assert {f["dataset"] for f in e["files"]} == {"a", "steam"}
+    assert e["sources"]["steam"]["runner"] == "server"
+    assert e["sources"]["a"]["runner"] == "github"
+    assert ledger.is_stale("2026-10-23") is False
+    assert verify.main() == 0
+
+
+def test_runner_selection_and_status_file(tmp_path, monkeypatch):
+    from types import SimpleNamespace
+
+    monkeypatch.setattr(collect, "DATA_DIR", tmp_path)
+    monkeypatch.setattr(collect, "STATUS_DIR", tmp_path / "_status")
+    ran = []
+
+    def mk(name, runner=None):
+        ns = SimpleNamespace(NAME=name, CATEGORY="c", collect=lambda s, r: ran.append(name) or [{"x": 1}])
+        if runner:
+            ns.RUNNER = runner
+        return ns
+
+    fake = {"gh": mk("gh"), "srv": mk("srv", "server")}
+    monkeypatch.setattr(collect, "discover_sources", lambda: fake)
+    assert collect.main([]) == 0 and ran == ["gh"]
+    assert collect.main(["--runner", "server"]) == 0 and ran == ["gh", "srv"]
+    names = sorted(p.name for p in (tmp_path / "_status").glob("*.json"))
+    assert len(names) == 2 and any(n.endswith(".server.json") for n in names)
+    st = json.loads(next((tmp_path / "_status").glob("*.server.json")).read_text("utf-8"))
+    assert st["runner"] == "server" and "srv" in st["sources"] and "gh" not in st["sources"]
+
+
+def test_steam_is_collected_by_server():
+    mods = collect.discover_sources()
+    assert getattr(mods["steam_cn"], "RUNNER", "github") == "server"
+    assert getattr(mods["steam_cn"], "ENABLED", True) is True

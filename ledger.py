@@ -9,7 +9,8 @@
 账本文件本身的 SHA-256 就是"这一天的指纹"，由下一天的账本引用，
 并用 OpenTimestamps 做公共时间戳（.ots 文件）。
 
-用法：python ledger.py [YYYY-MM-DD]
+用法：python ledger.py [YYYY-MM-DD]          生成/重建当天账本
+      python ledger.py [YYYY-MM-DD] --check  检查当天账本是否需要重建（需要则退出码 1）
 """
 
 from __future__ import annotations
@@ -69,8 +70,13 @@ def git_commit() -> str:
 
 
 def build(date: str) -> dict:
-    status_path = RAW / "_status" / f"{date}.json"
-    status = json.loads(status_path.read_text(encoding="utf-8")) if status_path.exists() else {}
+    # 合并当天所有机器的状态文件（<日期>.json 来自 GitHub，<日期>.server.json 来自国内服务器）
+    merged = {}
+    for sp in sorted((RAW / "_status").glob(f"{date}*.json")):
+        st = json.loads(sp.read_text(encoding="utf-8"))
+        runner = st.get("runner") or ("github" if sp.name == f"{date}.json" else sp.name.split(".")[1])
+        for name, s in (st.get("sources") or {}).items():
+            merged[name] = {**s, "runner": runner}
 
     files = []
     for path in sorted(RAW.glob(f"*/*/{date[:7]}/{date}.csv")):
@@ -89,8 +95,10 @@ def build(date: str) -> dict:
         )
 
     sources = {}
-    for name, s in sorted((status.get("sources") or {}).items()):
-        sources[name] = {k: s[k] for k in ("ok", "rows", "fetched_at_utc", "error") if k in s}
+    for name, s in sorted(merged.items()):
+        sources[name] = {
+            k: s[k] for k in ("ok", "rows", "fetched_at_utc", "error", "warning", "runner") if k in s
+        }
 
     prev = previous_ledger(date)
     return {
@@ -105,6 +113,21 @@ def build(date: str) -> dict:
     }
 
 
+def is_stale(date: str) -> bool:
+    """当天账本是否需要重建：账本不存在，或登记的文件/哈希与磁盘上的不一致
+    （例如国内服务器后来推送了当天的新数据）。"""
+    path = LEDGER / f"{date}.json"
+    if not path.exists():
+        return True
+    entry = json.loads(path.read_text(encoding="utf-8"))
+    recorded = {(f["path"], f["sha256"]) for f in entry.get("files", [])}
+    current = {
+        (p.relative_to(ROOT).as_posix(), sha256_file(p))
+        for p in RAW.glob(f"*/*/{date[:7]}/{date}.csv")
+    }
+    return recorded != current
+
+
 def write(date: str) -> Path:
     LEDGER.mkdir(exist_ok=True)
     entry = build(date)
@@ -117,6 +140,11 @@ def write(date: str) -> Path:
 if __name__ == "__main__":
     from collect import CST
 
-    d = sys.argv[1] if len(sys.argv) > 1 else datetime.now(CST).strftime("%Y-%m-%d")
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    d = args[0] if args else datetime.now(CST).strftime("%Y-%m-%d")
+    if "--check" in sys.argv:  # 只检查是否需要重建：需要则退出码 1
+        stale = is_stale(d)
+        print(f"ledger {d}: {'需要重建' if stale else '已是最新'}")
+        sys.exit(1 if stale else 0)
     p = write(d)
     print(f"ledger: {p.relative_to(ROOT)} sha256={sha256_file(p)}")

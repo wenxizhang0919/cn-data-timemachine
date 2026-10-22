@@ -53,7 +53,8 @@ jobs:
       - name: Anything new?
         id: changed
         run: |
-          if [ -n "$(git status --porcelain data/raw)" ]; then
+          # 两种情况需要继续：本次采到了新数据；或国内服务器推送了当天数据、账本还没登记
+          if [ -n "$(git status --porcelain data/raw)" ] || ! python ledger.py "${{ steps.d.outputs.date }}" --check; then
             echo "yes=true" >> "$GITHUB_OUTPUT"
           else
             echo "当天数据已存在，无需重复处理"

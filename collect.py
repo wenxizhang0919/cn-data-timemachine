@@ -11,6 +11,7 @@
 每个数据源是 sources/ 下的一个模块，需提供：
     NAME: str            数据集固定 ID（永不改变）
     CATEGORY: str        分类目录名，见 sources/_categories.py
+    RUNNER: str          （可选）由哪台机器采集：github（默认，海外）或 server（国内云服务器）
     TITLE: str           中文名
     SOURCE_URL: str      数据来源（原始服务的地址）
     LICENSE: str         许可/使用条款说明（含 🟢/🟡 等级）
@@ -117,13 +118,14 @@ def sha256(path: Path) -> str:
     return h.hexdigest()
 
 
+RUNNERS = ("github", "server")
 ANOMALY_RATIO = 0.5  # 行数低于前一次成功采集的一半，视为异常（可能是数据源改版、解析失效）
 
 
 def previous_rows(name: str, before: str) -> int | None:
     """找该数据源在 before 日期之前最近一次成功采集的行数。"""
-    for p in sorted(STATUS_DIR.glob("????-??-??.json"), reverse=True):
-        if p.stem >= before:
+    for p in sorted(STATUS_DIR.glob("????-??-??*.json"), reverse=True):
+        if p.name[:10] >= before:
             continue
         try:
             s = json.loads(p.read_text(encoding="utf-8")).get("sources", {}).get(name, {})
@@ -138,6 +140,10 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("only", nargs="*", help="只运行这些数据源")
     ap.add_argument("--force", action="store_true")
+    ap.add_argument(
+        "--runner", default="github", choices=RUNNERS,
+        help="在哪台机器上运行：github（GitHub Actions，海外）或 server（国内云服务器）",
+    )
     args = ap.parse_args(argv)
 
     now = datetime.now(timezone.utc)
@@ -146,12 +152,17 @@ def main(argv=None) -> int:
         fetched_at_utc=now.strftime("%Y-%m-%dT%H:%M:%SZ"),
     )
     sources = discover_sources()
-    # 未指定时只运行启用的数据源；ENABLED = False 的数据源可手动指定运行
-    selected = args.only or sorted(n for n, m in sources.items() if getattr(m, "ENABLED", True))
+    # 未指定时只运行"启用的、且归这台机器采集的"数据源；ENABLED = False 的数据源可手动指定运行
+    selected = args.only or sorted(
+        n for n, m in sources.items()
+        if getattr(m, "ENABLED", True) and getattr(m, "RUNNER", "github") == args.runner
+    )
     session = make_session()
 
-    status_path = STATUS_DIR / f"{run.date}.json"
-    status = {"date": run.date, "sources": {}}
+    # 每台机器写自己的状态文件，避免两台机器同时改同一个文件
+    suffix = "" if args.runner == "github" else f".{args.runner}"
+    status_path = STATUS_DIR / f"{run.date}{suffix}.json"
+    status = {"date": run.date, "runner": args.runner, "sources": {}}
     if status_path.exists():  # 同一天多次运行（如只补采一个源）时保留其他源的记录
         status = json.loads(status_path.read_text(encoding="utf-8"))
     failed = 0

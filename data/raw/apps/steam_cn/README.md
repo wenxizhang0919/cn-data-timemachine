@@ -3,7 +3,7 @@
 
 - 数据集 ID：`steam_cn`（固定不变）
 - 分类：应用与游戏（`apps`）
-- 状态：暂停（见 CHANGELOG）
+- 状态：采集中
 - 来源：<https://store.steampowered.com/search/?filter=topsellers&cc=cn>
 - 许可：🟡 Steam 商店公开页面（遵守 robots.txt，每日 4 次请求）。仅存档排名、价格、评测数等事实数据；游戏名称归各自权利人。
 - 覆盖：— 至 —，已存档 0 天，缺失 0 天

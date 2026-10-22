@@ -67,7 +67,7 @@
     "title": "Steam 中国区畅销榜",
     "category": "apps",
     "category_name": "应用与游戏",
-    "enabled": false,
+    "enabled": true,
     "description": "Steam 中国区畅销榜 / 热门新品榜（各前 100 名，含价格、折扣、评测数与好评率）。\n\n来源：Steam 商店公开搜索结果（中国区定价）。商店只显示当前榜单，\n畅销排名、折扣、评测数的历史没有免费公开来源。",
     "source_url": "https://store.steampowered.com/search/?filter=topsellers&cc=cn",
     "license": "🟡 Steam 商店公开页面（遵守 robots.txt，每日 4 次请求）。仅存档排名、价格、评测数等事实数据；游戏名称归各自权利人。",
