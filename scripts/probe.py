@@ -121,6 +121,9 @@ def dump(session, url: str) -> None:
             found.add(m.group(1) or m.group(2))
     for f in sorted(x for x in found if x and not x.startswith(("#", "javascript")))[:40]:
         print(f"  接口/链接：{f}")
+    # 接口调用处的上下文（看参数怎么传）
+    for m in list(re.finditer(r"\.ashx|/api/|Api/", text))[:6]:
+        print("  调用上下文：" + re.sub(r"\s+", " ", text[max(0, m.start() - 250): m.end() + 250]))
 
 
 def main() -> int:
