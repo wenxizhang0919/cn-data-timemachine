@@ -48,7 +48,7 @@ def main() -> int:
     print("最后一行：", json.dumps(rows[-1], ensure_ascii=False))
     for f in fields[:3]:
         c = Counter(str(r.get(f, "")) for r in rows)
-        print(f"{f} 不同取值 {len(c)} 个，最多的：", c.most_common(3))
+        print(f"{f} 不同取值 {len(c)} 个：", c.most_common(14))
     return 0
 
 

@@ -48,3 +48,12 @@
 | ID | 名称 | 首个快照 | 最新快照 | 已存档天数 | 缺失天数 | 状态 |
 |---|---|---|---|---|---|---|
 | [`hk_carpark_vacancy`](data/raw/transport/hk_carpark_vacancy/) | 香港停车场实时空位 | 2026-10-21 | 2026-10-22 | 2 | 0 | 采集中 |
+
+## 房地产（`real_estate`）
+
+各城市每日网签、成交等数据
+
+| ID | 名称 | 首个快照 | 最新快照 | 已存档天数 | 缺失天数 | 状态 |
+|---|---|---|---|---|---|---|
+| [`bj_housing_daily`](data/raw/real_estate/bj_housing_daily/) | 北京新房与二手房每日网签及库存 | — | — | 0 | 0 | 暂停（见 CHANGELOG） |
+| [`gz_housing_daily`](data/raw/real_estate/gz_housing_daily/) | 广州新建商品房每日签约与库存（分区） | — | — | 0 | 0 | 暂停（见 CHANGELOG） |
