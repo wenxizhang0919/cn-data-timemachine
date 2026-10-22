@@ -3,7 +3,7 @@
 
 - 数据集 ID：`cn_city_weather_forecast`（固定不变）
 - 分类：天气与环境（`weather`）
-- 状态：暂停（见 CHANGELOG）
+- 状态：采集中
 - 来源：<https://www.nmc.cn/publish/forecast.html>
 - 许可：🟡 中央气象台官网公开显示的预报数据，官网未声明开放许可；本存档仅作非商业研究用途的历史保存，使用时请注明来源：中央气象台。
 - 覆盖：— 至 —，已存档 0 天，缺失 0 天

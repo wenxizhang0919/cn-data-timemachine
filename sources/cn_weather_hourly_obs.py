@@ -17,7 +17,6 @@ from sources import _nmc
 NAME = "cn_weather_hourly_obs"
 CATEGORY = "weather"
 RUNNER = "server"
-ENABLED = False  # 待在服务器上实测解析无误后启用
 TITLE = "全国城市逐小时天气实况（中央气象台）"
 SOURCE_URL = "https://www.nmc.cn/publish/forecast.html"
 LICENSE = (

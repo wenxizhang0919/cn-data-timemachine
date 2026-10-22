@@ -16,7 +16,6 @@ from sources import _nmc
 NAME = "cn_city_weather_forecast"
 CATEGORY = "weather"
 RUNNER = "server"
-ENABLED = False  # 待在服务器上实测解析无误后启用
 TITLE = "全国城市 7 天天气预报存档（中央气象台）"
 SOURCE_URL = "https://www.nmc.cn/publish/forecast.html"
 LICENSE = (
