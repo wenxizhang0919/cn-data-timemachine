@@ -91,9 +91,9 @@
       "fetched_at_utc": "实际采集时刻（UTC）"
     },
     "path": "data/raw/apps/mi_appstore_rank/<YYYY-MM>/<YYYY-MM-DD>.csv",
-    "first_snapshot": null,
-    "latest_snapshot": null,
-    "days_archived": 0,
+    "first_snapshot": "2026-10-22",
+    "latest_snapshot": "2026-10-22",
+    "days_archived": 1,
     "days_missing": 0
   },
   {
@@ -262,9 +262,9 @@
       "fetched_at_utc": "实际采集时刻（UTC）"
     },
     "path": "data/raw/weather/cn_city_weather_forecast/<YYYY-MM>/<YYYY-MM-DD>.csv",
-    "first_snapshot": null,
-    "latest_snapshot": null,
-    "days_archived": 0,
+    "first_snapshot": "2026-10-22",
+    "latest_snapshot": "2026-10-22",
+    "days_archived": 1,
     "days_missing": 0
   },
   {
@@ -344,9 +344,9 @@
       "fetched_at_utc": "实际采集时刻（UTC）"
     },
     "path": "data/raw/weather/cn_weather_hourly_obs/<YYYY-MM>/<YYYY-MM-DD>.csv",
-    "first_snapshot": null,
-    "latest_snapshot": null,
-    "days_archived": 0,
+    "first_snapshot": "2026-10-22",
+    "latest_snapshot": "2026-10-22",
+    "days_archived": 1,
     "days_missing": 0
   },
   {
@@ -436,9 +436,9 @@
       "fetched_at_utc": "实际采集时刻（UTC）"
     },
     "path": "data/raw/real_estate/bj_housing_daily/<YYYY-MM>/<YYYY-MM-DD>.csv",
-    "first_snapshot": null,
-    "latest_snapshot": null,
-    "days_archived": 0,
+    "first_snapshot": "2026-10-22",
+    "latest_snapshot": "2026-10-22",
+    "days_archived": 1,
     "days_missing": 0
   },
   {
@@ -468,9 +468,9 @@
       "fetched_at_utc": "实际采集时刻（UTC）"
     },
     "path": "data/raw/real_estate/gz_housing_daily/<YYYY-MM>/<YYYY-MM-DD>.csv",
-    "first_snapshot": null,
-    "latest_snapshot": null,
-    "days_archived": 0,
+    "first_snapshot": "2026-10-22",
+    "latest_snapshot": "2026-10-22",
+    "days_archived": 1,
     "days_missing": 0
   }
 ]

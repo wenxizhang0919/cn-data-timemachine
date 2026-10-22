@@ -11,7 +11,7 @@
 |---|---|---|---|---|---|---|
 | [`appstore_cn`](data/raw/apps/appstore_cn/) | App Store 中国区排行榜 | 2026-10-21 | 2026-10-22 | 2 | 0 | 采集中 |
 | [`appstore_global`](data/raw/apps/appstore_global/) | 全球 App Store 排行榜 | 2026-10-21 | 2026-10-22 | 2 | 0 | 采集中 |
-| [`mi_appstore_rank`](data/raw/apps/mi_appstore_rank/) | 小米应用商店排行榜（总榜与分类榜） | — | — | 0 | 0 | 采集中 |
+| [`mi_appstore_rank`](data/raw/apps/mi_appstore_rank/) | 小米应用商店排行榜（总榜与分类榜） | 2026-10-22 | 2026-10-22 | 1 | 0 | 采集中 |
 | [`steam_cn`](data/raw/apps/steam_cn/) | Steam 中国区畅销榜 | 2026-10-22 | 2026-10-22 | 1 | 0 | 采集中 |
 
 ## 内容与媒体（`media`）
@@ -37,9 +37,9 @@
 
 | ID | 名称 | 首个快照 | 最新快照 | 已存档天数 | 缺失天数 | 状态 |
 |---|---|---|---|---|---|---|
-| [`cn_city_weather_forecast`](data/raw/weather/cn_city_weather_forecast/) | 全国城市 7 天天气预报存档（中央气象台） | — | — | 0 | 0 | 采集中 |
+| [`cn_city_weather_forecast`](data/raw/weather/cn_city_weather_forecast/) | 全国城市 7 天天气预报存档（中央气象台） | 2026-10-22 | 2026-10-22 | 1 | 0 | 采集中 |
 | [`cn_surface_water_quality`](data/raw/weather/cn_surface_water_quality/) | 全国地表水水质自动监测实时数据 | 2026-10-22 | 2026-10-22 | 1 | 0 | 采集中 |
-| [`cn_weather_hourly_obs`](data/raw/weather/cn_weather_hourly_obs/) | 全国城市逐小时天气实况（中央气象台） | — | — | 0 | 0 | 采集中 |
+| [`cn_weather_hourly_obs`](data/raw/weather/cn_weather_hourly_obs/) | 全国城市逐小时天气实况（中央气象台） | 2026-10-22 | 2026-10-22 | 1 | 0 | 采集中 |
 | [`hk_weather_forecast`](data/raw/weather/hk_weather_forecast/) | 香港天文台九天预报 | 2026-10-21 | 2026-10-22 | 2 | 0 | 采集中 |
 
 ## 交通出行（`transport`）
@@ -56,5 +56,5 @@
 
 | ID | 名称 | 首个快照 | 最新快照 | 已存档天数 | 缺失天数 | 状态 |
 |---|---|---|---|---|---|---|
-| [`bj_housing_daily`](data/raw/real_estate/bj_housing_daily/) | 北京新房与二手房每日网签及库存 | — | — | 0 | 0 | 采集中 |
-| [`gz_housing_daily`](data/raw/real_estate/gz_housing_daily/) | 广州新建商品房每日签约与库存（分区） | — | — | 0 | 0 | 采集中 |
+| [`bj_housing_daily`](data/raw/real_estate/bj_housing_daily/) | 北京新房与二手房每日网签及库存 | 2026-10-22 | 2026-10-22 | 1 | 0 | 采集中 |
+| [`gz_housing_daily`](data/raw/real_estate/gz_housing_daily/) | 广州新建商品房每日签约与库存（分区） | 2026-10-22 | 2026-10-22 | 1 | 0 | 采集中 |
