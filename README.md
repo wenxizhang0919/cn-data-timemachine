@@ -77,6 +77,7 @@ ots verify ledger/2026-10-21.json.ots         # 核验某天账本的公共时�
 |---|---|---|
 | `appstore_cn` | App Store 中国区：iPhone 免费/付费/畅销榜（总榜 + 全部 25 个分类）、iPad 三榜、Mac 免费榜、新上架榜，各前 100 名 | 🟢 Apple 官方公开 RSS |
 | `appstore_global` | 全球 37 个国家/地区 App Store 免费榜、畅销榜、游戏免费榜、游戏畅销榜，可追踪中国应用出海 | 🟢 Apple 官方公开 RSS |
+| `mi_appstore_rank` | 小米应用商店总榜与 17 个分类榜（每榜约前 108 名，含安卓包名），可与 App Store 对照研究国内 iOS / 安卓市场 | 🟡 小米应用商店网页（由国内服务器采集） |
 | `apple_podcasts_cn` | Apple 播客中国区排行榜（总榜 + 18 个分类） | 🟢 Apple 官方公开 RSS |
 | `huggingface_models` | Hugging Face 模型、数据集、Spaces 应用热度，及中国主要 AI 机构模型的下载量 | 🟢 Hugging Face 公开 API |
 | `llm_api_prices` | OpenRouter 上全部大模型的 API 价格、上下文长度、免费与否 | 🟢 OpenRouter 公开 API |

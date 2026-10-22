@@ -7,5 +7,5 @@
 |---|---|---|---|---|---|---|
 | [`appstore_cn`](appstore_cn/) | App Store 中国区排行榜 | 2026-10-21 | 2026-10-22 | 2 | 0 | 采集中 |
 | [`appstore_global`](appstore_global/) | 全球 App Store 排行榜 | 2026-10-21 | 2026-10-22 | 2 | 0 | 采集中 |
-| [`mi_appstore_rank`](mi_appstore_rank/) | 小米应用商店排行榜（总榜与分类榜） | — | — | 0 | 0 | 暂停（见 CHANGELOG） |
+| [`mi_appstore_rank`](mi_appstore_rank/) | 小米应用商店排行榜（总榜与分类榜） | — | — | 0 | 0 | 采集中 |
 | [`steam_cn`](steam_cn/) | Steam 中国区畅销榜 | 2026-10-22 | 2026-10-22 | 1 | 0 | 采集中 |

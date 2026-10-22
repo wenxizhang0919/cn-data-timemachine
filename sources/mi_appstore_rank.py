@@ -6,7 +6,7 @@
 
 说明：
 - chart = "0" 是全部应用总榜，其余为分类榜（chart_name 为分类名）。
-- rank 是在该榜单中的名次（按页面顺序，从 1 开始）。榜单翻页直到没有新应用为止（总榜最多 MAX_PAGES 页）。
+- rank 是在该榜单中的名次（按页面顺序，从 1 开始）。榜单翻页直到没有新应用为止；实测网页版每个榜单约显示前 108 名。
 - package 是安卓包名（跨日、跨商店对齐用的稳定 ID）；app_id 是页面统计代码里的应用编号。
 """
 
@@ -16,7 +16,6 @@ import time
 NAME = "mi_appstore_rank"
 CATEGORY = "apps"
 RUNNER = "server"
-ENABLED = False  # 待在服务器上实测解析无误后启用
 TITLE = "小米应用商店排行榜（总榜与分类榜）"
 SOURCE_URL = "https://app.mi.com/topList"
 LICENSE = (
