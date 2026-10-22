@@ -34,6 +34,10 @@ git config pack.deltaCacheSize 32m
 git config core.packedGitLimit 128m
 git config core.packedGitWindowSize 32m
 
+# 拉取也走 SSH（ssh.github.com:443）：国内访问 GitHub 的 HTTPS 时常出现 TLS 错误，SSH 更稳
+SSH_URL="git@github.com:wenxizhang0919/cn-data-timemachine.git"
+[ "$(git remote get-url origin)" = "$SSH_URL" ] || git remote set-url origin "$SSH_URL"
+
 # 1. 往日"已提交但没推上去"的数据：过了当天就不能再进入历史（只增不改），撤销本地提交、文件另存
 if retry git fetch -q origin main; then
   if [ -n "$(git log origin/main..HEAD --oneline)" ]; then

@@ -74,6 +74,8 @@ if [ ! -d "$REPO_DIR/.git" ]; then
   [ "$ok" = 1 ] || { echo "克隆失败：请稍后重新运行本脚本"; exit 1; }
 fi
 cd "$REPO_DIR"
+# 克隆后拉取和推送都改走 SSH（ssh.github.com:443），国内比 HTTPS 稳定；首次克隆用 HTTPS 是因为部署密钥还没加
+sudo -u "$APP_USER" git remote set-url origin "git@github.com:$REPO.git"
 sudo -u "$APP_USER" git remote set-url --push origin "git@github.com:$REPO.git"
 sudo -u "$APP_USER" git config user.name "timemachine-server"
 sudo -u "$APP_USER" git config user.email "timemachine-server@users.noreply.github.com"

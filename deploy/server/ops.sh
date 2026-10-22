@@ -10,6 +10,7 @@ set -uo pipefail
 REPO_DIR=/opt/timemachine/repo
 APP_USER=timemachine
 cd "$REPO_DIR" || exit 1
+sudo -u "$APP_USER" git remote set-url origin git@github.com:wenxizhang0919/cn-data-timemachine.git
 sudo -u "$APP_USER" timeout 120 git pull -q --rebase origin main || echo "（拉取代码失败，使用本地已有版本）"
 
 case "${1:-status}" in
