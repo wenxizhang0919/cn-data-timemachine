@@ -6,7 +6,7 @@
 - 状态：采集中
 - 来源：<https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd>
 - 许可：🟢 香港天文台开放数据（DATA.GOV.HK 使用条款），来源：香港天文台。
-- 覆盖：2026-10-21 至 2026-10-22，已存档 2 天，缺失 0 天
+- 覆盖：2026-10-21 至 2026-10-23，已存档 3 天，缺失 0 天
 - 文件：`data/raw/weather/hk_weather_forecast/<YYYY-MM>/<YYYY-MM-DD>.csv`，每天一个 CSV（UTF-8，Excel 可直接打开）
 - 频率：每天采集一次（当天首次成功的那次）
 - 采集机器：GitHub Actions（海外）
