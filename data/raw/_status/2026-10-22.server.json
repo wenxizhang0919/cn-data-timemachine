@@ -9,6 +9,17 @@
       "fetched_at_utc": "2026-10-22T06:18:32Z",
       "file": "apps/steam_cn/2026-10/2026-10-22.csv",
       "sha256": "8b1874181e1f92192811d0b9857e68ee18967ccdb9cb35c3e8747c7814d35c94"
+    },
+    "cn_surface_water_quality": {
+      "ok": true,
+      "rows": 1563,
+      "seconds": 5.2,
+      "fetched_at_utc": "2026-10-22T06:47:03Z",
+      "file": "weather/cn_surface_water_quality/2026-10/2026-10-22.csv",
+      "sha256": "e494282e911a68dc9087c7b28d4fd02c08820b9801458a0f64fdbaca727bf657",
+      "fetched": 1563,
+      "added": 1563,
+      "runs": 1
     }
   }
 }
