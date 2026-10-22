@@ -2,8 +2,13 @@ name: daily-snapshot
 
 on:
   schedule:
-    # 每天北京时间 10:17（UTC 02:17）。避开整点，GitHub 整点排队最严重。
+    # GitHub 的定时触发在高峰期可能延迟甚至被丢弃（2026-10-22 的 10:17 那次就没有触发），
+    # 所以每天安排 4 次（北京时间 10:17 / 13:37 / 17:07 / 20:37）。
+    # 第一次成功的运行负责采集，之后的运行发现当天数据已在，就直接跳过，不产生新提交。
     - cron: "17 2 * * *"
+    - cron: "37 5 * * *"
+    - cron: "7 9 * * *"
+    - cron: "37 12 * * *"
   workflow_dispatch:
     inputs:
       force:
@@ -40,7 +45,19 @@ jobs:
         continue-on-error: true
         run: python collect.py ${{ inputs.force && '--force' || '' }}
 
+      # 当天数据已经齐了（之前的运行已采集）就跳过后续步骤，避免重复提交
+      - name: Anything new?
+        id: changed
+        run: |
+          if [ -n "$(git status --porcelain data/raw)" ]; then
+            echo "yes=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "当天数据已存在，无需重复处理"
+            echo "yes=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Ledger (hash chain) and catalog
+        if: steps.changed.outputs.yes == 'true'
         run: |
           python ledger.py "${{ steps.d.outputs.date }}"
           python make_catalog.py
@@ -48,6 +65,7 @@ jobs:
       # 公共时间戳：把当天账本的哈希提交给 OpenTimestamps 日历服务器，几小时后锚定到比特币区块。
       # 之后每天顺便把旧的时间戳证明升级为完整证明。失败不影响采集。
       - name: OpenTimestamps
+        if: steps.changed.outputs.yes == 'true'
         continue-on-error: true
         run: |
           rm -f "ledger/${{ steps.d.outputs.date }}.json.ots"
@@ -55,6 +73,7 @@ jobs:
           for f in ledger/*.json.ots; do ots upgrade "$f" || true; done
 
       - name: Verify and commit
+        if: steps.changed.outputs.yes == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
