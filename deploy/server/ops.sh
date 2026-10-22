@@ -5,6 +5,7 @@
 #   bash /opt/timemachine/repo/deploy/server/ops.sh apply           重新运行一键安装（幂等，用于更新系统级设置）
 #   bash /opt/timemachine/repo/deploy/server/ops.sh try <数据源> [N] 试跑一个数据源，只打印不写文件（N=只抓前 N 个）
 #   bash /opt/timemachine/repo/deploy/server/ops.sh run [参数]       立即执行一次正式采集（参数同 run.sh，如 --intraday-only）
+#   bash /opt/timemachine/repo/deploy/server/ops.sh probe [网址...]  从服务器探测候选数据源网址（只读）
 set -uo pipefail
 REPO_DIR=/opt/timemachine/repo
 APP_USER=timemachine
@@ -26,6 +27,10 @@ case "${1:-status}" in
   try)
     shift
     sudo -u "$APP_USER" python3 scripts/dry_run.py "$1" ${2:+--limit "$2"}
+    ;;
+  probe)
+    shift
+    sudo -u "$APP_USER" python3 scripts/probe.py "$@" 2>&1 | head -400
     ;;
   run)
     shift
