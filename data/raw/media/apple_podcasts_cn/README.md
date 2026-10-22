@@ -6,7 +6,7 @@
 - 状态：采集中
 - 来源：<https://itunes.apple.com/cn/rss/toppodcasts/>
 - 许可：🟢 Apple 官方公开 RSS 接口。仅存档排名等事实数据；节目名称归各自权利人。
-- 覆盖：2026-10-21 至 2026-10-21，已存档 1 天，缺失 0 天
+- 覆盖：2026-10-21 至 2026-10-22，已存档 2 天，缺失 0 天
 - 文件：`data/raw/media/apple_podcasts_cn/<YYYY-MM>/<YYYY-MM-DD>.csv`，每天一个 CSV（UTF-8，Excel 可直接打开）
 
 ## 说明

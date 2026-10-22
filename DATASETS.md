@@ -9,8 +9,8 @@
 
 | ID | 名称 | 首个快照 | 最新快照 | 已存档天数 | 缺失天数 | 状态 |
 |---|---|---|---|---|---|---|
-| [`appstore_cn`](data/raw/apps/appstore_cn/) | App Store 中国区排行榜 | 2026-10-21 | 2026-10-21 | 1 | 0 | 采集中 |
-| [`appstore_global`](data/raw/apps/appstore_global/) | 全球 App Store 排行榜 | 2026-10-21 | 2026-10-21 | 1 | 0 | 采集中 |
+| [`appstore_cn`](data/raw/apps/appstore_cn/) | App Store 中国区排行榜 | 2026-10-21 | 2026-10-22 | 2 | 0 | 采集中 |
+| [`appstore_global`](data/raw/apps/appstore_global/) | 全球 App Store 排行榜 | 2026-10-21 | 2026-10-22 | 2 | 0 | 采集中 |
 | [`steam_cn`](data/raw/apps/steam_cn/) | Steam 中国区畅销榜 | — | — | 0 | 0 | 暂停（见 CHANGELOG） |
 
 ## 内容与媒体（`media`）
@@ -19,7 +19,7 @@
 
 | ID | 名称 | 首个快照 | 最新快照 | 已存档天数 | 缺失天数 | 状态 |
 |---|---|---|---|---|---|---|
-| [`apple_podcasts_cn`](data/raw/media/apple_podcasts_cn/) | Apple 播客中国区排行榜 | 2026-10-21 | 2026-10-21 | 1 | 0 | 采集中 |
+| [`apple_podcasts_cn`](data/raw/media/apple_podcasts_cn/) | Apple 播客中国区排行榜 | 2026-10-21 | 2026-10-22 | 2 | 0 | 采集中 |
 
 ## 人工智能（`ai`）
 
@@ -27,8 +27,8 @@
 
 | ID | 名称 | 首个快照 | 最新快照 | 已存档天数 | 缺失天数 | 状态 |
 |---|---|---|---|---|---|---|
-| [`huggingface_models`](data/raw/ai/huggingface_models/) | Hugging Face 热度（模型/数据集/应用） | 2026-10-21 | 2026-10-21 | 1 | 0 | 采集中 |
-| [`llm_api_prices`](data/raw/ai/llm_api_prices/) | 大模型 API 价格（OpenRouter） | 2026-10-21 | 2026-10-21 | 1 | 0 | 采集中 |
+| [`huggingface_models`](data/raw/ai/huggingface_models/) | Hugging Face 热度（模型/数据集/应用） | 2026-10-21 | 2026-10-22 | 2 | 0 | 采集中 |
+| [`llm_api_prices`](data/raw/ai/llm_api_prices/) | 大模型 API 价格（OpenRouter） | 2026-10-21 | 2026-10-22 | 2 | 0 | 采集中 |
 
 ## 天气与环境（`weather`）
 
@@ -36,7 +36,7 @@
 
 | ID | 名称 | 首个快照 | 最新快照 | 已存档天数 | 缺失天数 | 状态 |
 |---|---|---|---|---|---|---|
-| [`hk_weather_forecast`](data/raw/weather/hk_weather_forecast/) | 香港天文台九天预报 | 2026-10-21 | 2026-10-21 | 1 | 0 | 采集中 |
+| [`hk_weather_forecast`](data/raw/weather/hk_weather_forecast/) | 香港天文台九天预报 | 2026-10-21 | 2026-10-22 | 2 | 0 | 采集中 |
 
 ## 交通出行（`transport`）
 
@@ -44,4 +44,4 @@
 
 | ID | 名称 | 首个快照 | 最新快照 | 已存档天数 | 缺失天数 | 状态 |
 |---|---|---|---|---|---|---|
-| [`hk_carpark_vacancy`](data/raw/transport/hk_carpark_vacancy/) | 香港停车场实时空位 | 2026-10-21 | 2026-10-21 | 1 | 0 | 采集中 |
+| [`hk_carpark_vacancy`](data/raw/transport/hk_carpark_vacancy/) | 香港停车场实时空位 | 2026-10-21 | 2026-10-22 | 2 | 0 | 采集中 |

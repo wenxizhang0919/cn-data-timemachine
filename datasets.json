@@ -28,8 +28,8 @@
     },
     "path": "data/raw/apps/appstore_cn/<YYYY-MM>/<YYYY-MM-DD>.csv",
     "first_snapshot": "2026-10-21",
-    "latest_snapshot": "2026-10-21",
-    "days_archived": 1,
+    "latest_snapshot": "2026-10-22",
+    "days_archived": 2,
     "days_missing": 0
   },
   {
@@ -58,8 +58,8 @@
     },
     "path": "data/raw/apps/appstore_global/<YYYY-MM>/<YYYY-MM-DD>.csv",
     "first_snapshot": "2026-10-21",
-    "latest_snapshot": "2026-10-21",
-    "days_archived": 1,
+    "latest_snapshot": "2026-10-22",
+    "days_archived": 2,
     "days_missing": 0
   },
   {
@@ -117,8 +117,8 @@
     },
     "path": "data/raw/media/apple_podcasts_cn/<YYYY-MM>/<YYYY-MM-DD>.csv",
     "first_snapshot": "2026-10-21",
-    "latest_snapshot": "2026-10-21",
-    "days_archived": 1,
+    "latest_snapshot": "2026-10-22",
+    "days_archived": 2,
     "days_missing": 0
   },
   {
@@ -147,8 +147,8 @@
     },
     "path": "data/raw/ai/huggingface_models/<YYYY-MM>/<YYYY-MM-DD>.csv",
     "first_snapshot": "2026-10-21",
-    "latest_snapshot": "2026-10-21",
-    "days_archived": 1,
+    "latest_snapshot": "2026-10-22",
+    "days_archived": 2,
     "days_missing": 0
   },
   {
@@ -178,8 +178,8 @@
     },
     "path": "data/raw/ai/llm_api_prices/<YYYY-MM>/<YYYY-MM-DD>.csv",
     "first_snapshot": "2026-10-21",
-    "latest_snapshot": "2026-10-21",
-    "days_archived": 1,
+    "latest_snapshot": "2026-10-22",
+    "days_archived": 2,
     "days_missing": 0
   },
   {
@@ -210,8 +210,8 @@
     },
     "path": "data/raw/weather/hk_weather_forecast/<YYYY-MM>/<YYYY-MM-DD>.csv",
     "first_snapshot": "2026-10-21",
-    "latest_snapshot": "2026-10-21",
-    "days_archived": 1,
+    "latest_snapshot": "2026-10-22",
+    "days_archived": 2,
     "days_missing": 0
   },
   {
@@ -239,8 +239,8 @@
     },
     "path": "data/raw/transport/hk_carpark_vacancy/<YYYY-MM>/<YYYY-MM-DD>.csv",
     "first_snapshot": "2026-10-21",
-    "latest_snapshot": "2026-10-21",
-    "days_archived": 1,
+    "latest_snapshot": "2026-10-22",
+    "days_archived": 2,
     "days_missing": 0
   }
 ]

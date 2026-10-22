@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-22",
+  "sources": {
+    "apple_podcasts_cn": {
+      "ok": true,
+      "rows": 1900,
+      "seconds": 15.5,
+      "fetched_at_utc": "2026-10-22T04:47:35Z",
+      "file": "media/apple_podcasts_cn/2026-10/2026-10-22.csv",
+      "sha256": "ba76b35451b782f11d5ee686528cb6311c1fa1aaeef009645186db9a097a4240"
+    },
+    "appstore_cn": {
+      "ok": true,
+      "rows": 8354,
+      "seconds": 98.9,
+      "fetched_at_utc": "2026-10-22T04:47:35Z",
+      "file": "apps/appstore_cn/2026-10/2026-10-22.csv",
+      "sha256": "fb38525b19f556374e25c1303a916cc551fe12f6c348dbe38e6fa8fc5a5fa5f1"
+    },
+    "appstore_global": {
+      "ok": true,
+      "rows": 14798,
+      "seconds": 139.3,
+      "fetched_at_utc": "2026-10-22T04:47:35Z",
+      "file": "apps/appstore_global/2026-10/2026-10-22.csv",
+      "sha256": "21345004b062db6011aafb816ee0773c67976bc4d726dcf411e15b1efcb2f195"
+    },
+    "hk_carpark_vacancy": {
+      "ok": true,
+      "rows": 755,
+      "seconds": 2.6,
+      "fetched_at_utc": "2026-10-22T04:47:35Z",
+      "file": "transport/hk_carpark_vacancy/2026-10/2026-10-22.csv",
+      "sha256": "bb1275ca913efd5c34c5e4f49c4abc3a82e954f7df3244be7f66c616773c6714"
+    },
+    "hk_weather_forecast": {
+      "ok": true,
+      "rows": 9,
+      "seconds": 1.1,
+      "fetched_at_utc": "2026-10-22T04:47:35Z",
+      "file": "weather/hk_weather_forecast/2026-10/2026-10-22.csv",
+      "sha256": "d52a4d52f6c908750a2746d7a252fe2524e3cc908a82102e38f32dddf6c6de4b"
+    },
+    "huggingface_models": {
+      "ok": true,
+      "rows": 1195,
+      "seconds": 12.7,
+      "fetched_at_utc": "2026-10-22T04:47:35Z",
+      "file": "ai/huggingface_models/2026-10/2026-10-22.csv",
+      "sha256": "3a9d6965a4817c8120270f1d2e1d66d57be1621e24f79e787313e73f2a815691"
+    },
+    "llm_api_prices": {
+      "ok": true,
+      "rows": 468,
+      "seconds": 0.1,
+      "fetched_at_utc": "2026-10-22T04:47:35Z",
+      "file": "ai/llm_api_prices/2026-10/2026-10-22.csv",
+      "sha256": "1994fb5c69d3d8ad0315068e4f0be594a1dea7cbc537f7070fa006ad4cd91b83"
+    }
+  }
+}
