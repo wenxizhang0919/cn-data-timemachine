@@ -3,6 +3,7 @@
 
 用法：python scripts/probe.py [网址 ...]          不给网址时探测下面 CANDIDATES 里的全部
       python scripts/probe.py --dump 网址 [...]   详细模式：打印正文、表格、脚本里的接口地址
+      python scripts/probe.py --around 网址 正则    打印第一处匹配附近的 HTML 原文，并统计匹配次数
 """
 
 from __future__ import annotations
@@ -128,6 +129,19 @@ def dump(session, url: str) -> None:
 
 def main() -> int:
     s = collect.make_session()
+    if sys.argv[1:2] == ["--around"]:
+        url, pat = sys.argv[2], sys.argv[3]
+        r = s.get(url, timeout=20)
+        r.encoding = r.apparent_encoding or r.encoding
+        ms = list(re.finditer(pat, r.text))
+        print(f"{r.status_code} {len(r.text)} 字符，匹配 {len(ms)} 处")
+        if ms:
+            a = ms[0].start()
+            print(r.text[max(0, a - 700): a + 1300])
+            print("----- 最后一处 -----")
+            b = ms[-1].start()
+            print(r.text[max(0, b - 300): b + 600])
+        return 0
     if sys.argv[1:2] == ["--dump"]:
         for url in sys.argv[2:]:
             dump(s, url)
