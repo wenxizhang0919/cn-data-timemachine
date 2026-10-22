@@ -190,3 +190,25 @@ def test_intraday_anomaly_compares_single_fetch(tmp_path, monkeypatch):
 def test_water_quality_is_server_intraday():
     m = collect.discover_sources()["cn_surface_water_quality"]
     assert m.RUNNER == "server" and m.INTRADAY and set(m.KEY) <= set(m.FIELDS)
+
+
+def test_append_is_byte_identical_to_full_rewrite(tmp_path):
+    a = [{"s": "甲", "t": "08:00", "v": "1,5"}, {"s": "乙", "t": "08:00", "v": '有"引号"'}]
+    b = [{"s": "甲", "t": "08:00", "v": "x"}, {"s": "甲", "t": "12:00", "v": "2"}]
+    p1, p2 = tmp_path / "a.csv", tmp_path / "b.csv"
+    collect.write_csv(p1, a)
+    total, added = collect.append_intraday(p1, b, ("s", "t"))
+    merged, _ = collect.merge_intraday(a, b, ("s", "t"))
+    collect.write_csv(p2, merged)
+    assert (total, added) == (3, 1)
+    assert p1.read_bytes() == p2.read_bytes()
+    assert not (tmp_path / "a.csv.tmp").exists()
+
+
+def test_append_falls_back_to_rewrite_when_new_column_appears(tmp_path):
+    p = tmp_path / "a.csv"
+    collect.write_csv(p, [{"s": "甲", "t": "08:00"}])
+    total, added = collect.append_intraday(p, [{"s": "甲", "t": "12:00", "new": "9"}], ("s", "t"))
+    assert (total, added) == (2, 1)
+    rows = collect.read_csv(p)
+    assert rows[0]["new"] == "" and rows[1]["new"] == "9"

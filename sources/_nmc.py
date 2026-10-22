@@ -2,6 +2,9 @@
 
 一次请求返回一个城市的：过去 24 小时逐小时实况、未来 7 天预报、空气质量等。
 多个数据集（逐小时实况、7 天预报）共用同一批请求：同一次运行里只抓一遍，结果缓存在内存里。
+
+省内存（服务器只有 2G）：每个城市的返回只保留各数据集用到的几个字段（雷达图、气候统计等丢弃），
+2500 个城市缓存约 20–30 MB。
 """
 
 from __future__ import annotations
@@ -53,7 +56,7 @@ def fetch_all(session, run, limit: int | None = None) -> dict:
             j = get(session, f"/rest/weather?stationid={c['code']}", retries=2)
             if j.get("code") != 0 or not j.get("data"):
                 raise RuntimeError(j.get("msg") or "无数据")
-            data[c["code"]] = j["data"]
+            data[c["code"]] = slim(j["data"])
         except Exception:  # noqa: BLE001
             failed.append(c["code"])
         time.sleep(SLEEP)
@@ -62,6 +65,17 @@ def fetch_all(session, run, limit: int | None = None) -> dict:
     res = {"cities": cs, "data": data, "failed": failed}
     _cache[key] = res
     return res
+
+
+def slim(d: dict) -> dict:
+    """只留数据集用到的部分，其余（雷达图、气候、图片等）丢弃以节省内存。"""
+    real = d.get("real") or {}
+    return {
+        "passedchart": d.get("passedchart") or [],
+        "predict": d.get("predict") or {},
+        "air": d.get("air") or {},
+        "real": {"warn": real.get("warn") or {}},
+    }
 
 
 def val(v):

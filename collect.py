@@ -145,6 +145,40 @@ def read_csv(path: Path) -> list[dict]:
         return list(csv.DictReader(f))
 
 
+def append_intraday(path: Path, fetched: list[dict], key: tuple) -> tuple[int, int]:
+    """把新记录追加到当天文件（同一 KEY 只留最早的一条）。返回 (文件总行数, 新增行数)。
+
+    只在内存里保留 KEY 列组成的集合，不读入整个文件；先写临时副本再替换，中途出错不会留下半截文件。
+    新记录出现了文件里没有的列时（数据源加了字段），退回整体重写。
+    """
+    with path.open(newline="", encoding="utf-8-sig") as f:
+        reader = csv.reader(f)
+        header = next(reader, [])
+        idx = [header.index(k) if k in header else None for k in key]
+        seen, n = set(), 0
+        for line in reader:
+            seen.add(tuple(line[i] if i is not None and i < len(line) else "" for i in idx))
+            n += 1
+    new = []
+    for r in fetched:
+        k = tuple(str(r.get(f, "")) for f in key)
+        if k not in seen:
+            seen.add(k)
+            new.append(r)
+    if not new:
+        return n, 0
+    if any(k not in header for r in new for k in r):
+        merged, _ = merge_intraday(read_csv(path), new, key)
+        write_csv(path, merged)
+        return len(merged), len(new)
+    tmp = path.with_suffix(".csv.tmp")
+    shutil.copyfile(path, tmp)
+    with tmp.open("a", newline="", encoding="utf-8") as f:
+        csv.DictWriter(f, fieldnames=header).writerows(new)
+    tmp.replace(path)
+    return n + len(new), len(new)
+
+
 def merge_intraday(existing: list[dict], fetched: list[dict], key: tuple) -> tuple[list[dict], int]:
     """把本次抓到的行追加到当天已有的行后面；同一 KEY 的记录只保留最早采到的那条。"""
     seen = {tuple(str(r.get(k, "")) for k in key) for r in existing}
@@ -225,17 +259,20 @@ def main(argv=None) -> int:
                 r.setdefault("fetched_at_utc", run.fetched_at_utc)
             fetched = len(rows)
             prev_entry = status["sources"].get(name, {})
-            if intraday:
-                existing = read_csv(path) if path.exists() and not args.force else []
-                rows, added = merge_intraday(existing, rows, tuple(mod.KEY))
-                if existing and not added:
+            total, added = len(rows), len(rows)
+            if intraday and path.exists() and not args.force:
+                # 省内存：不把当天整个文件读进来，只读去重用的 KEY 列，新行追加到文件末尾
+                total, added = append_intraday(path, rows, tuple(mod.KEY))
+                if not added:
                     # 没有新的监测时刻：不改文件、不改状态，避免无意义的提交
                     print(f"[same] {name}: 抓到 {fetched} 行，没有新记录")
                     continue
-            write_csv(path, rows)
+            else:
+                write_csv(path, rows)
+            del rows
             status["sources"][name] = {
                 "ok": True,
-                "rows": len(rows),
+                "rows": total,
                 "seconds": round(time.time() - t0, 1),
                 "fetched_at_utc": run.fetched_at_utc,
                 "file": path.relative_to(DATA_DIR).as_posix(),
@@ -245,15 +282,15 @@ def main(argv=None) -> int:
                 status["sources"][name].update(
                     fetched=fetched, added=added, runs=int(prev_entry.get("runs", 0)) + 1,
                 )
-                print(f"[ok]   {name}: 抓到 {fetched} 行，新增 {added} 行，当天累计 {len(rows)} 行 -> {path}")
+                print(f"[ok]   {name}: 抓到 {fetched} 行，新增 {added} 行，当天累计 {total} 行 -> {path}")
             else:
-                print(f"[ok]   {name}: {len(rows)} 行 -> {path}")
+                print(f"[ok]   {name}: {total} 行 -> {path}")
             # 异常检测：数据照常保存（如实存档），但让本次运行报错，GitHub 会发邮件提醒检查
             # 一天多次的数据源比较"单次抓取行数"，一天一次的比较"文件行数"
             if intraday:
                 n, prev = fetched, prev_entry.get("fetched") or previous_rows(name, run.date, "fetched")
             else:
-                n, prev = len(rows), previous_rows(name, run.date)
+                n, prev = total, previous_rows(name, run.date)
             if prev and n < int(prev) * ANOMALY_RATIO:
                 warning = f"行数骤降：{n} 行，前一次为 {prev} 行，可能是数据源改版"
                 status["sources"][name]["warning"] = warning
@@ -282,6 +319,13 @@ def main(argv=None) -> int:
             status["host_warning"] = f"磁盘剩余 {free_gb:.1f} GB，低于 {DISK_WARN_GB} GB"
         else:
             status.pop("host_warning", None)
+
+    try:  # 记录本次运行的内存峰值（只打印到日志，用于观察 2G 服务器的余量）
+        import resource
+
+        print(f"[mem]  峰值内存 {resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024:.0f} MB")
+    except Exception:  # noqa: BLE001
+        pass
 
     STATUS_DIR.mkdir(parents=True, exist_ok=True)
     status_path.write_text(json.dumps(status, ensure_ascii=False, indent=2), encoding="utf-8")

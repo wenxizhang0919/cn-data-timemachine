@@ -29,6 +29,16 @@ apt-get install -y -q git python3 python3-requests unattended-upgrades ca-certif
 timedatectl set-timezone Asia/Shanghai || true
 dpkg-reconfigure -f noninteractive unattended-upgrades || true
 
+# 服务器只有 2G 内存：加 2G 交换空间作安全垫（内存偶尔不够时变慢，而不是进程被系统杀掉），
+# 并让系统尽量少用交换（swappiness=10）
+if ! swapon --show | grep -q .; then
+  fallocate -l 2G /swapfile 2>/dev/null || dd if=/dev/zero of=/swapfile bs=1M count=2048 status=none
+  chmod 600 /swapfile && mkswap -q /swapfile && swapon /swapfile
+  grep -q '^/swapfile' /etc/fstab || echo '/swapfile none swap sw 0 0' >> /etc/fstab
+fi
+echo 'vm.swappiness=10' > /etc/sysctl.d/99-timemachine.conf
+sysctl -q -p /etc/sysctl.d/99-timemachine.conf || true
+
 echo "==> 2/6 创建专用用户 $APP_USER"
 if ! id -u "$APP_USER" >/dev/null 2>&1; then
   useradd --system --create-home --home-dir "$APP_HOME" --shell /bin/bash "$APP_USER"

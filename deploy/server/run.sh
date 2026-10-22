@@ -27,6 +27,13 @@ retry() {
   return 1
 }
 
+# 省内存（服务器只有 2G）：限制 git 打包/压缩时的内存和线程（仓库会越来越大）
+git config pack.threads 1
+git config pack.windowMemory 64m
+git config pack.deltaCacheSize 32m
+git config core.packedGitLimit 128m
+git config core.packedGitWindowSize 32m
+
 # 1. 往日"已提交但没推上去"的数据：过了当天就不能再进入历史（只增不改），撤销本地提交、文件另存
 if retry git fetch -q origin main; then
   if [ -n "$(git log origin/main..HEAD --oneline)" ]; then
