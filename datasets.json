@@ -67,6 +67,36 @@
     "days_missing": 0
   },
   {
+    "id": "mi_appstore_rank",
+    "title": "小米应用商店排行榜（总榜与分类榜）",
+    "category": "apps",
+    "category_name": "应用与游戏",
+    "enabled": false,
+    "intraday": false,
+    "runner": "server",
+    "description": "小米应用商店排行榜（总榜 + 各分类榜），每天一次。\n\n来源：小米应用商店网页版「应用排行榜」。国内安卓市场远大于 App Store，但各安卓商店的榜单\n只显示当前排名，历史排名主要由七麦、蝉大师等商业公司付费提供。每天存一次，\n可与 appstore_cn 对照研究国内 iOS / 安卓两个市场的应用排名变化。\n\n说明：\n- chart = \"0\" 是全部应用总榜，其余为分类榜（chart_name 为分类名）。\n- rank 是在该榜单中的名次（按页面顺序，从 1 开始）。榜单翻页直到没有新应用为止（总榜最多 MAX_PAGES 页）。\n- package 是安卓包名（跨日、跨商店对齐用的稳定 ID）；app_id 是页面统计代码里的应用编号。",
+    "source_url": "https://app.mi.com/topList",
+    "license": "🟡 小米应用商店网页公开显示的排行榜，未声明开放许可；本存档仅作非商业研究用途的历史保存，使用时请注明来源：小米应用商店。",
+    "fields": {
+      "chart": "榜单 ID（0 = 总榜，其余为分类 ID）",
+      "chart_name": "榜单名称",
+      "rank": "名次",
+      "app_name": "应用名称",
+      "package": "安卓包名",
+      "app_id": "小米商店页面统计代码里的应用编号（pos_name）",
+      "category_id": "应用所属分类 ID",
+      "category_name": "应用所属分类",
+      "page": "所在页码",
+      "date": "采集日期（北京时间），即数据版本日期",
+      "fetched_at_utc": "实际采集时刻（UTC）"
+    },
+    "path": "data/raw/apps/mi_appstore_rank/<YYYY-MM>/<YYYY-MM-DD>.csv",
+    "first_snapshot": null,
+    "latest_snapshot": null,
+    "days_archived": 0,
+    "days_missing": 0
+  },
+  {
     "id": "steam_cn",
     "title": "Steam 中国区畅销榜",
     "category": "apps",
