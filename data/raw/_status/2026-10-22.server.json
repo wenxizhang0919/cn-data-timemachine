@@ -12,14 +12,54 @@
     },
     "cn_surface_water_quality": {
       "ok": true,
-      "rows": 4001,
-      "seconds": 5.3,
-      "fetched_at_utc": "2026-10-22T09:27:09Z",
+      "rows": 4655,
+      "seconds": 5.1,
+      "fetched_at_utc": "2026-10-22T09:37:09Z",
       "file": "weather/cn_surface_water_quality/2026-10/2026-10-22.csv",
-      "sha256": "e93135f96dcff87a7b96689e92a8da06307cd7843d4075cde1c5e6905fde85a1",
+      "sha256": "7f913c124fef9bce05225c4bf7bf32d8881e0e571903ba0a6645a785260f3953",
       "fetched": 1565,
-      "added": 1546,
-      "runs": 3
+      "added": 654,
+      "runs": 4
+    },
+    "bj_housing_daily": {
+      "ok": true,
+      "rows": 213,
+      "seconds": 0.2,
+      "fetched_at_utc": "2026-10-22T09:37:09Z",
+      "file": "real_estate/bj_housing_daily/2026-10/2026-10-22.csv",
+      "sha256": "4c81660ea7725e85e80f7b2488f1a03688ce6ff80712cab8a0257b228ac63084"
+    },
+    "cn_city_weather_forecast": {
+      "ok": true,
+      "rows": 17689,
+      "seconds": 1218.4,
+      "fetched_at_utc": "2026-10-22T09:37:09Z",
+      "file": "weather/cn_city_weather_forecast/2026-10/2026-10-22.csv",
+      "sha256": "d1800acb61b10ae829546aaa9eb67fe82614ad5740d8cbee4b4f2cf2056afd79"
+    },
+    "cn_weather_hourly_obs": {
+      "ok": true,
+      "rows": 60528,
+      "seconds": 0.7,
+      "fetched_at_utc": "2026-10-22T09:37:09Z",
+      "file": "weather/cn_weather_hourly_obs/2026-10/2026-10-22.csv",
+      "sha256": "0ff749b20df8ab5848741b2e275a2b9b19a9130b7f63ae9dce2ce971f36b0428"
+    },
+    "gz_housing_daily": {
+      "ok": true,
+      "rows": 33,
+      "seconds": 3.4,
+      "fetched_at_utc": "2026-10-22T09:37:09Z",
+      "file": "real_estate/gz_housing_daily/2026-10/2026-10-22.csv",
+      "sha256": "ac06f82b6edb071471b06730ae9e02a81ed2856d757aac55da3dcba939085fd0"
+    },
+    "mi_appstore_rank": {
+      "ok": true,
+      "rows": 1749,
+      "seconds": 58.8,
+      "fetched_at_utc": "2026-10-22T09:37:09Z",
+      "file": "apps/mi_appstore_rank/2026-10/2026-10-22.csv",
+      "sha256": "b1ea318ec9aaf3ee8d32426173167ffff869499ca924327cff00a57b0cf9d246"
     }
   }
 }
