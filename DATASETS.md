@@ -55,5 +55,5 @@
 
 | ID | 名称 | 首个快照 | 最新快照 | 已存档天数 | 缺失天数 | 状态 |
 |---|---|---|---|---|---|---|
-| [`bj_housing_daily`](data/raw/real_estate/bj_housing_daily/) | 北京新房与二手房每日网签及库存 | — | — | 0 | 0 | 暂停（见 CHANGELOG） |
-| [`gz_housing_daily`](data/raw/real_estate/gz_housing_daily/) | 广州新建商品房每日签约与库存（分区） | — | — | 0 | 0 | 暂停（见 CHANGELOG） |
+| [`bj_housing_daily`](data/raw/real_estate/bj_housing_daily/) | 北京新房与二手房每日网签及库存 | — | — | 0 | 0 | 采集中 |
+| [`gz_housing_daily`](data/raw/real_estate/gz_housing_daily/) | 广州新建商品房每日签约与库存（分区） | — | — | 0 | 0 | 采集中 |

@@ -10,6 +10,8 @@
   "其中住宅套数·面积(m²)"）、value（数值原文）。
 - group 是上一级栏目（如"期房、现房网上签约数据统计""存量房网上签约统计"）。
 - 官网"面积"行紧跟在对应套数行后面，这里把它记为"上一指标·面积(m²)"，避免同名歧义。
+- 多列表格（如"存量房网上签约月统计"按区域、按价格段的成交）记为 item = "行名|列名"；
+  这类表格官网没有单独标题，section 为空，靠 group 识别，period 为空表示"官网当时展示的最近一期"。
 """
 
 import re
@@ -17,7 +19,6 @@ import re
 NAME = "bj_housing_daily"
 CATEGORY = "real_estate"
 RUNNER = "server"
-ENABLED = False  # 待在服务器上实测解析无误后启用
 TITLE = "北京新房与二手房每日网签及库存"
 SOURCE_URL = "http://bjjs.zjw.beijing.gov.cn/eportal/ui?pageId=307749"
 LICENSE = (

@@ -13,7 +13,6 @@
 NAME = "gz_housing_daily"
 CATEGORY = "real_estate"
 RUNNER = "server"
-ENABLED = False  # 待在服务器上实测解析无误后启用
 TITLE = "广州新建商品房每日签约与库存（分区）"
 SOURCE_URL = "https://zfcj.gz.gov.cn/zfcj/tjxx/spfxstjxx/"
 LICENSE = (
