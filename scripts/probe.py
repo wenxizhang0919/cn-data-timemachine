@@ -1,7 +1,8 @@
 """探测候选数据源：从本机（国内服务器）访问一批网址，打印状态、标题、关键词附近的内容和相关链接。
 只读、不写文件，用于找新数据源。
 
-用法：python scripts/probe.py [网址 ...]      不给网址时探测下面 CANDIDATES 里的全部
+用法：python scripts/probe.py [网址 ...]          不给网址时探测下面 CANDIDATES 里的全部
+      python scripts/probe.py --dump 网址 [...]   详细模式：打印正文、表格、脚本里的接口地址
 """
 
 from __future__ import annotations
@@ -81,8 +82,54 @@ def probe(session, url: str) -> None:
         print(f"  接口线索：{a}")
 
 
+def dump(session, url: str) -> None:
+    print("#" * 100)
+    print(url)
+    try:
+        r = session.get(url, timeout=20)
+    except Exception as e:  # noqa: BLE001
+        print(f"  失败：{e!r}"[:300])
+        return
+    r.encoding = r.apparent_encoding or r.encoding
+    text = r.text
+    print(f"  {r.status_code} {len(r.content)}B -> {r.url}")
+    # 表格：逐行打印单元格
+    for ti, table in enumerate(re.findall(r"<table.*?</table>", text, re.S | re.I)[:12]):
+        rows = re.findall(r"<tr.*?</tr>", table, re.S | re.I)
+        print(f"  [表 {ti}] {len(rows)} 行")
+        for tr in rows[:14]:
+            cells = [re.sub(r"<[^>]+>|\s+", " ", c).strip() for c in re.findall(r"<t[dh][^>]*>(.*?)</t[dh]>", tr, re.S | re.I)]
+            if any(cells):
+                print("    | " + " | ".join(cells)[:220])
+    plain = re.sub(r"<script.*?</script>|<style.*?</style>", " ", text, flags=re.S | re.I)
+    plain = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", plain))
+    print("  正文：" + plain[:1500])
+    # 脚本：内联脚本和同站脚本文件里的接口地址
+    pat = re.compile(r"""(?:url|URL|action|href)\s*[:=]\s*["']([^"']{4,160})["']|\$\.(?:post|get|ajax)\(\s*["']([^"']+)["']""")
+    found = set()
+    for m in pat.finditer(text):
+        found.add(m.group(1) or m.group(2))
+    for src in re.findall(r"""<script[^>]+src=["']([^"']+)["']""", text, re.I)[:15]:
+        full = urljoin(r.url, src)
+        if any(x in full for x in ("jquery", "bootstrap", "layui", "echarts", "vue", "swiper")):
+            continue
+        try:
+            js = session.get(full, timeout=15).text
+        except Exception:  # noqa: BLE001
+            continue
+        for m in pat.finditer(js):
+            found.add(m.group(1) or m.group(2))
+    for f in sorted(x for x in found if x and not x.startswith(("#", "javascript")))[:40]:
+        print(f"  接口/链接：{f}")
+
+
 def main() -> int:
     s = collect.make_session()
+    if sys.argv[1:2] == ["--dump"]:
+        for url in sys.argv[2:]:
+            dump(s, url)
+            time.sleep(1)
+        return 0
     for url in sys.argv[1:] or CANDIDATES:
         probe(s, url)
         time.sleep(1)
