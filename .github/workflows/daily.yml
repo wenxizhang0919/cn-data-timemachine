@@ -9,6 +9,10 @@ on:
     - cron: "37 5 * * *"
     - cron: "7 9 * * *"
     - cron: "37 12 * * *"
+  # 保险：外部值守（或你在网页上改动这个文件）可以随时补触发一次采集
+  push:
+    paths:
+      - ".github/kick"
   workflow_dispatch:
     inputs:
       force:

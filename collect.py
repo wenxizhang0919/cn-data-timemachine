@@ -117,6 +117,23 @@ def sha256(path: Path) -> str:
     return h.hexdigest()
 
 
+ANOMALY_RATIO = 0.5  # 行数低于前一次成功采集的一半，视为异常（可能是数据源改版、解析失效）
+
+
+def previous_rows(name: str, before: str) -> int | None:
+    """找该数据源在 before 日期之前最近一次成功采集的行数。"""
+    for p in sorted(STATUS_DIR.glob("????-??-??.json"), reverse=True):
+        if p.stem >= before:
+            continue
+        try:
+            s = json.loads(p.read_text(encoding="utf-8")).get("sources", {}).get(name, {})
+        except Exception:  # noqa: BLE001
+            continue
+        if s.get("ok") and s.get("rows"):
+            return int(s["rows"])
+    return None
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("only", nargs="*", help="只运行这些数据源")
@@ -165,6 +182,13 @@ def main(argv=None) -> int:
                 "sha256": sha256(path),
             }
             print(f"[ok]   {name}: {len(rows)} 行 -> {path}")
+            # 异常检测：数据照常保存（如实存档），但让本次运行报错，GitHub 会发邮件提醒检查
+            prev = previous_rows(name, run.date)
+            if prev and len(rows) < prev * ANOMALY_RATIO:
+                warning = f"行数骤降：{len(rows)} 行，前一次为 {prev} 行，可能是数据源改版"
+                status["sources"][name]["warning"] = warning
+                failed += 1
+                print(f"[warn] {name}: {warning}")
         except Exception as e:  # noqa: BLE001
             failed += 1
             status["sources"][name] = {

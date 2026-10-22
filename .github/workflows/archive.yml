@@ -1,0 +1,23 @@
+name: offsite-archive
+
+# 保险：每周把整个仓库（代码 + 数据 + 账本）提交给 Software Heritage 永久存档。
+# Software Heritage 是独立于 GitHub 的公共源代码存档库，即使本仓库或账号出问题，历史仍可找回。
+# 存档地址：https://archive.softwareheritage.org/browse/origin/?origin_url=https://github.com/wenxizhang0919/cn-data-timemachine
+on:
+  schedule:
+    - cron: "43 3 * * 0"  # 每周日北京时间 11:43
+  workflow_dispatch: {}
+
+jobs:
+  software-heritage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Request Software Heritage save
+        run: |
+          origin="https://github.com/${{ github.repository }}"
+          curl -sS -X POST --fail-with-body \
+            "https://archive.softwareheritage.org/api/1/origin/save/git/url/${origin}/" \
+            | tee response.json
+          echo
+          grep -q '"save_request_status"' response.json

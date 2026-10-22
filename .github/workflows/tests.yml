@@ -1,0 +1,25 @@
+name: tests
+
+# 保险：每次改代码都先跑一遍测试，避免改坏采集逻辑。纯数据提交不触发。
+on:
+  push:
+    paths-ignore:
+      - "data/**"
+      - "ledger/**"
+      - "DATASETS.md"
+      - "datasets.json"
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt pytest
+      - run: python -m pytest -q tests
+      - name: Verify ledger chain
+        run: python scripts/verify.py

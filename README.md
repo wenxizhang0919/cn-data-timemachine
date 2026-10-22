@@ -36,6 +36,21 @@ pip install opentimestamps-client
 ots verify ledger/2026-10-21.json.ots         # 核验某天账本的公共时间戳
 ```
 
+## 保险设施
+
+连续性是这个存档的全部价值，所以每一种已知的失败方式都有对应的保险：
+
+| 风险 | 保险 |
+|---|---|
+| GitHub 定时任务延迟或被丢弃 | 每天 4 次定时尝试（北京时间 10:17 / 13:37 / 17:07 / 20:37），先成功者采集，其余自动跳过 |
+| 全天都没有触发，且没有任何提醒 | 独立的外部值守：每晚检查当天账本是否生成，没有就通过 [`.github/kick`](.github/kick) 补触发一次并通知维护者 |
+| 单个数据源请求失败 | 自动重试；失败时整次运行标红，GitHub 发邮件提醒 |
+| 数据源改版导致"采到了但数据不对" | 异常检测：行数低于前一次的一半即报警（数据照常如实保存，问题记入 CHANGELOG） |
+| 改代码改坏了采集 | 每次推送代码自动运行测试和整链验证（[`tests.yml`](.github/workflows/tests.yml)） |
+| GitHub 仓库或账号出问题 | 每周自动提交给 [Software Heritage](https://www.softwareheritage.org/) 永久存档（[`archive.yml`](.github/workflows/archive.yml)）；也欢迎 fork 作为分布式备份 |
+
+手动补触发：在 GitHub 网页上编辑 `.github/kick`（改任意内容）并提交即可。
+
 ## 已收录的数据
 
 数据按分类存放，每个数据集一个独立文件夹，点进去就有它自己的说明页。按分类分组的完整目录见 **[DATASETS.md](DATASETS.md)**（机器可读版本：[`datasets.json`](datasets.json)）。

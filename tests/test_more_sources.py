@@ -268,3 +268,27 @@ def test_disabled_source_skipped_by_default(tmp_path, monkeypatch):
     monkeypatch.setattr(collect, "discover_sources", lambda: fake)
     assert collect.main([]) == 0 and ran == ["on"]
     assert collect.main(["off"]) == 0 and ran == ["on", "off"]
+
+
+def test_row_drop_is_flagged_but_saved(tmp_path, monkeypatch):
+    import json
+
+    import collect
+
+    monkeypatch.setattr(collect, "DATA_DIR", tmp_path)
+    monkeypatch.setattr(collect, "STATUS_DIR", tmp_path / "_status")
+    (tmp_path / "_status").mkdir()
+    (tmp_path / "_status" / "2000-01-01.json").write_text(
+        json.dumps({"sources": {"src": {"ok": True, "rows": 100}}})
+    )
+    n = {"rows": 10}
+    mod = SimpleNamespace(NAME="src", CATEGORY="c", collect=lambda s, r: [{"x": i} for i in range(n["rows"])])
+    monkeypatch.setattr(collect, "discover_sources", lambda: {"src": mod})
+
+    assert collect.main(["src", "--force"]) == 1  # 10 < 100 * 0.5，报警
+    status = json.loads(next(p for p in (tmp_path / "_status").glob("*.json") if p.stem != "2000-01-01").read_text())
+    assert "行数骤降" in status["sources"]["src"]["warning"]
+    assert list(tmp_path.glob("c/src/*/*.csv"))  # 数据照常保存
+
+    n["rows"] = 80
+    assert collect.main(["src", "--force"]) == 0  # 正常波动不报警
