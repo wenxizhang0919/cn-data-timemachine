@@ -88,9 +88,9 @@
       "fetched_at_utc": "实际采集时刻（UTC）"
     },
     "path": "data/raw/apps/steam_cn/<YYYY-MM>/<YYYY-MM-DD>.csv",
-    "first_snapshot": null,
-    "latest_snapshot": null,
-    "days_archived": 0,
+    "first_snapshot": "2026-10-22",
+    "latest_snapshot": "2026-10-22",
+    "days_archived": 1,
     "days_missing": 0
   },
   {

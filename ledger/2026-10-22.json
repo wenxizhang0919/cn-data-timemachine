@@ -1,6 +1,6 @@
 {
-  "code_commit": "c14d08ca3b6522f06063714c4d84c3c806de8d8f",
-  "created_at_utc": "2026-10-22T04:52:06Z",
+  "code_commit": "0e134e421b8e0559240b32c3e7d99db915d89a2e",
+  "created_at_utc": "2026-10-22T06:19:05Z",
   "date": "2026-10-22",
   "files": [
     {
@@ -40,6 +40,15 @@
       "sha256": "21345004b062db6011aafb816ee0773c67976bc4d726dcf411e15b1efcb2f195"
     },
     {
+      "bytes": 33617,
+      "category": "apps",
+      "content_id": "steam_cn@2026-10-22#8b1874181e1f",
+      "dataset": "steam_cn",
+      "path": "data/raw/apps/steam_cn/2026-10/2026-10-22.csv",
+      "rows": 200,
+      "sha256": "8b1874181e1f92192811d0b9857e68ee18967ccdb9cb35c3e8747c7814d35c94"
+    },
+    {
       "bytes": 295684,
       "category": "media",
       "content_id": "apple_podcasts_cn@2026-10-22#ba76b35451b7",
@@ -74,37 +83,50 @@
     "apple_podcasts_cn": {
       "fetched_at_utc": "2026-10-22T04:47:35Z",
       "ok": true,
-      "rows": 1900
+      "rows": 1900,
+      "runner": "github"
     },
     "appstore_cn": {
       "fetched_at_utc": "2026-10-22T04:47:35Z",
       "ok": true,
-      "rows": 8354
+      "rows": 8354,
+      "runner": "github"
     },
     "appstore_global": {
       "fetched_at_utc": "2026-10-22T04:47:35Z",
       "ok": true,
-      "rows": 14798
+      "rows": 14798,
+      "runner": "github"
     },
     "hk_carpark_vacancy": {
       "fetched_at_utc": "2026-10-22T04:47:35Z",
       "ok": true,
-      "rows": 755
+      "rows": 755,
+      "runner": "github"
     },
     "hk_weather_forecast": {
       "fetched_at_utc": "2026-10-22T04:47:35Z",
       "ok": true,
-      "rows": 9
+      "rows": 9,
+      "runner": "github"
     },
     "huggingface_models": {
       "fetched_at_utc": "2026-10-22T04:47:35Z",
       "ok": true,
-      "rows": 1195
+      "rows": 1195,
+      "runner": "github"
     },
     "llm_api_prices": {
       "fetched_at_utc": "2026-10-22T04:47:35Z",
       "ok": true,
-      "rows": 468
+      "rows": 468,
+      "runner": "github"
+    },
+    "steam_cn": {
+      "fetched_at_utc": "2026-10-22T06:18:32Z",
+      "ok": true,
+      "rows": 200,
+      "runner": "server"
     }
   }
 }
