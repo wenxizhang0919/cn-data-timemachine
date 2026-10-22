@@ -1,15 +1,17 @@
-"""全国地表水水质自动监测站实时数据（一天内多次采集，逐个监测时刻存档）。
+"""全国地表水水质自动监测站实时数据（每小时采集，逐个监测时刻存档）。
 
 来源：中国环境监测总站「国家地表水水质自动监测实时数据发布系统」。
-官网只滚动显示每个断面"最新一次"的监测值（约每 4 小时一次），不提供历史查询或下载。
-本数据集由国内云服务器一天多次抓取，把每个断面每个监测时刻的数值都存下来，
-攒成全国断面 × 4 小时的面板数据。
+官网只滚动显示全国约 1500 个断面"最新一次"的监测值（多数断面每小时更新），
+不提供历史查询或下载。本数据集由国内云服务器每小时抓取一次，
+把每个断面每个监测时刻的数值都存下来，攒成全国断面 × 小时的面板数据。
 
 说明：
-- 官网注明"数据未经审核，仅供参考"，本存档如实保存原始发布值，不做任何修正。
-- 每天一个文件，包含当天各次采集中出现的所有（断面, 监测时刻）记录；
-  同一断面同一监测时刻只记一次（以第一次采到的为准）。
-- 断面停运、维护时官网显示的空值或"--"原样保存，不做插补。
+- 官网注明"数据未经审核，仅供参考"，本存档如实保存发布值，不做任何修正或插补。
+- 每个指标存两列：官网显示值（按发布规则修约）和 `_orig` 原始值（官网提示框里的
+  "原始值"；与显示值相同时留空）。
+- 官网显示"--"时，若提示框给出原因（如"当天质控不合格"），记录在 `notes` 列。
+- 文件按采集日期（北京时间）划分；同一断面同一监测时刻只记一次，以第一次采到的为准。
+  每天 0:27–22:27 每小时采集，23 点前后的监测值会在次日凌晨的采集中存入次日文件。
 """
 
 import html
@@ -19,8 +21,6 @@ import time
 NAME = "cn_surface_water_quality"
 CATEGORY = "weather"
 RUNNER = "server"
-# 接口格式已按官网脚本实现，待在服务器上实测通过后再启用，避免把解析错误的数据写进不可修改的历史
-ENABLED = False
 INTRADAY = True  # 一天内多次采集，按 KEY 去重后追加到当天文件
 KEY = ("province", "basin", "station", "monitor_time")
 TITLE = "全国地表水水质自动监测实时数据"
@@ -51,8 +51,14 @@ HEADER_MAP = {
     "总氮": "total_nitrogen_mg_l",
     "叶绿素": "chlorophyll_a_mg_l",
     "藻密度": "algae_density_cells_l",
-    "站点情况": "station_status",
 }
+
+# 测量指标列（有显示值/原始值/备注之分）
+MEASURES = [
+    "water_temp_c", "ph", "dissolved_oxygen_mg_l", "conductivity_us_cm", "turbidity_ntu",
+    "permanganate_index_mg_l", "ammonia_nitrogen_mg_l", "total_phosphorus_mg_l",
+    "total_nitrogen_mg_l", "chlorophyll_a_mg_l", "algae_density_cells_l",
+]
 
 CLASS_NAMES = {"1": "Ⅰ", "2": "Ⅱ", "3": "Ⅲ", "4": "Ⅳ", "5": "Ⅴ", "6": "劣Ⅴ"}
 
@@ -75,8 +81,10 @@ FIELDS = {
     "total_nitrogen_mg_l": "总氮（mg/L）",
     "chlorophyll_a_mg_l": "叶绿素α（mg/L）",
     "algae_density_cells_l": "藻密度（cells/L）",
-    "station_status": "站点情况（如维护、停运等说明）",
 }
+for _m in MEASURES:
+    FIELDS[f"{_m}_orig"] = f"{FIELDS[_m]}的原始值（未修约；与显示值相同时留空）"
+FIELDS["notes"] = "官网提示框里的说明（如某指标\"当天质控不合格\"），多条用分号分隔"
 
 _TAG = re.compile(r"<[^>]+>")
 _TITLE = re.compile(r"""title\s*=\s*['"]([^'"]*)['"]""")
@@ -90,10 +98,20 @@ def clean(v) -> str:
     return "" if s in ("--", "&nbsp;") else s
 
 
+def title_of(v) -> str:
+    m = _TITLE.search(str(v or ""))
+    return html.unescape(m.group(1)).strip() if m else ""
+
+
 def station_name(v) -> str:
     """断面名称单元格可能是缩略显示，完整名称在 title 里。"""
     m = _TITLE.search(str(v or ""))
     return html.unescape(m.group(1)).strip() if m and m.group(1).strip() else clean(v)
+
+
+def header_label(h: str) -> str:
+    """'水温<br/><span class='unit'>(℃)</span>' -> '水温'"""
+    return re.split(r"<br\s*/?>", str(h or ""))[0].strip() or clean(h)
 
 
 def header_field(h: str, i: int) -> str:
@@ -148,13 +166,27 @@ def fetch(session, page_index: int, page_size: int) -> dict:
 
 
 def parse(j: dict, run_date: str) -> list[dict]:
-    fields = [header_field(h, i) for i, h in enumerate(j.get("thead") or [])]
+    thead = j.get("thead") or []
+    fields = [header_field(h, i) for i, h in enumerate(thead)]
+    labels = [header_label(h) for h in thead]
     rows = []
     for cells in j.get("tbody") or []:
-        row = {}
+        row, notes = {}, []
         for i, v in enumerate(cells):
             f = fields[i] if i < len(fields) else f"extra_{i}"
-            row[f] = station_name(v) if f == "station" else clean(v)
+            if f == "station":
+                row[f] = station_name(v)
+                continue
+            row[f] = clean(v)
+            if f in MEASURES or f.startswith("extra_"):
+                t = title_of(v)
+                m = re.match(r"^原始值[：:]\s*(.*)$", t)
+                if m:
+                    orig = m.group(1).strip()
+                    row[f"{f}_orig"] = "" if orig == row[f] else orig
+                elif t:
+                    notes.append(f"{labels[i] if i < len(labels) else f}：{t}")
+        row["notes"] = "；".join(notes)
         code = row.get("water_class_code", "")
         row["water_class"] = CLASS_NAMES.get(code, "")
         row["monitor_time"] = full_time(row.get("monitor_time_raw", ""), run_date)

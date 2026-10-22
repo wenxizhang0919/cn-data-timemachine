@@ -12,19 +12,29 @@ sys.path.insert(0, str(ROOT))
 import collect  # noqa: E402
 from sources import cn_surface_water_quality as wq  # noqa: E402
 
-THEAD = [
-    "省份", "流域", "断面名称", "监测时间", "水质类别", "水温(℃)", "pH(无量纲)",
-    "溶解氧(mg/L)", "电导率(μS/cm)", "浊度(NTU)", "高锰酸盐指数(mg/L)", "氨氮(mg/L)",
-    "总磷(mg/L)", "总氮(mg/L)", "叶绿素α(mg/L)", "藻密度(cells/L)", "站点情况",
+# 与 2026-10-22 在服务器上实测到的官网返回格式一致
+U = "<br/><span class='unit'>({})</span>"
+THEAD = ["省份", "流域", "断面名称", "监测时间", "水质类别"] + [
+    n + U.format(u) for n, u in [
+        ("水温", "℃"), ("pH", "无量纲"), ("溶解氧", "mg/L"), ("电导率", "μS/cm"), ("浊度", "NTU"),
+        ("高锰酸盐指数", "mg/L"), ("氨氮", "mg/L"), ("总磷", "mg/L"), ("总氮", "mg/L"),
+        ("叶绿素α", "mg/L"), ("藻密度", "cells/L"),
+    ]
 ]
 
 
-def row(station, t, cls="2", ph="7.62"):
+def v(shown, orig):
+    return f"<span title='原始值：{orig}'>{shown}</span>"
+
+
+QC = "<span data-toggle='tooltip' data-placement='right' title='当天质控不合格'>--</span>"
+
+
+def row(station, t, cls="2", ph="7.58"):
     return [
-        "浙江省", "长江流域",
-        f"<span data-toggle='tooltip' title='{station}'>{station[:4]}</span>",
-        t, cls, "18.2", f"<span title='原始值：{ph}'>{ph}</span>", "8.1", "--", "5.3",
-        "2.1", "0.05", "0.061", "1.2", "--", "--", "正常",
+        "北京市", "海河流域", station, t, cls,
+        v("17.0", "17.01"), v(ph, ph), v("8.61", "8.61"), v("367.4", "367.36"), v("9.3", "9.345"),
+        QC, v("0.029", "0.029"), v("0.018", "0.018"), v("1.19", "1.19"), "--", "--",
     ]
 
 
@@ -49,15 +59,22 @@ class FakeSession:
         return Resp(self.payloads.pop(0))
 
 
-def test_parse_cleans_html_and_builds_full_time():
-    j = {"result": 1, "total": 1, "thead": THEAD, "tbody": [row("钱塘江闸口断面", "10-22 12:00")]}
-    rows = wq.parse(j, "2026-10-22")
-    r = rows[0]
-    assert r["station"] == "钱塘江闸口断面"  # 完整名称取自 title
-    assert r["ph"] == "7.62"  # 去掉提示框标签
-    assert r["conductivity_us_cm"] == ""  # "--" 视为空
-    assert r["monitor_time"] == "2026-10-22 12:00"
-    assert r["water_class"] == "Ⅱ" and r["water_class_code"] == "2"
+def test_parse_matches_live_format():
+    j = {"result": 1, "total": 1, "records": 1, "thead": THEAD, "tbody": [row("鼓楼外大街", "10-22 14:00", "1")]}
+    r = wq.parse(j, "2026-10-22")[0]
+    assert r["station"] == "鼓楼外大街" and r["province"] == "北京市"
+    assert r["water_temp_c"] == "17.0" and r["water_temp_c_orig"] == "17.01"  # 显示值与原始值
+    assert r["ph"] == "7.58" and r["ph_orig"] == ""  # 相同时原始值留空
+    assert r["permanganate_index_mg_l"] == "" and r["notes"] == "高锰酸盐指数：当天质控不合格"
+    assert r["chlorophyll_a_mg_l"] == ""  # "--" 视为空
+    assert r["monitor_time"] == "2026-10-22 14:00"
+    assert r["water_class"] == "Ⅰ" and r["water_class_code"] == "1"
+    assert not [k for k in r if k.startswith("extra_")]
+
+
+def test_station_full_name_from_title():
+    assert wq.station_name("<span title='钱塘江闸口断面'>钱塘江闸</span>") == "钱塘江闸口断面"
+    assert wq.station_name("鼓楼外大街") == "鼓楼外大街"
 
 
 def test_year_inferred_across_new_year():
@@ -68,10 +85,11 @@ def test_year_inferred_across_new_year():
 
 
 def test_unknown_header_kept_as_extra_column():
-    j = {"result": 1, "thead": THEAD + ["新指标(mg/L)"], "tbody": [row("甲断面", "10-22 08:00") + ["0.3"]]}
+    j = {"result": 1, "thead": THEAD + ["新指标" + U.format("mg/L")],
+         "tbody": [row("甲断面", "10-22 08:00") + [v("0.3", "0.31")]]}
     s = FakeSession([j])
     out = wq.collect(s, SimpleNamespace(date="2026-10-22"))
-    assert out[0]["extra_17"] == "0.3"
+    assert out[0]["extra_16"] == "0.3" and out[0]["extra_16_orig"] == "0.31"
     assert set(wq.FIELDS) <= set(out[0])
 
 

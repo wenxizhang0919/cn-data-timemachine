@@ -8,7 +8,7 @@
 #   2. 创建专用的低权限用户 timemachine（不用 root 跑采集）
 #   3. 生成一把只用于本仓库的 SSH 部署密钥（私钥只存在这台服务器上）
 #   4. 克隆仓库到 /opt/timemachine/repo
-#   5. 设定时任务：每天北京时间 10:47 / 14:07 / 17:37 / 20:47 运行 run.sh（一天一次的数据源先成功者采集），另在 2:17 / 6:17 / 22:17 只采一天多次的数据源
+#   5. 设定时任务：每天北京时间 10:47 / 14:07 / 17:37 / 20:47 运行 run.sh（一天一次的数据源先成功者采集），另在 0:27–22:27 每小时只采一天多次的数据源
 #   6. 打印部署公钥：把它加到 GitHub 仓库 Settings → Deploy keys（勾选 Allow write access）
 set -euo pipefail
 
@@ -73,14 +73,15 @@ echo "==> 5/6 设置定时任务"
 cat > /etc/cron.d/timemachine <<EOF
 # 每日数据时光机：国内数据源采集（北京时间）。
 # 一天一次的数据源：下面 4 个时点先成功者采集，其余自动跳过。
-# 一天多次的数据源（如水质，约每 4 小时更新）：每个时点都采，另加夜间时点，保证不漏监测时刻。
+# 一天多次的数据源（如水质，每小时更新）：每天 0:27–22:27 每小时采一次。
+# 23 点不采：留出时间让 GitHub 在当天结束前把最后一次推送登记进账本。
 SHELL=/bin/bash
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 47 10 * * * $APP_USER $REPO_DIR/deploy/server/run.sh >> $LOG 2>&1
 7 14 * * *  $APP_USER $REPO_DIR/deploy/server/run.sh >> $LOG 2>&1
 37 17 * * * $APP_USER $REPO_DIR/deploy/server/run.sh >> $LOG 2>&1
 47 20 * * * $APP_USER $REPO_DIR/deploy/server/run.sh >> $LOG 2>&1
-17 2,6,22 * * * $APP_USER $REPO_DIR/deploy/server/run.sh --intraday-only >> $LOG 2>&1
+27 0-22 * * * $APP_USER $REPO_DIR/deploy/server/run.sh --intraday-only >> $LOG 2>&1
 EOF
 chmod 644 /etc/cron.d/timemachine
 touch "$LOG" && chown "$APP_USER:$APP_USER" "$LOG"
