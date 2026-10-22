@@ -30,6 +30,7 @@ import hashlib
 import importlib
 import json
 import pkgutil
+import shutil
 import sys
 import time
 import traceback
@@ -122,6 +123,7 @@ def sha256(path: Path) -> str:
 
 RUNNERS = ("github", "server")
 ANOMALY_RATIO = 0.5  # 行数低于前一次成功采集的一半，视为异常（可能是数据源改版、解析失效）
+DISK_WARN_GB = 3  # 服务器磁盘剩余低于此值时在状态文件里报警
 
 
 def previous_rows(name: str, before: str, key: str = "rows") -> int | None:
@@ -164,6 +166,10 @@ def main(argv=None) -> int:
         help="只运行一天多次采集的数据源（INTRADAY = True），用于夜间等额外时点",
     )
     ap.add_argument(
+        "--fallback", action="store_true",
+        help="兜底：另一台机器负责的数据源若今天还没有文件，由本机代为采集（用于晚间补漏）",
+    )
+    ap.add_argument(
         "--runner", default="github", choices=RUNNERS,
         help="在哪台机器上运行：github（GitHub Actions，海外）或 server（国内云服务器）",
     )
@@ -181,6 +187,15 @@ def main(argv=None) -> int:
         if getattr(m, "ENABLED", True) and getattr(m, "RUNNER", "github") == args.runner
         and (getattr(m, "INTRADAY", False) or not args.intraday_only)
     )
+    if args.fallback and not args.only:
+        # 别的机器负责、但今天还没采到的一天一次数据源，由本机兜底
+        selected += sorted(
+            n for n, m in sources.items()
+            if getattr(m, "ENABLED", True) and getattr(m, "RUNNER", "github") != args.runner
+            and not getattr(m, "INTRADAY", False) and not out_path(m, run.date).exists()
+        )
+        if selected:
+            print(f"[fallback] 本机兜底采集：{', '.join(selected)}")
     session = make_session()
 
     # 每台机器写自己的状态文件，避免两台机器同时改同一个文件
@@ -259,6 +274,14 @@ def main(argv=None) -> int:
             }
             print(f"[fail] {name}: {e!r}")
             traceback.print_exc()
+
+    # 机器自检：磁盘快满时在状态文件里留警告（只在状态变化时改动，避免每次运行都产生提交）
+    if args.runner == "server":
+        free_gb = shutil.disk_usage(ROOT).free / 1e9
+        if free_gb < DISK_WARN_GB:
+            status["host_warning"] = f"磁盘剩余 {free_gb:.1f} GB，低于 {DISK_WARN_GB} GB"
+        else:
+            status.pop("host_warning", None)
 
     STATUS_DIR.mkdir(parents=True, exist_ok=True)
     status_path.write_text(json.dumps(status, ensure_ascii=False, indent=2), encoding="utf-8")

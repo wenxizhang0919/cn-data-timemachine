@@ -8,6 +8,8 @@ on:
       - "ledger/**"
       - "DATASETS.md"
       - "datasets.json"
+      - "STATUS.md"
+      - ".github/kick"
   pull_request:
 
 jobs:

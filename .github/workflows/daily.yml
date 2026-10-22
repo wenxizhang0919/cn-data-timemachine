@@ -66,6 +66,8 @@ jobs:
         run: |
           python ledger.py "${{ steps.d.outputs.date }}"
           python make_catalog.py
+          # 状态页：每个数据集今天是否到齐、连续天数、有没有问题（只是展示，不让任务失败）
+          python scripts/health.py --write STATUS.md > /dev/null
 
       # 公共时间戳：把当天账本的哈希提交给 OpenTimestamps 日历服务器，几小时后锚定到比特币区块。
       # 之后每天顺便把旧的时间戳证明升级为完整证明。失败不影响采集。
@@ -84,7 +86,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data ledger DATASETS.md datasets.json
+          git add data ledger DATASETS.md datasets.json STATUS.md
           python scripts/check_immutable.py "${{ steps.d.outputs.date }}"
           python scripts/verify.py
           if git diff --cached --quiet; then

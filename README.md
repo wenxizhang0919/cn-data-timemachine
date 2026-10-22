@@ -1,5 +1,9 @@
 # 每日数据时光机 · cn-data-timemachine
 
+[![运行状态](https://github.com/wenxizhang0919/cn-data-timemachine/actions/workflows/health.yml/badge.svg)](STATUS.md) [![每日采集](https://github.com/wenxizhang0919/cn-data-timemachine/actions/workflows/daily.yml/badge.svg)](https://github.com/wenxizhang0919/cn-data-timemachine/actions/workflows/daily.yml)
+
+**今天的数据到齐了吗？看 [STATUS.md](STATUS.md)**：每个数据集今天是否到齐、连续了多少天、有没有问题，随每次数据入库自动更新。
+
 很多公开数据源只提供**"现在这一刻"**的数据：排行榜、价格、实时空位、最新一版预报……它们不保留历史，或者历史只能花大钱买。等到写论文、打比赛需要面板数据时，才发现过去的数据已经拿不到了。
 
 这个仓库每天自动给这些数据源拍一张快照，**从 2026-10-21 开始一天接一天地存下来，并且让任何人都能验证这些记录没有被改过。**
@@ -43,7 +47,11 @@ ots verify ledger/2026-10-21.json.ots         # 核验某天账本的公共时�
 | 风险 | 保险 |
 |---|---|
 | GitHub 定时任务延迟或被丢弃 | 每天 4 次定时尝试（北京时间 10:17 / 13:37 / 17:07 / 20:37），先成功者采集，其余自动跳过 |
-| 全天都没有触发，且没有任何提醒 | 独立的外部值守：每晚检查当天账本是否生成，没有就通过 [`.github/kick`](.github/kick) 补触发一次并通知维护者 |
+| 全天都没有触发，且没有任何提醒 | 两路互相独立的值守：① GitHub 每晚 22:47 / 23:17 / 23:47 健康检查（[`health.yml`](.github/workflows/health.yml)），发现问题先自动补跑，仍有问题就发邮件；② GitHub 之外的外部值守每晚 21:13 做同样检查，并通过 [`.github/kick`](.github/kick) 补触发、通知维护者 |
+| 国内服务器停机、断网、卡死 | 服务器上每次运行最多 50 分钟，超时强制结束；水质等每小时数据超过 3 小时没有更新，健康检查即报警；服务器负责的数据会出现在 [STATUS.md](STATUS.md) 上 |
+| GitHub 当天没能采到它负责的数据 | 国内服务器每晚 21:47 兜底：GitHub 负责的数据源若当天还没有文件，由服务器代采（状态里记为服务器采集） |
+| 服务器磁盘写满 | 剩余空间低于 3 GB 时写入状态文件，健康检查报警 |
+| 改服务器定时要登录服务器 | 定时任务写在仓库的 [`deploy/server/crontab`](deploy/server/crontab)，服务器每次运行自动同步（带安全检查，防止误删定时） |
 | 单个数据源请求失败 | 自动重试；失败时整次运行标红，GitHub 发邮件提醒 |
 | 数据源改版导致"采到了但数据不对" | 异常检测：行数低于前一次的一半即报警（数据照常如实保存，问题记入 CHANGELOG） |
 | 改代码改坏了采集 | 每次推送代码自动运行测试和整链验证（[`tests.yml`](.github/workflows/tests.yml)） |
@@ -71,9 +79,10 @@ ots verify ledger/2026-10-21.json.ots         # 核验某天账本的公共时�
 | `apple_podcasts_cn` | Apple 播客中国区排行榜（总榜 + 18 个分类） | 🟢 Apple 官方公开 RSS |
 | `huggingface_models` | Hugging Face 模型、数据集、Spaces 应用热度，及中国主要 AI 机构模型的下载量 | 🟢 Hugging Face 公开 API |
 | `llm_api_prices` | OpenRouter 上全部大模型的 API 价格、上下文长度、免费与否 | 🟢 OpenRouter 公开 API |
-| `steam_cn` | Steam 中国区畅销榜、热门新品榜，含价格、折扣、评测数、好评率 | 🟡 Steam 商店公开页面（由国内服务器采集，部署中） |
+| `steam_cn` | Steam 中国区畅销榜、热门新品榜，含价格、折扣、评测数、好评率 | 🟡 Steam 商店公开页面（由国内服务器采集） |
 | `hk_weather_forecast` | 香港天文台九天预报（存下每天发布的预报，可研究预报准确率） | 🟢 香港天文台开放数据 |
 | `hk_carpark_vacancy` | 香港约 430 个停车场实时空位（每日固定时点快照） | 🟢 香港运输署开放数据 |
+| `cn_surface_water_quality` | 全国约 1500 个地表水水质自动监测断面，**每小时**一个监测时刻：水温、pH、溶解氧、氨氮、总磷、总氮等 11 项指标与水质类别，含未修约原始值与质控说明 | 🟡 中国环境监测总站公开发布（由国内服务器每小时采集） |
 
 ## 目录结构
 

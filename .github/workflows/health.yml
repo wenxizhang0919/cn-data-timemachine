@@ -1,0 +1,59 @@
+name: health-check
+
+# 每晚严格检查：今天各数据集到齐没有、国内服务器还活着没、账本和时间戳连不连续。
+#   22:47  发现问题 → 自动补跑一次采集（不报错，先自己修）
+#   23:17  仍有问题 → 再补跑一次，并让本任务失败 —— GitHub 会给仓库主人发邮件
+#   23:47  最后确认（防止 23:17 那次被 GitHub 丢弃）
+# 另有独立于 GitHub 的外部值守（Claude 定时任务，每晚 21:13）做同样的检查，两路互为备份。
+on:
+  schedule:
+    - cron: "47 14 * * *"
+    - cron: "17 15 * * *"
+    - cron: "47 15 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: health-check
+  cancel-in-progress: false
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - name: Check
+        id: check
+        run: |
+          set +e
+          python scripts/health.py --strict > report.md
+          rc=$?
+          cat report.md
+          cat report.md >> "$GITHUB_STEP_SUMMARY"
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+
+      # 用 workflow_dispatch 触发采集（GitHub 自带令牌的推送不会触发其他工作流，但手动触发可以）
+      - name: Retry collection
+        if: steps.check.outputs.rc != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh workflow run daily.yml --ref main
+          echo "已触发一次补跑采集" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Fail so GitHub emails the owner
+        if: steps.check.outputs.rc != '0' && github.event.schedule != '47 14 * * *'
+        run: |
+          echo "健康检查发现问题，详情见本次运行的 Summary 或仓库里的 STATUS.md"
+          exit 1

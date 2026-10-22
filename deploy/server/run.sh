@@ -44,6 +44,15 @@ fi
 # 2. 拉取最新代码（以后改代码只需推到 GitHub，服务器下次运行自动用上）
 retry git pull --rebase -q origin main || echo "拉取失败，先用本地已有代码继续"
 
+# 2b. 同步定时任务：仓库里的 deploy/server/crontab 改了就装上（改定时不用登录服务器）。
+#     安全检查：新文件至少要有 3 条运行 run.sh 的定时，防止误推一个空文件导致服务器从此不再采集。
+CRON_SRC="$REPO_DIR/deploy/server/crontab"
+if [ -f "$CRON_SRC" ] && [ "$(grep -c '^[^#].*run\.sh' "$CRON_SRC")" -ge 3 ]; then
+  if ! diff -q <(crontab -l 2>/dev/null) "$CRON_SRC" >/dev/null 2>&1; then
+    crontab "$CRON_SRC" && echo "定时任务已按仓库更新"
+  fi
+fi
+
 # 3. 往日未能推送的数据：按"只增不改"规则不能再补进历史，移出仓库另存，避免卡住后续提交
 for f in $(git ls-files --others --exclude-standard data/raw); do
   case "$f" in
