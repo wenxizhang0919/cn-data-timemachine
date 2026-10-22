@@ -16,6 +16,8 @@
     SOURCE_URL: str      数据来源（原始服务的地址）
     LICENSE: str         许可/使用条款说明（含 🟢/🟡 等级）
     FIELDS: dict         字段名 -> 字段说明
+    INTRADAY: bool       （可选）一天内多次采集：新行按 KEY 去重后追加进当天文件；默认 False（一天一次）
+    KEY: tuple           （INTRADAY 时必填）判断"同一条记录"的字段，如 (站点, 监测时刻)
     collect(session, run) -> list[dict]
         返回当天采集到的行；每行是扁平的 dict。
 """
@@ -122,8 +124,8 @@ RUNNERS = ("github", "server")
 ANOMALY_RATIO = 0.5  # 行数低于前一次成功采集的一半，视为异常（可能是数据源改版、解析失效）
 
 
-def previous_rows(name: str, before: str) -> int | None:
-    """找该数据源在 before 日期之前最近一次成功采集的行数。"""
+def previous_rows(name: str, before: str, key: str = "rows") -> int | None:
+    """找该数据源在 before 日期之前最近一次成功采集的行数（key="fetched" 时为单次抓取行数）。"""
     for p in sorted(STATUS_DIR.glob("????-??-??*.json"), reverse=True):
         if p.name[:10] >= before:
             continue
@@ -131,15 +133,36 @@ def previous_rows(name: str, before: str) -> int | None:
             s = json.loads(p.read_text(encoding="utf-8")).get("sources", {}).get(name, {})
         except Exception:  # noqa: BLE001
             continue
-        if s.get("ok") and s.get("rows"):
-            return int(s["rows"])
+        if s.get("ok") and s.get(key):
+            return int(s[key])
     return None
+
+
+def read_csv(path: Path) -> list[dict]:
+    with path.open(newline="", encoding="utf-8-sig") as f:
+        return list(csv.DictReader(f))
+
+
+def merge_intraday(existing: list[dict], fetched: list[dict], key: tuple) -> tuple[list[dict], int]:
+    """把本次抓到的行追加到当天已有的行后面；同一 KEY 的记录只保留最早采到的那条。"""
+    seen = {tuple(str(r.get(k, "")) for k in key) for r in existing}
+    new = []
+    for r in fetched:
+        k = tuple(str(r.get(f, "")) for f in key)
+        if k not in seen:
+            seen.add(k)
+            new.append(r)
+    return existing + new, len(new)
 
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("only", nargs="*", help="只运行这些数据源")
     ap.add_argument("--force", action="store_true")
+    ap.add_argument(
+        "--intraday-only", action="store_true",
+        help="只运行一天多次采集的数据源（INTRADAY = True），用于夜间等额外时点",
+    )
     ap.add_argument(
         "--runner", default="github", choices=RUNNERS,
         help="在哪台机器上运行：github（GitHub Actions，海外）或 server（国内云服务器）",
@@ -156,6 +179,7 @@ def main(argv=None) -> int:
     selected = args.only or sorted(
         n for n, m in sources.items()
         if getattr(m, "ENABLED", True) and getattr(m, "RUNNER", "github") == args.runner
+        and (getattr(m, "INTRADAY", False) or not args.intraday_only)
     )
     session = make_session()
 
@@ -172,7 +196,8 @@ def main(argv=None) -> int:
             print(f"[skip] 未知数据源: {name}")
             continue
         path = out_path(mod, run.date)
-        if path.exists() and not args.force:
+        intraday = getattr(mod, "INTRADAY", False)
+        if path.exists() and not args.force and not intraday:
             print(f"[skip] {name}: 今天已采集")
             continue
         t0 = time.time()
@@ -183,6 +208,15 @@ def main(argv=None) -> int:
             for r in rows:
                 r.setdefault("date", run.date)
                 r.setdefault("fetched_at_utc", run.fetched_at_utc)
+            fetched = len(rows)
+            prev_entry = status["sources"].get(name, {})
+            if intraday:
+                existing = read_csv(path) if path.exists() and not args.force else []
+                rows, added = merge_intraday(existing, rows, tuple(mod.KEY))
+                if existing and not added:
+                    # 没有新的监测时刻：不改文件、不改状态，避免无意义的提交
+                    print(f"[same] {name}: 抓到 {fetched} 行，没有新记录")
+                    continue
             write_csv(path, rows)
             status["sources"][name] = {
                 "ok": True,
@@ -192,16 +226,32 @@ def main(argv=None) -> int:
                 "file": path.relative_to(DATA_DIR).as_posix(),
                 "sha256": sha256(path),
             }
-            print(f"[ok]   {name}: {len(rows)} 行 -> {path}")
+            if intraday:
+                status["sources"][name].update(
+                    fetched=fetched, added=added, runs=int(prev_entry.get("runs", 0)) + 1,
+                )
+                print(f"[ok]   {name}: 抓到 {fetched} 行，新增 {added} 行，当天累计 {len(rows)} 行 -> {path}")
+            else:
+                print(f"[ok]   {name}: {len(rows)} 行 -> {path}")
             # 异常检测：数据照常保存（如实存档），但让本次运行报错，GitHub 会发邮件提醒检查
-            prev = previous_rows(name, run.date)
-            if prev and len(rows) < prev * ANOMALY_RATIO:
-                warning = f"行数骤降：{len(rows)} 行，前一次为 {prev} 行，可能是数据源改版"
+            # 一天多次的数据源比较"单次抓取行数"，一天一次的比较"文件行数"
+            if intraday:
+                n, prev = fetched, prev_entry.get("fetched") or previous_rows(name, run.date, "fetched")
+            else:
+                n, prev = len(rows), previous_rows(name, run.date)
+            if prev and n < int(prev) * ANOMALY_RATIO:
+                warning = f"行数骤降：{n} 行，前一次为 {prev} 行，可能是数据源改版"
                 status["sources"][name]["warning"] = warning
                 failed += 1
                 print(f"[warn] {name}: {warning}")
         except Exception as e:  # noqa: BLE001
             failed += 1
+            prev_entry = status["sources"].get(name, {})
+            if getattr(mod, "INTRADAY", False) and prev_entry.get("ok"):
+                # 当天早些时候已成功采到数据：保留那次的记录，只记下这次的失败
+                prev_entry["last_error"] = f"{run.fetched_at_utc} {e!r}"[:500]
+                print(f"[fail] {name}: {e!r}（当天已有数据，保留）")
+                continue
             status["sources"][name] = {
                 "ok": False,
                 "fetched_at_utc": run.fetched_at_utc,

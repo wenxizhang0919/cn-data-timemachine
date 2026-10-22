@@ -48,6 +48,8 @@ def build() -> list[dict]:
                 "category": cat,
                 "category_name": CATEGORIES[cat][0],
                 "enabled": getattr(mod, "ENABLED", True),
+                "intraday": getattr(mod, "INTRADAY", False),
+                "runner": getattr(mod, "RUNNER", "github"),
                 "description": (mod.__doc__ or "").strip(),
                 "source_url": mod.SOURCE_URL,
                 "license": mod.LICENSE,
@@ -81,6 +83,13 @@ TABLE_HEAD = [
 ]
 
 
+FREQ = {
+    False: "每天采集一次（当天首次成功的那次）",
+    True: "一天内多次采集，新出现的记录追加进当天文件（同一记录只存一次，以首次采到的为准）",
+}
+RUNNER_NAME = {"github": "GitHub Actions（海外）", "server": "国内云服务器（阿里云 杭州）"}
+
+
 def render_dataset(d) -> str:
     src = f"<{d['source_url']}>" if "{" not in d["source_url"] else f"`{d['source_url']}`"
     lines = [
@@ -95,6 +104,8 @@ def render_dataset(d) -> str:
         f"- 覆盖：{d['first_snapshot'] or '—'} 至 {d['latest_snapshot'] or '—'}，"
         f"已存档 {d['days_archived']} 天，缺失 {d['days_missing']} 天",
         f"- 文件：`{d['path']}`，每天一个 CSV（UTF-8，Excel 可直接打开）",
+        f"- 频率：{FREQ[d['intraday']]}",
+        f"- 采集机器：{RUNNER_NAME.get(d['runner'], d['runner'])}",
         "",
         "## 说明",
         "",

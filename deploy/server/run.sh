@@ -52,8 +52,8 @@ for f in $(git ls-files --others --exclude-standard data/raw); do
   esac
 done
 
-# 4. 采集
-python3 collect.py --runner server
+# 4. 采集（额外参数原样传给 collect.py，如 --intraday-only 只跑一天多次的数据源）
+python3 collect.py --runner server "$@"
 rc=$?
 
 # 5. 提交并推送当天的新数据
