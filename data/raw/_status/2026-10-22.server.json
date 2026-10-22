@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-22",
+  "runner": "server",
+  "sources": {
+    "steam_cn": {
+      "ok": true,
+      "rows": 200,
+      "seconds": 18.4,
+      "fetched_at_utc": "2026-10-22T06:18:32Z",
+      "file": "apps/steam_cn/2026-10/2026-10-22.csv",
+      "sha256": "8b1874181e1f92192811d0b9857e68ee18967ccdb9cb35c3e8747c7814d35c94"
+    }
+  }
+}
