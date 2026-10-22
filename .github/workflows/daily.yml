@@ -75,6 +75,8 @@ jobs:
           rm -f "ledger/${{ steps.d.outputs.date }}.json.ots"
           ots stamp "ledger/${{ steps.d.outputs.date }}.json"
           for f in ledger/*.json.ots; do ots upgrade "$f" || true; done
+          # ots upgrade 会留下 .bak 备份文件，不需要入库
+          rm -f ledger/*.ots.bak
 
       - name: Verify and commit
         if: steps.changed.outputs.yes == 'true'
