@@ -9,6 +9,7 @@
 
 from __future__ import annotations
 
+import os
 import time
 
 BASE = "https://www.nmc.cn"
@@ -44,6 +45,7 @@ def cities(session) -> list[dict]:
 
 def fetch_all(session, run, limit: int | None = None) -> dict:
     """返回 {"cities": [...], "data": {code: data}, "failed": [...]}；同一天同一进程只抓一次。"""
+    limit = limit or int(os.environ.get("TM_LIMIT") or 0) or None  # 试跑时只抓前 N 个城市
     key = (run.date, limit)
     if key in _cache:
         return _cache[key]

@@ -31,6 +31,10 @@ sudo -u timemachine /opt/timemachine/repo/deploy/server/run.sh
 
 - 定时任务写在 [`crontab`](crontab)：一天一次的数据源在 10:47 / 14:07 / 17:37 / 20:47 先成功者采集；每小时的数据源 0:27–22:27 每小时一次；21:47 兜底补采（含 GitHub 当天没采到的数据源）。每次运行最多 50 分钟。
 - 每次运行前自动 `git pull`，并把 `crontab` 同步到服务器，所以改代码、改定时都只需推到 GitHub，不用登录服务器。
-- 没有密码也能运维：阿里云控制台 → 云服务器 ECS → 云助手 → 对实例执行命令（以 root 运行）。
+- 没有密码也能运维：阿里云控制台 → 云服务器 ECS → 云助手 → 对实例执行命令（以 root 运行），常用命令都在 [`ops.sh`](ops.sh)：
+  - `bash /opt/timemachine/repo/deploy/server/ops.sh status`：内存、交换空间、磁盘、定时任务、最近日志
+  - `bash /opt/timemachine/repo/deploy/server/ops.sh try <数据源ID> [N]`：试跑一个数据源，只打印不写文件
+  - `bash /opt/timemachine/repo/deploy/server/ops.sh run`：立即正式采集一次
+- 服务器只有 2G 内存：一键安装会加 2G 交换空间；每次运行的内存峰值记在日志的 `[mem]` 行。
 - 日志：`/var/log/timemachine.log`
 - 推送失败时数据留在本地，当天内下次运行自动补推；跨天仍未推送的文件按"只增不改"规则不进入历史，移到 `/opt/timemachine/unsent/` 另存。
