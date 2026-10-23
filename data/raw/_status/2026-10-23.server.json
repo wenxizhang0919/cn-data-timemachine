@@ -12,7 +12,7 @@
       "fetched": 987,
       "added": 1,
       "runs": 2,
-      "last_error": "2026-10-23T09:52:24Z ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='szzdjc.cnemc.cn', port=8070): Read timed out. (read timeout=60)\"))"
+      "last_error": "2026-10-23T10:52:24Z ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='szzdjc.cnemc.cn', port=8070): Read timed out. (read timeout=60)\"))"
     },
     "bj_housing_daily": {
       "ok": true,
