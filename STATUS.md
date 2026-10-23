@@ -1,26 +1,26 @@
 <!-- 本文件由 scripts/health.py 自动生成，请勿手改 -->
 # 运行状态
 
-**✅ 一切正常** · 检查日期 2026-10-23 · 检查时间 2026-10-23 11:06（北京时间）
+**✅ 一切正常** · 检查日期 2026-10-24 · 检查时间 2026-10-24 01:31（北京时间）
 
 ## 各数据集
 
 | 数据集 | 名称 | 采集 | 今天 | 连续天数 | 已存档天数 | 开始日期 |
 |---|---|---|---|---|---|---|
-| `appstore_cn` | App Store 中国区排行榜 | GitHub | ✅ | 3 | 3 | 2026-10-21 |
-| `appstore_global` | 全球 App Store 排行榜 | GitHub | ✅ | 3 | 3 | 2026-10-21 |
-| `mi_appstore_rank` | 小米应用商店排行榜（总榜与分类榜） | 国内服务器 | ✅ | 2 | 2 | 2026-10-22 |
-| `steam_cn` | Steam 中国区畅销榜 | 国内服务器 | ✅ | 2 | 2 | 2026-10-22 |
-| `apple_podcasts_cn` | Apple 播客中国区排行榜 | GitHub | ✅ | 3 | 3 | 2026-10-21 |
-| `huggingface_models` | Hugging Face 热度（模型/数据集/应用） | GitHub | ✅ | 3 | 3 | 2026-10-21 |
-| `llm_api_prices` | 大模型 API 价格（OpenRouter） | GitHub | ✅ | 3 | 3 | 2026-10-21 |
-| `cn_city_weather_forecast` | 全国城市 7 天天气预报存档（中央气象台） | 国内服务器 | ✅ | 2 | 2 | 2026-10-22 |
-| `cn_surface_water_quality` | 全国地表水水质自动监测实时数据 | 国内服务器·每小时 | ✅（今天 2 次有新数据，累计 988 行） | 2 | 2 | 2026-10-22 |
-| `cn_weather_hourly_obs` | 全国城市逐小时天气实况（中央气象台） | 国内服务器 | ✅ | 2 | 2 | 2026-10-22 |
-| `hk_weather_forecast` | 香港天文台九天预报 | GitHub | ✅ | 3 | 3 | 2026-10-21 |
-| `hk_carpark_vacancy` | 香港停车场实时空位 | GitHub | ✅ | 3 | 3 | 2026-10-21 |
-| `bj_housing_daily` | 北京新房与二手房每日网签及库存 | 国内服务器 | ✅ | 2 | 2 | 2026-10-22 |
-| `gz_housing_daily` | 广州新建商品房每日签约与库存（分区） | 国内服务器 | ✅ | 2 | 2 | 2026-10-22 |
+| `appstore_cn` | App Store 中国区排行榜 | GitHub | ✅ | 4 | 4 | 2026-10-21 |
+| `appstore_global` | 全球 App Store 排行榜 | GitHub | ✅ | 4 | 4 | 2026-10-21 |
+| `mi_appstore_rank` | 小米应用商店排行榜（总榜与分类榜） | 国内服务器 | ⏳ 等待采集 | 2 | 2 | 2026-10-22 |
+| `steam_cn` | Steam 中国区畅销榜 | 国内服务器 | ⏳ 等待采集 | 2 | 2 | 2026-10-22 |
+| `apple_podcasts_cn` | Apple 播客中国区排行榜 | GitHub | ✅ | 4 | 4 | 2026-10-21 |
+| `huggingface_models` | Hugging Face 热度（模型/数据集/应用） | GitHub | ✅ | 4 | 4 | 2026-10-21 |
+| `llm_api_prices` | 大模型 API 价格（OpenRouter） | GitHub | ✅ | 4 | 4 | 2026-10-21 |
+| `cn_city_weather_forecast` | 全国城市 7 天天气预报存档（中央气象台） | 国内服务器 | ⏳ 等待采集 | 2 | 2 | 2026-10-22 |
+| `cn_surface_water_quality` | 全国地表水水质自动监测实时数据 | 国内服务器·每小时 | ⏳ 等待采集 | 2 | 2 | 2026-10-22 |
+| `cn_weather_hourly_obs` | 全国城市逐小时天气实况（中央气象台） | 国内服务器 | ⏳ 等待采集 | 2 | 2 | 2026-10-22 |
+| `hk_weather_forecast` | 香港天文台九天预报 | GitHub | ✅ | 4 | 4 | 2026-10-21 |
+| `hk_carpark_vacancy` | 香港停车场实时空位 | GitHub | ✅ | 4 | 4 | 2026-10-21 |
+| `bj_housing_daily` | 北京新房与二手房每日网签及库存 | 国内服务器 | ⏳ 等待采集 | 2 | 2 | 2026-10-22 |
+| `gz_housing_daily` | 广州新建商品房每日签约与库存（分区） | 国内服务器 | ⏳ 等待采集 | 2 | 2 | 2026-10-22 |
 
 ## 怎么自查
 

@@ -5,5 +5,5 @@
 
 | ID | 名称 | 首个快照 | 最新快照 | 已存档天数 | 缺失天数 | 状态 |
 |---|---|---|---|---|---|---|
-| [`huggingface_models`](huggingface_models/) | Hugging Face 热度（模型/数据集/应用） | 2026-10-21 | 2026-10-23 | 3 | 0 | 采集中 |
-| [`llm_api_prices`](llm_api_prices/) | 大模型 API 价格（OpenRouter） | 2026-10-21 | 2026-10-23 | 3 | 0 | 采集中 |
+| [`huggingface_models`](huggingface_models/) | Hugging Face 热度（模型/数据集/应用） | 2026-10-21 | 2026-10-24 | 4 | 0 | 采集中 |
+| [`llm_api_prices`](llm_api_prices/) | 大模型 API 价格（OpenRouter） | 2026-10-21 | 2026-10-24 | 4 | 0 | 采集中 |
