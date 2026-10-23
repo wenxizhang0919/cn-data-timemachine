@@ -12,6 +12,54 @@
       "fetched": 987,
       "added": 1,
       "runs": 2
+    },
+    "bj_housing_daily": {
+      "ok": true,
+      "rows": 213,
+      "seconds": 0.2,
+      "fetched_at_utc": "2026-10-23T02:47:09Z",
+      "file": "real_estate/bj_housing_daily/2026-10/2026-10-23.csv",
+      "sha256": "7daec8ff95aeb0f4afa8ea881713ff97d0e438d01844d070ef895e27339fd65b"
+    },
+    "cn_city_weather_forecast": {
+      "ok": true,
+      "rows": 17689,
+      "seconds": 1050.9,
+      "fetched_at_utc": "2026-10-23T02:47:09Z",
+      "file": "weather/cn_city_weather_forecast/2026-10/2026-10-23.csv",
+      "sha256": "46481eb2444594567b4cb20ed8465f6af4e0d74e6d0f39034855d469c1b9be7e"
+    },
+    "cn_weather_hourly_obs": {
+      "ok": true,
+      "rows": 60528,
+      "seconds": 0.5,
+      "fetched_at_utc": "2026-10-23T02:47:09Z",
+      "file": "weather/cn_weather_hourly_obs/2026-10/2026-10-23.csv",
+      "sha256": "5a443d940e4f4ad506b1b9468db527b7d3b2a37489613d89bd581e3ab3033f25"
+    },
+    "gz_housing_daily": {
+      "ok": true,
+      "rows": 33,
+      "seconds": 3.5,
+      "fetched_at_utc": "2026-10-23T02:47:09Z",
+      "file": "real_estate/gz_housing_daily/2026-10/2026-10-23.csv",
+      "sha256": "324e8eec75f038475728a7e973dfc6d6a6bc2666a313604686be98362f54de6e"
+    },
+    "mi_appstore_rank": {
+      "ok": true,
+      "rows": 1749,
+      "seconds": 58.0,
+      "fetched_at_utc": "2026-10-23T02:47:09Z",
+      "file": "apps/mi_appstore_rank/2026-10/2026-10-23.csv",
+      "sha256": "cae4e3fcb7821e8dfd3b47c8dc9316a6bee0fd0c16f731d3a1087cd6cff6613e"
+    },
+    "steam_cn": {
+      "ok": true,
+      "rows": 200,
+      "seconds": 18.3,
+      "fetched_at_utc": "2026-10-23T02:47:09Z",
+      "file": "apps/steam_cn/2026-10/2026-10-23.csv",
+      "sha256": "31bbecdc59a146d4f4a8eea7847d9e6dfdeae902abf011a5a8b316d18f7fd859"
     }
   }
 }
