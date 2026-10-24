@@ -6,7 +6,7 @@
 - 状态：采集中
 - 来源：<https://openrouter.ai/api/v1/models>
 - 许可：🟢 OpenRouter 公开 API。仅存档价格、上下文长度等事实数据。
-- 覆盖：2026-10-21 至 2026-10-24，已存档 4 天，缺失 0 天
+- 覆盖：2026-10-21 至 2026-10-25，已存档 5 天，缺失 0 天
 - 文件：`data/raw/ai/llm_api_prices/<YYYY-MM>/<YYYY-MM-DD>.csv`，每天一个 CSV（UTF-8，Excel 可直接打开）
 - 频率：每天采集一次（当天首次成功的那次）
 - 采集机器：GitHub Actions（海外）

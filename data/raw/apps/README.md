@@ -5,7 +5,7 @@
 
 | ID | 名称 | 首个快照 | 最新快照 | 已存档天数 | 缺失天数 | 状态 |
 |---|---|---|---|---|---|---|
-| [`appstore_cn`](appstore_cn/) | App Store 中国区排行榜 | 2026-10-21 | 2026-10-24 | 4 | 0 | 采集中 |
-| [`appstore_global`](appstore_global/) | 全球 App Store 排行榜 | 2026-10-21 | 2026-10-24 | 4 | 0 | 采集中 |
+| [`appstore_cn`](appstore_cn/) | App Store 中国区排行榜 | 2026-10-21 | 2026-10-25 | 5 | 0 | 采集中 |
+| [`appstore_global`](appstore_global/) | 全球 App Store 排行榜 | 2026-10-21 | 2026-10-25 | 5 | 0 | 采集中 |
 | [`mi_appstore_rank`](mi_appstore_rank/) | 小米应用商店排行榜（总榜与分类榜） | 2026-10-22 | 2026-10-23 | 2 | 0 | 采集中 |
 | [`steam_cn`](steam_cn/) | Steam 中国区畅销榜 | 2026-10-22 | 2026-10-23 | 2 | 0 | 采集中 |
