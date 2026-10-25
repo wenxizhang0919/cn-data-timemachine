@@ -8,4 +8,4 @@
 | [`cn_city_weather_forecast`](cn_city_weather_forecast/) | 全国城市 7 天天气预报存档（中央气象台） | 2026-10-22 | 2026-10-23 | 2 | 0 | 采集中 |
 | [`cn_surface_water_quality`](cn_surface_water_quality/) | 全国地表水水质自动监测实时数据 | 2026-10-22 | 2026-10-23 | 2 | 0 | 采集中 |
 | [`cn_weather_hourly_obs`](cn_weather_hourly_obs/) | 全国城市逐小时天气实况（中央气象台） | 2026-10-22 | 2026-10-23 | 2 | 0 | 采集中 |
-| [`hk_weather_forecast`](hk_weather_forecast/) | 香港天文台九天预报 | 2026-10-21 | 2026-10-25 | 5 | 0 | 采集中 |
+| [`hk_weather_forecast`](hk_weather_forecast/) | 香港天文台九天预报 | 2026-10-21 | 2026-10-26 | 6 | 0 | 采集中 |
