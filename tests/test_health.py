@@ -123,3 +123,26 @@ def test_fallback_collects_other_runners_missing_daily_sources(tmp_path, monkeyp
     assert sorted(ran) == ["gh2", "srv"]  # 只兜底缺的、一天一次的
     st = json.loads(next((tmp_path / "_status").glob("*.server.json")).read_text("utf-8"))
     assert "gh2" in st["sources"] and "gh1" not in st["sources"]
+
+
+def test_intraday_no_file_today_flags_server_down(tmp_path, monkeypatch):
+    setup(tmp_path, monkeypatch, files=("a",))
+    assert not [p for p in health.check(D, at(2))["problems"] if "`w`" in p]
+    probs = health.check(D, at(21, 13))["problems"]  # 服务器整天没推送，22 点前也要报警
+    assert any("`w`" in p and "没有任何数据" in p for p in probs)
+
+
+def test_strict_after_midnight_checks_previous_day(tmp_path, monkeypatch):
+    seen = []
+    monkeypatch.setattr(health, "check", lambda d, now: seen.append(d) or {"problems": [], "rows": [], "date": d, "checked_at": ""})
+    monkeypatch.setattr(health, "render", lambda rep: "")
+
+    class FakeDT(datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return datetime(2026, 10, 22, 18, 30, tzinfo=timezone.utc)  # 北京时间 10-23 02:30
+
+    monkeypatch.setattr(health, "datetime", FakeDT)
+    health.main(["--strict"])
+    health.main([])
+    assert seen == ["2026-10-22", "2026-10-23"]

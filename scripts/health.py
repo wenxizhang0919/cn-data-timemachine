@@ -36,6 +36,7 @@ from sources._categories import CATEGORIES  # noqa: E402
 DEADLINE_HOUR = 22  # 北京时间 22 点后仍缺数据才算"缺失"；之前算"等待采集"
 INTRADAY_MAX_GAP_H = 3  # 一天多次的数据源超过 3 小时没有新数据视为异常
 INTRADAY_ACTIVE_FROM_H = 3  # 凌晨数据少，3 点前不检查这一项
+STRICT_LATE_UNTIL_H = 6  # --strict 在北京时间 6 点前运行时（定时被推迟），检查前一天
 RUNNER_NAME = {"github": "GitHub", "server": "国内服务器"}
 
 
@@ -110,6 +111,8 @@ def check(date: str, now: datetime) -> dict:
             issues.append("有数据但未登记进账本")
         if st.get("warning"):
             issues.append(st["warning"])
+        if intraday and not has_file and not issues and is_today and now_cst.hour >= INTRADAY_ACTIVE_FROM_H:
+            issues.append(f"已到 {now_cst.hour} 点，今天还没有任何数据（服务器可能停了，或数据源停更）")
         if intraday and has_file and is_today and now_cst.hour >= INTRADAY_ACTIVE_FROM_H:
             last = parse_utc(st.get("fetched_at_utc", ""))
             if last is None or now - last > timedelta(hours=INTRADAY_MAX_GAP_H):
@@ -203,6 +206,9 @@ def main(argv=None) -> int:
     args = ap.parse_args(argv)
     now = datetime.now(timezone.utc)
     date = args.date or now.astimezone(CST).strftime("%Y-%m-%d")
+    if not args.date and args.strict and now.astimezone(CST).hour < STRICT_LATE_UNTIL_H:
+        # GitHub 定时任务常被推迟到次日凌晨，此时应检查刚结束的那一天，而不是刚开始的新一天
+        date = prev_day(date)
     rep = check(date, now)
     text = render(rep)
     if args.write:
