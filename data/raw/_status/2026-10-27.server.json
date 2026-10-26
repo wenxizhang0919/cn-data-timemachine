@@ -1,0 +1,11 @@
+{
+  "date": "2026-10-27",
+  "runner": "server",
+  "sources": {
+    "cn_surface_water_quality": {
+      "ok": false,
+      "fetched_at_utc": "2026-10-26T16:52:25Z",
+      "error": "ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='szzdjc.cnemc.cn', port=8070): Read timed out. (read timeout=60)\"))"
+    }
+  }
+}
