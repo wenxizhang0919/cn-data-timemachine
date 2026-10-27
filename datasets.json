@@ -92,9 +92,9 @@
     },
     "path": "data/raw/apps/mi_appstore_rank/<YYYY-MM>/<YYYY-MM-DD>.csv",
     "first_snapshot": "2026-10-22",
-    "latest_snapshot": "2026-10-23",
-    "days_archived": 2,
-    "days_missing": 0
+    "latest_snapshot": "2026-10-27",
+    "days_archived": 3,
+    "days_missing": 3
   },
   {
     "id": "steam_cn",
@@ -125,9 +125,9 @@
     },
     "path": "data/raw/apps/steam_cn/<YYYY-MM>/<YYYY-MM-DD>.csv",
     "first_snapshot": "2026-10-22",
-    "latest_snapshot": "2026-10-23",
-    "days_archived": 2,
-    "days_missing": 0
+    "latest_snapshot": "2026-10-27",
+    "days_archived": 3,
+    "days_missing": 3
   },
   {
     "id": "apple_podcasts_cn",
@@ -263,9 +263,9 @@
     },
     "path": "data/raw/weather/cn_city_weather_forecast/<YYYY-MM>/<YYYY-MM-DD>.csv",
     "first_snapshot": "2026-10-22",
-    "latest_snapshot": "2026-10-23",
-    "days_archived": 2,
-    "days_missing": 0
+    "latest_snapshot": "2026-10-27",
+    "days_archived": 3,
+    "days_missing": 3
   },
   {
     "id": "cn_surface_water_quality",
@@ -314,9 +314,9 @@
     },
     "path": "data/raw/weather/cn_surface_water_quality/<YYYY-MM>/<YYYY-MM-DD>.csv",
     "first_snapshot": "2026-10-22",
-    "latest_snapshot": "2026-10-23",
-    "days_archived": 2,
-    "days_missing": 0
+    "latest_snapshot": "2026-10-27",
+    "days_archived": 3,
+    "days_missing": 3
   },
   {
     "id": "cn_weather_hourly_obs",
@@ -345,9 +345,9 @@
     },
     "path": "data/raw/weather/cn_weather_hourly_obs/<YYYY-MM>/<YYYY-MM-DD>.csv",
     "first_snapshot": "2026-10-22",
-    "latest_snapshot": "2026-10-23",
-    "days_archived": 2,
-    "days_missing": 0
+    "latest_snapshot": "2026-10-27",
+    "days_archived": 3,
+    "days_missing": 3
   },
   {
     "id": "hk_weather_forecast",
@@ -437,9 +437,9 @@
     },
     "path": "data/raw/real_estate/bj_housing_daily/<YYYY-MM>/<YYYY-MM-DD>.csv",
     "first_snapshot": "2026-10-22",
-    "latest_snapshot": "2026-10-23",
-    "days_archived": 2,
-    "days_missing": 0
+    "latest_snapshot": "2026-10-27",
+    "days_archived": 3,
+    "days_missing": 3
   },
   {
     "id": "gz_housing_daily",
@@ -469,8 +469,8 @@
     },
     "path": "data/raw/real_estate/gz_housing_daily/<YYYY-MM>/<YYYY-MM-DD>.csv",
     "first_snapshot": "2026-10-22",
-    "latest_snapshot": "2026-10-23",
-    "days_archived": 2,
-    "days_missing": 0
+    "latest_snapshot": "2026-10-27",
+    "days_archived": 3,
+    "days_missing": 3
   }
 ]
