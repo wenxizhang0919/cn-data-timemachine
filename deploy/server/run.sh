@@ -38,17 +38,25 @@ git config core.packedGitWindowSize 32m
 SSH_URL="git@github.com:wenxizhang0919/cn-data-timemachine.git"
 [ "$(git remote get-url origin)" = "$SSH_URL" ] || git remote set-url origin "$SSH_URL"
 
-# 1. 往日"已提交但没推上去"的数据：过了当天就不能再进入历史（只增不改），撤销本地提交、文件另存
-if retry git fetch -q origin main; then
-  if [ -n "$(git log origin/main..HEAD --oneline)" ]; then
-    stale=$(git diff --name-only --diff-filter=A origin/main...HEAD -- data/raw | grep -v "$TODAY" || true)
-    if [ -n "$stale" ]; then
-      for f in $stale; do
-        [ -f "$f" ] && mkdir -p "$UNSENT/$(dirname "$f")" && cp "$f" "$UNSENT/$f"
-      done
-      echo "往日未推送的数据已另存到 $UNSENT，撤销本地提交"
-      git reset -q --hard origin/main
-    fi
+# 0. 先确认能上外网：断网时（最常见原因是阿里云账户欠费，按流量计费的公网被停用）不要在各种超时里耗满 50 分钟，
+#    直接记日志退出；网络恢复后下一个整点自动继续。
+if ! timeout 10 bash -c '</dev/tcp/ssh.github.com/443' 2>/dev/null && ! curl -s -m 10 -o /dev/null https://www.baidu.com; then
+  echo "$NOW 无法访问外网，跳过本次运行（最常见原因：阿里云账户欠费导致公网流量停用，请检查余额）"
+  exit 1
+fi
+
+# 1. 往日"已提交但没推上去"的数据：过了当天就不能再进入历史（只增不改），撤销本地提交、文件另存。
+#    拉取失败也要检查（用上次拉到的 origin/main 比较）：2026-10 断网 4 天时，因为只在拉取成功后检查，
+#    积压了 93 个本地提交，网络恢复后被一次性推了上去。
+retry git fetch -q origin main || echo "拉取失败，用上次的 origin/main 检查积压提交"
+if [ -n "$(git log origin/main..HEAD --oneline 2>/dev/null)" ]; then
+  stale=$(git diff --name-only --diff-filter=AM origin/main...HEAD -- data/raw | grep -v "$TODAY" | grep -v 'README.md$' || true)
+  if [ -n "$stale" ]; then
+    for f in $stale; do
+      [ -f "$f" ] && mkdir -p "$UNSENT/$(dirname "$f")" && cp "$f" "$UNSENT/$f"
+    done
+    echo "往日未推送的数据已另存到 $UNSENT，撤销本地提交"
+    git reset -q --hard origin/main
   fi
 fi
 

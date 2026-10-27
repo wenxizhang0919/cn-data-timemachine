@@ -239,7 +239,15 @@ def main(argv=None) -> int:
     if status_path.exists():  # 同一天多次运行（如只补采一个源）时保留其他源的记录
         status = json.loads(status_path.read_text(encoding="utf-8"))
     failed = 0
+
+    def save_status() -> None:
+        # 每采完一个数据源就写一次状态：运行中途被超时强制结束时，已完成的部分仍有记录
+        STATUS_DIR.mkdir(parents=True, exist_ok=True)
+        status_path.write_text(json.dumps(status, ensure_ascii=False, indent=2), encoding="utf-8")
+
     for name in selected:
+        if status["sources"]:
+            save_status()  # 保存上一个数据源的结果
         mod = sources.get(name)
         if mod is None:
             print(f"[skip] 未知数据源: {name}")

@@ -112,12 +112,12 @@ def check(date: str, now: datetime) -> dict:
         if st.get("warning"):
             issues.append(st["warning"])
         if intraday and not has_file and not issues and is_today and now_cst.hour >= INTRADAY_ACTIVE_FROM_H:
-            issues.append(f"已到 {now_cst.hour} 点，今天还没有任何数据（服务器可能停了，或数据源停更）")
+            issues.append(f"已到 {now_cst.hour} 点，今天还没有任何数据（服务器可能停了：最常见原因是阿里云账户欠费导致断网，请先查余额；也可能是数据源停更）")
         if intraday and has_file and is_today and now_cst.hour >= INTRADAY_ACTIVE_FROM_H:
             last = parse_utc(st.get("fetched_at_utc", ""))
             if last is None or now - last > timedelta(hours=INTRADAY_MAX_GAP_H):
                 ago = f"{(now - last).total_seconds() / 3600:.1f} 小时" if last else "未知时长"
-                issues.append(f"已 {ago} 没有新数据（服务器可能停了，或数据源停更）")
+                issues.append(f"已 {ago} 没有新数据（服务器可能停了：最常见原因是阿里云账户欠费导致断网，请先查余额；也可能是数据源停更）")
         problems += [f"`{name}`：{i}" for i in issues]
 
         if has_file and not issues:
