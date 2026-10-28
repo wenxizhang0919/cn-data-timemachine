@@ -3,9 +3,15 @@
   "runner": "server",
   "sources": {
     "cn_surface_water_quality": {
-      "ok": false,
-      "fetched_at_utc": "2026-10-28T16:27:09Z",
-      "error": "RuntimeError('没有采到任何数据')"
+      "ok": true,
+      "rows": 972,
+      "seconds": 5.3,
+      "fetched_at_utc": "2026-10-28T17:27:10Z",
+      "file": "weather/cn_surface_water_quality/2026-10/2026-10-29.csv",
+      "sha256": "1c6b97523ba6336b0f56f4b54e6e995b7fce1637f86a86acd3b5db467ffc53ca",
+      "fetched": 972,
+      "added": 972,
+      "runs": 1
     }
   }
 }
