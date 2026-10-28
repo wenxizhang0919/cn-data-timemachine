@@ -6,7 +6,7 @@
 - 状态：采集中
 - 来源：<https://api.data.gov.hk/v1/carpark-info-vacancy>
 - 许可：🟢 香港运输署开放数据（DATA.GOV.HK 使用条款），来源：运输署。
-- 覆盖：2026-10-21 至 2026-10-28，已存档 8 天，缺失 0 天
+- 覆盖：2026-10-21 至 2026-10-29，已存档 9 天，缺失 0 天
 - 文件：`data/raw/transport/hk_carpark_vacancy/<YYYY-MM>/<YYYY-MM-DD>.csv`，每天一个 CSV（UTF-8，Excel 可直接打开）
 - 频率：每天采集一次（当天首次成功的那次）
 - 采集机器：GitHub Actions（海外）
