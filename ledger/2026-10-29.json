@@ -1,6 +1,6 @@
 {
-  "code_commit": "364f4dd1f8c138e28cafae382e0586049c1d1b85",
-  "created_at_utc": "2026-10-29T05:27:34Z",
+  "code_commit": "adb64038c71cbaf88c8f4246fbdc850695c879e9",
+  "created_at_utc": "2026-10-29T06:07:59Z",
   "date": "2026-10-29",
   "files": [
     {
@@ -49,13 +49,13 @@
       "sha256": "af6045e15d3342faed47e0a389e3a2e158e5ef24c7fff87a5ae33d0dcff6877f"
     },
     {
-      "bytes": 16610,
+      "bytes": 33808,
       "category": "apps",
-      "content_id": "steam_cn@2026-10-29#60cbc226b4dc",
+      "content_id": "steam_cn@2026-10-29#7401d01f7656",
       "dataset": "steam_cn",
       "path": "data/raw/apps/steam_cn/2026-10/2026-10-29.csv",
-      "rows": 99,
-      "sha256": "60cbc226b4dcdf0b596fb85fe9aadc604c5de05654bfffe2a7c57e8fd3449b7a"
+      "rows": 200,
+      "sha256": "7401d01f7656ffede679a8b321dee8b68b13c1f3a97cea4d19220904aa834341"
     },
     {
       "bytes": 296200,
@@ -213,11 +213,10 @@
       "runner": "server"
     },
     "steam_cn": {
-      "fetched_at_utc": "2026-10-29T02:47:09Z",
+      "fetched_at_utc": "2026-10-29T06:07:10Z",
       "ok": true,
-      "rows": 99,
-      "runner": "server",
-      "warning": "行数骤降：99 行，前一次为 200 行，可能是数据源改版"
+      "rows": 200,
+      "runner": "server"
     }
   }
 }
