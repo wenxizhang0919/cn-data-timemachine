@@ -12,6 +12,55 @@
       "fetched": 974,
       "added": 1,
       "runs": 3
+    },
+    "bj_housing_daily": {
+      "ok": true,
+      "rows": 213,
+      "seconds": 0.2,
+      "fetched_at_utc": "2026-10-29T02:47:09Z",
+      "file": "real_estate/bj_housing_daily/2026-10/2026-10-29.csv",
+      "sha256": "d069f0bb154470aa34bdc6e614408262ce43a216dc1cef4db669cc91431bb6d7"
+    },
+    "cn_city_weather_forecast": {
+      "ok": true,
+      "rows": 17689,
+      "seconds": 1120.3,
+      "fetched_at_utc": "2026-10-29T02:47:09Z",
+      "file": "weather/cn_city_weather_forecast/2026-10/2026-10-29.csv",
+      "sha256": "f4494bef75d6c9cb1e44a8d8f89cc1cd1182ec3e2133f5e9133a28945ecd7e01"
+    },
+    "cn_weather_hourly_obs": {
+      "ok": true,
+      "rows": 60528,
+      "seconds": 0.5,
+      "fetched_at_utc": "2026-10-29T02:47:09Z",
+      "file": "weather/cn_weather_hourly_obs/2026-10/2026-10-29.csv",
+      "sha256": "0810f0b07ca437f613996f2395efdc0da5775d9e3d608ec56e6eb732302c0419"
+    },
+    "gz_housing_daily": {
+      "ok": true,
+      "rows": 33,
+      "seconds": 3.5,
+      "fetched_at_utc": "2026-10-29T02:47:09Z",
+      "file": "real_estate/gz_housing_daily/2026-10/2026-10-29.csv",
+      "sha256": "fd8c647a3e1eb1d16a8d953a9895f6970c7898c3df2f18208cc55427f5c2d275"
+    },
+    "mi_appstore_rank": {
+      "ok": true,
+      "rows": 1747,
+      "seconds": 57.9,
+      "fetched_at_utc": "2026-10-29T02:47:09Z",
+      "file": "apps/mi_appstore_rank/2026-10/2026-10-29.csv",
+      "sha256": "af6045e15d3342faed47e0a389e3a2e158e5ef24c7fff87a5ae33d0dcff6877f"
+    },
+    "steam_cn": {
+      "ok": true,
+      "rows": 99,
+      "seconds": 394.0,
+      "fetched_at_utc": "2026-10-29T02:47:09Z",
+      "file": "apps/steam_cn/2026-10/2026-10-29.csv",
+      "sha256": "60cbc226b4dcdf0b596fb85fe9aadc604c5de05654bfffe2a7c57e8fd3449b7a",
+      "warning": "行数骤降：99 行，前一次为 200 行，可能是数据源改版"
     }
   }
 }
