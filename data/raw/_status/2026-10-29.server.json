@@ -4,14 +4,14 @@
   "sources": {
     "cn_surface_water_quality": {
       "ok": true,
-      "rows": 975,
-      "seconds": 4.4,
-      "fetched_at_utc": "2026-10-29T04:27:09Z",
+      "rows": 977,
+      "seconds": 4.8,
+      "fetched_at_utc": "2026-10-29T05:27:09Z",
       "file": "weather/cn_surface_water_quality/2026-10/2026-10-29.csv",
-      "sha256": "c25eb818b77eab8647ceccf4d9c4f8b2b22a949a5ccbb0869a759d44ff281a34",
-      "fetched": 972,
-      "added": 1,
-      "runs": 4
+      "sha256": "ca2f6cb150a29c81ff8f79a29bdb0fe9e3039f2221f6e2a257e8007f91f4515b",
+      "fetched": 974,
+      "added": 2,
+      "runs": 5
     },
     "bj_housing_daily": {
       "ok": true,
