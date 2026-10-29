@@ -254,7 +254,11 @@ def main(argv=None) -> int:
             continue
         path = out_path(mod, run.date)
         intraday = getattr(mod, "INTRADAY", False)
-        if path.exists() and not args.force and not intraday:
+        # 今天早些时候采到的文件行数骤降（多半是对方接口临时出错、只采到一部分）：
+        # 后续重试再采一次，只有行数更多才替换当天文件
+        prev_today = status["sources"].get(name, {})
+        partial = bool(prev_today.get("ok") and prev_today.get("warning"))
+        if path.exists() and not args.force and not intraday and not partial:
             print(f"[skip] {name}: 今天已采集")
             continue
         t0 = time.time()
@@ -275,7 +279,12 @@ def main(argv=None) -> int:
                     # 没有新的监测时刻：不改文件、不改状态，避免无意义的提交
                     print(f"[same] {name}: 抓到 {fetched} 行，没有新记录")
                     continue
+            elif partial and path.exists() and not args.force and len(rows) <= int(prev_today.get("rows") or 0):
+                print(f"[same] {name}: 重试抓到 {len(rows)} 行，不多于当天已有的 {prev_today.get('rows')} 行，保留原文件")
+                continue
             else:
+                if partial:
+                    print(f"[retry] {name}: 当天文件行数骤降，重试抓到 {len(rows)} 行，替换当天文件")
                 write_csv(path, rows)
             del rows
             status["sources"][name] = {
