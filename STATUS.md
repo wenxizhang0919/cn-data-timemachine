@@ -1,11 +1,7 @@
 <!-- 本文件由 scripts/health.py 自动生成，请勿手改 -->
 # 运行状态
 
-**⚠️ 有 1 个问题** · 检查日期 2026-10-30 · 检查时间 2026-10-30 00:33（北京时间）
-
-## 问题
-
-- `cn_surface_water_quality`：采集失败：RuntimeError('没有采到任何数据')
+**✅ 一切正常** · 检查日期 2026-10-30 · 检查时间 2026-10-30 01:27（北京时间）
 
 ## 各数据集
 
@@ -19,7 +15,7 @@
 | `huggingface_models` | Hugging Face 热度（模型/数据集/应用） | GitHub | ✅ | 10 | 10 | 2026-10-21 |
 | `llm_api_prices` | 大模型 API 价格（OpenRouter） | GitHub | ✅ | 10 | 10 | 2026-10-21 |
 | `cn_city_weather_forecast` | 全国城市 7 天天气预报存档（中央气象台） | 国内服务器 | ⏳ 等待采集 | 3 | 5 | 2026-10-22 |
-| `cn_surface_water_quality` | 全国地表水水质自动监测实时数据 | 国内服务器·每小时 | ❌ 采集失败：RuntimeError('没有采到任何数据') | 3 | 5 | 2026-10-22 |
+| `cn_surface_water_quality` | 全国地表水水质自动监测实时数据 | 国内服务器·每小时 | ✅（今天 1 次有新数据，累计 977 行） | 4 | 6 | 2026-10-22 |
 | `cn_weather_hourly_obs` | 全国城市逐小时天气实况（中央气象台） | 国内服务器 | ⏳ 等待采集 | 3 | 5 | 2026-10-22 |
 | `hk_weather_forecast` | 香港天文台九天预报 | GitHub | ✅ | 10 | 10 | 2026-10-21 |
 | `hk_carpark_vacancy` | 香港停车场实时空位 | GitHub | ✅ | 10 | 10 | 2026-10-21 |
