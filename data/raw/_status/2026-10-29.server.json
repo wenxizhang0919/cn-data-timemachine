@@ -55,12 +55,11 @@
     },
     "steam_cn": {
       "ok": true,
-      "rows": 99,
-      "seconds": 394.0,
-      "fetched_at_utc": "2026-10-29T02:47:09Z",
+      "rows": 200,
+      "seconds": 18.3,
+      "fetched_at_utc": "2026-10-29T06:07:10Z",
       "file": "apps/steam_cn/2026-10/2026-10-29.csv",
-      "sha256": "60cbc226b4dcdf0b596fb85fe9aadc604c5de05654bfffe2a7c57e8fd3449b7a",
-      "warning": "行数骤降：99 行，前一次为 200 行，可能是数据源改版"
+      "sha256": "7401d01f7656ffede679a8b321dee8b68b13c1f3a97cea4d19220904aa834341"
     }
   }
 }
