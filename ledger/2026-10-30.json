@@ -1,0 +1,123 @@
+{
+  "code_commit": "6bc5df024250f659a873c23ae8ce160eeccc7143",
+  "created_at_utc": "2026-10-29T16:33:35Z",
+  "date": "2026-10-30",
+  "files": [
+    {
+      "bytes": 165030,
+      "category": "ai",
+      "content_id": "huggingface_models@2026-10-30#70e9d419a5a0",
+      "dataset": "huggingface_models",
+      "path": "data/raw/ai/huggingface_models/2026-10/2026-10-30.csv",
+      "rows": 1197,
+      "sha256": "70e9d419a5a077e0b254a2abbd1a4dd12016f92769a084d76015f6701d31ef96"
+    },
+    {
+      "bytes": 62955,
+      "category": "ai",
+      "content_id": "llm_api_prices@2026-10-30#94347c27f5b3",
+      "dataset": "llm_api_prices",
+      "path": "data/raw/ai/llm_api_prices/2026-10/2026-10-30.csv",
+      "rows": 457,
+      "sha256": "94347c27f5b3af06ea823190694e98b13d5ad93d3db8e28cbaf428f8c90de0de"
+    },
+    {
+      "bytes": 1758848,
+      "category": "apps",
+      "content_id": "appstore_cn@2026-10-30#b2579f652ac9",
+      "dataset": "appstore_cn",
+      "path": "data/raw/apps/appstore_cn/2026-10/2026-10-30.csv",
+      "rows": 8358,
+      "sha256": "b2579f652ac9718d6bddd72b3368fae072ee9d84bc195cf7360518b17addfc0e"
+    },
+    {
+      "bytes": 2277270,
+      "category": "apps",
+      "content_id": "appstore_global@2026-10-30#f5781d219f72",
+      "dataset": "appstore_global",
+      "path": "data/raw/apps/appstore_global/2026-10/2026-10-30.csv",
+      "rows": 14800,
+      "sha256": "f5781d219f7284c6ad8f63899b347048af00cafc94a0c8868d686de66631ab0a"
+    },
+    {
+      "bytes": 295947,
+      "category": "media",
+      "content_id": "apple_podcasts_cn@2026-10-30#d8c06ec4297d",
+      "dataset": "apple_podcasts_cn",
+      "path": "data/raw/media/apple_podcasts_cn/2026-10/2026-10-30.csv",
+      "rows": 1898,
+      "sha256": "d8c06ec4297de9eaa5dfe18c395d293b7f1c5c78592befc4eaf7f6eb8253c81b"
+    },
+    {
+      "bytes": 88544,
+      "category": "transport",
+      "content_id": "hk_carpark_vacancy@2026-10-30#6d15e7389c59",
+      "dataset": "hk_carpark_vacancy",
+      "path": "data/raw/transport/hk_carpark_vacancy/2026-10/2026-10-30.csv",
+      "rows": 757,
+      "sha256": "6d15e7389c599bfedceabd2449fff7f7d5838c30f3a483dcf5eee3408ca18d70"
+    },
+    {
+      "bytes": 3822,
+      "category": "weather",
+      "content_id": "hk_weather_forecast@2026-10-30#609049105326",
+      "dataset": "hk_weather_forecast",
+      "path": "data/raw/weather/hk_weather_forecast/2026-10/2026-10-30.csv",
+      "rows": 9,
+      "sha256": "609049105326a422355371f4f84ee2e5a8d2ef53c71b5879ac4f9ff9a4d2b478"
+    }
+  ],
+  "prev_date": "2026-10-29",
+  "prev_ledger_sha256": "9747c62673f45bba59541e848885d91c28d92f4909bbb890ca31369ea7a7e27d",
+  "schema": "cn-data-timemachine/ledger/v1",
+  "sources": {
+    "apple_podcasts_cn": {
+      "fetched_at_utc": "2026-10-29T16:27:34Z",
+      "ok": true,
+      "rows": 1898,
+      "runner": "github"
+    },
+    "appstore_cn": {
+      "fetched_at_utc": "2026-10-29T16:27:34Z",
+      "ok": true,
+      "rows": 8358,
+      "runner": "github"
+    },
+    "appstore_global": {
+      "fetched_at_utc": "2026-10-29T16:27:34Z",
+      "ok": true,
+      "rows": 14800,
+      "runner": "github"
+    },
+    "cn_surface_water_quality": {
+      "error": "RuntimeError('没有采到任何数据')",
+      "fetched_at_utc": "2026-10-29T16:27:09Z",
+      "ok": false,
+      "runner": "server"
+    },
+    "hk_carpark_vacancy": {
+      "fetched_at_utc": "2026-10-29T16:27:34Z",
+      "ok": true,
+      "rows": 757,
+      "runner": "github"
+    },
+    "hk_weather_forecast": {
+      "fetched_at_utc": "2026-10-29T16:27:34Z",
+      "ok": true,
+      "rows": 9,
+      "runner": "github"
+    },
+    "huggingface_models": {
+      "fetched_at_utc": "2026-10-29T16:27:34Z",
+      "ok": true,
+      "rows": 1197,
+      "runner": "github"
+    },
+    "llm_api_prices": {
+      "fetched_at_utc": "2026-10-29T16:27:34Z",
+      "ok": true,
+      "rows": 457,
+      "runner": "github"
+    }
+  }
+}
