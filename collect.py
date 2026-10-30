@@ -308,7 +308,13 @@ def main(argv=None) -> int:
                 n, prev = fetched, prev_entry.get("fetched") or previous_rows(name, run.date, "fetched")
             else:
                 n, prev = total, previous_rows(name, run.date)
-            if prev and n < int(prev) * ANOMALY_RATIO:
+            # 数据源自己报告"只采到一部分"（如某个榜单中途出错），同样标记，后续重试会再采
+            partial_msg = "" if intraday else getattr(mod, "LAST_WARNING", "")
+            if partial_msg:
+                status["sources"][name]["warning"] = partial_msg
+                failed += 1
+                print(f"[warn] {name}: {partial_msg}")
+            elif prev and n < int(prev) * ANOMALY_RATIO:
                 warning = f"行数骤降：{n} 行，前一次为 {prev} 行，可能是数据源改版"
                 status["sources"][name]["warning"] = warning
                 failed += 1

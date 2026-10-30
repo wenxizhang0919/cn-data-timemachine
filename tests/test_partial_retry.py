@@ -58,3 +58,40 @@ def test_retry_with_fewer_rows_keeps_original(tmp_path, monkeypatch):
     collect.main(["--runner", "server"])
     collect.main(["--runner", "server"])
     assert _rows(tmp_path) == 99 and _status(tmp_path)["rows"] == 99
+
+
+def test_source_reported_partial_is_retried(tmp_path, monkeypatch):
+    """2026-10-30 steam_cn 畅销榜第 3 页出错，只得 149 行（未到骤降阈值），由数据源自己报告不完整。"""
+    calls = _setup(tmp_path, monkeypatch, [149, 200])
+    d = collect.discover_sources()["d"]
+    inner = d.collect
+
+    def fake(s, r):
+        rows = inner(s, r)
+        d.LAST_WARNING = "部分榜单采集中途出错" if len(rows) < 200 else ""
+        return rows
+
+    d.collect = fake
+    assert collect.main(["--runner", "server"]) == 1
+    assert _rows(tmp_path) == 149 and "warning" in _status(tmp_path)
+    assert collect.main(["--runner", "server"]) == 0
+    assert _rows(tmp_path) == 200 and "warning" not in _status(tmp_path)
+    assert len(calls) == 2
+
+
+def test_steam_collect_reports_partial(monkeypatch):
+    import collect as c
+    from sources import steam_cn
+
+    page = '<a href="x" data-ds-appid="{0}"><span class="title">G{0}</span></a>'
+    n = iter(range(10_000))
+
+    def fake_get_json(session, url, retries=3, params=None):
+        if params["filter"] == "topsellers" and params["start"] == 50:
+            raise RuntimeError("502")
+        return {"results_html": "".join(page.format(next(n)) for _ in range(25))}
+
+    monkeypatch.setattr(c, "get_json", fake_get_json)
+    monkeypatch.setattr(steam_cn, "PAUSE_SECONDS", 0)
+    rows = steam_cn.collect(None, None)
+    assert len(rows) == 150 and "topsellers" in steam_cn.LAST_WARNING

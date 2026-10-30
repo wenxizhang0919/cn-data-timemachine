@@ -39,6 +39,9 @@ TOP_N = 100
 PAGE = 25
 PAUSE_SECONDS = 2.0
 RETRIES = 5  # Steam 偶发 502，多试几次
+# 本次采集中途出错（某个榜单只采到一部分）时的说明；collect.py 据此标记 warning，
+# 当天之后的定时重试会再采一次，行数更多才替换当天文件
+LAST_WARNING = ""
 
 _ROW = re.compile(r'<a\s+href="[^"]*"\s+data-ds-appid="([^"]+)"(.*?)</a>', re.S)
 _TITLE = re.compile(r'<span class="title">(.*?)</span>', re.S)
@@ -82,8 +85,10 @@ def parse(results_html: str) -> list[dict]:
 
 
 def collect(session, run) -> list[dict]:
+    global LAST_WARNING
     from collect import get_json
 
+    LAST_WARNING = ""
     rows, errors = [], []
     for key, label in LISTS.items():
         seen, rank = set(), 0
@@ -111,4 +116,6 @@ def collect(session, run) -> list[dict]:
         print(f"  [warn] {msg}")
     if not rows:
         raise RuntimeError("; ".join(errors[:3]) or "解析结果为空，页面结构可能变了")
+    if errors:
+        LAST_WARNING = "部分榜单采集中途出错，数据不完整：" + "; ".join(errors[:3])[:300]
     return rows
