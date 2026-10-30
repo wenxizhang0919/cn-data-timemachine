@@ -6,7 +6,7 @@
 - 状态：采集中
 - 来源：<https://huggingface.co/api/>
 - 许可：🟢 Hugging Face 公开 API。仅存档公开仓库的统计数字（下载量、点赞数、热度）。
-- 覆盖：2026-10-21 至 2026-10-30，已存档 10 天，缺失 0 天
+- 覆盖：2026-10-21 至 2026-10-31，已存档 11 天，缺失 0 天
 - 文件：`data/raw/ai/huggingface_models/<YYYY-MM>/<YYYY-MM-DD>.csv`，每天一个 CSV（UTF-8，Excel 可直接打开）
 - 频率：每天采集一次（当天首次成功的那次）
 - 采集机器：GitHub Actions（海外）
