@@ -55,12 +55,11 @@
     },
     "steam_cn": {
       "ok": true,
-      "rows": 149,
-      "seconds": 260.2,
-      "fetched_at_utc": "2026-10-30T02:47:09Z",
+      "rows": 200,
+      "seconds": 223.2,
+      "fetched_at_utc": "2026-10-30T06:07:09Z",
       "file": "apps/steam_cn/2026-10/2026-10-30.csv",
-      "sha256": "8960d5522d95e2066bc8eb915e8be5882fa19cb9faf9d6f4b264d9916ceb403f",
-      "warning": "部分榜单采集中途出错，数据不完整：畅销榜只采到前 50 名（第 3 页起出错），共 149 行（前一天 200 行）；上午检查补标，待 14:07 重试"
+      "sha256": "08c7e12ffe1a5ec0095b4731ca13fe62e303667aef3d7a0fb2165f0ad1f222b3"
     }
   }
 }
