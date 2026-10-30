@@ -1,6 +1,6 @@
 {
-  "code_commit": "ca54fe8594bcc6502db73bbc2cc01f907f8e864e",
-  "created_at_utc": "2026-10-30T03:11:56Z",
+  "code_commit": "f714dbcc7070e12f5deab9b55e44d78789c54513",
+  "created_at_utc": "2026-10-30T06:11:18Z",
   "date": "2026-10-30",
   "files": [
     {
@@ -49,13 +49,13 @@
       "sha256": "61de035145d268d58cefaba15d0513f14c344ec5bfcf17d88f845468376f0a60"
     },
     {
-      "bytes": 25331,
+      "bytes": 33944,
       "category": "apps",
-      "content_id": "steam_cn@2026-10-30#8960d5522d95",
+      "content_id": "steam_cn@2026-10-30#08c7e12ffe1a",
       "dataset": "steam_cn",
       "path": "data/raw/apps/steam_cn/2026-10/2026-10-30.csv",
-      "rows": 149,
-      "sha256": "8960d5522d95e2066bc8eb915e8be5882fa19cb9faf9d6f4b264d9916ceb403f"
+      "rows": 200,
+      "sha256": "08c7e12ffe1a5ec0095b4731ca13fe62e303667aef3d7a0fb2165f0ad1f222b3"
     },
     {
       "bytes": 295947,
@@ -213,9 +213,9 @@
       "runner": "server"
     },
     "steam_cn": {
-      "fetched_at_utc": "2026-10-30T02:47:09Z",
+      "fetched_at_utc": "2026-10-30T06:07:09Z",
       "ok": true,
-      "rows": 149,
+      "rows": 200,
       "runner": "server"
     }
   }
