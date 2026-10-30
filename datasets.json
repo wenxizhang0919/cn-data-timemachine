@@ -92,8 +92,8 @@
     },
     "path": "data/raw/apps/mi_appstore_rank/<YYYY-MM>/<YYYY-MM-DD>.csv",
     "first_snapshot": "2026-10-22",
-    "latest_snapshot": "2026-10-29",
-    "days_archived": 5,
+    "latest_snapshot": "2026-10-30",
+    "days_archived": 6,
     "days_missing": 3
   },
   {
@@ -125,8 +125,8 @@
     },
     "path": "data/raw/apps/steam_cn/<YYYY-MM>/<YYYY-MM-DD>.csv",
     "first_snapshot": "2026-10-22",
-    "latest_snapshot": "2026-10-29",
-    "days_archived": 5,
+    "latest_snapshot": "2026-10-30",
+    "days_archived": 6,
     "days_missing": 3
   },
   {
@@ -263,8 +263,8 @@
     },
     "path": "data/raw/weather/cn_city_weather_forecast/<YYYY-MM>/<YYYY-MM-DD>.csv",
     "first_snapshot": "2026-10-22",
-    "latest_snapshot": "2026-10-29",
-    "days_archived": 5,
+    "latest_snapshot": "2026-10-30",
+    "days_archived": 6,
     "days_missing": 3
   },
   {
@@ -345,8 +345,8 @@
     },
     "path": "data/raw/weather/cn_weather_hourly_obs/<YYYY-MM>/<YYYY-MM-DD>.csv",
     "first_snapshot": "2026-10-22",
-    "latest_snapshot": "2026-10-29",
-    "days_archived": 5,
+    "latest_snapshot": "2026-10-30",
+    "days_archived": 6,
     "days_missing": 3
   },
   {
@@ -437,8 +437,8 @@
     },
     "path": "data/raw/real_estate/bj_housing_daily/<YYYY-MM>/<YYYY-MM-DD>.csv",
     "first_snapshot": "2026-10-22",
-    "latest_snapshot": "2026-10-29",
-    "days_archived": 5,
+    "latest_snapshot": "2026-10-30",
+    "days_archived": 6,
     "days_missing": 3
   },
   {
@@ -469,8 +469,8 @@
     },
     "path": "data/raw/real_estate/gz_housing_daily/<YYYY-MM>/<YYYY-MM-DD>.csv",
     "first_snapshot": "2026-10-22",
-    "latest_snapshot": "2026-10-29",
-    "days_archived": 5,
+    "latest_snapshot": "2026-10-30",
+    "days_archived": 6,
     "days_missing": 3
   }
 ]
