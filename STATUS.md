@@ -1,11 +1,11 @@
 <!-- 本文件由 scripts/health.py 自动生成，请勿手改 -->
 # 运行状态
 
-**⚠️ 有 1 个问题** · 检查日期 2026-10-31 · 检查时间 2026-10-31 12:27（北京时间）
+**⚠️ 有 1 个问题** · 检查日期 2026-10-31 · 检查时间 2026-10-31 14:11（北京时间）
 
 ## 问题
 
-- `steam_cn`：部分榜单采集中途出错，数据不完整：topsellers: ConnectTimeout(MaxRetryError("HTTPSConnectionPool(host='store.steampowered.com', port=443): Max retries exceeded with url: /search/results/?filter=topsellers&cc=cn&l=schinese&start=25&count=25&infinite=1 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x74929
+- `steam_cn`：部分榜单采集中途出错，数据不完整：topsellers: ConnectTimeout(MaxRetryError("HTTPSConnectionPool(host='store.steampowered.com', port=443): Max retries exceeded with url: /search/results/?filter=topsellers&cc=cn&l=schinese&start=50&count=25&infinite=1 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x790f3
 
 ## 各数据集
 
@@ -14,12 +14,12 @@
 | `appstore_cn` | App Store 中国区排行榜 | GitHub | ✅ | 11 | 11 | 2026-10-21 |
 | `appstore_global` | 全球 App Store 排行榜 | GitHub | ✅ | 11 | 11 | 2026-10-21 |
 | `mi_appstore_rank` | 小米应用商店排行榜（总榜与分类榜） | 国内服务器 | ✅ | 5 | 7 | 2026-10-22 |
-| `steam_cn` | Steam 中国区畅销榜 | 国内服务器 | ❌ 部分榜单采集中途出错，数据不完整：topsellers: ConnectTimeout(MaxRetryError("HTTPSConnectionPool(host='store.steampowered.com', port=443): Max retries exceeded with url: /search/results/?filter=topsellers&cc=cn&l=schinese&start=25&count=25&infinite=1 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x74929 | 5 | 7 | 2026-10-22 |
+| `steam_cn` | Steam 中国区畅销榜 | 国内服务器 | ❌ 部分榜单采集中途出错，数据不完整：topsellers: ConnectTimeout(MaxRetryError("HTTPSConnectionPool(host='store.steampowered.com', port=443): Max retries exceeded with url: /search/results/?filter=topsellers&cc=cn&l=schinese&start=50&count=25&infinite=1 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x790f3 | 5 | 7 | 2026-10-22 |
 | `apple_podcasts_cn` | Apple 播客中国区排行榜 | GitHub | ✅ | 11 | 11 | 2026-10-21 |
 | `huggingface_models` | Hugging Face 热度（模型/数据集/应用） | GitHub | ✅ | 11 | 11 | 2026-10-21 |
 | `llm_api_prices` | 大模型 API 价格（OpenRouter） | GitHub | ✅ | 11 | 11 | 2026-10-21 |
 | `cn_city_weather_forecast` | 全国城市 7 天天气预报存档（中央气象台） | 国内服务器 | ✅ | 5 | 7 | 2026-10-22 |
-| `cn_surface_water_quality` | 全国地表水水质自动监测实时数据 | 国内服务器·每小时 | ✅（今天 4 次有新数据，累计 984 行） | 5 | 7 | 2026-10-22 |
+| `cn_surface_water_quality` | 全国地表水水质自动监测实时数据 | 国内服务器·每小时 | ✅（今天 5 次有新数据，累计 985 行） | 5 | 7 | 2026-10-22 |
 | `cn_weather_hourly_obs` | 全国城市逐小时天气实况（中央气象台） | 国内服务器 | ✅ | 5 | 7 | 2026-10-22 |
 | `hk_weather_forecast` | 香港天文台九天预报 | GitHub | ✅ | 11 | 11 | 2026-10-21 |
 | `hk_carpark_vacancy` | 香港停车场实时空位 | GitHub | ✅ | 11 | 11 | 2026-10-21 |
