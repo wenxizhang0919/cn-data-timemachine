@@ -1,6 +1,6 @@
 {
-  "code_commit": "60a7cdab08e781104f9e57c9a14c608dca3cd609",
-  "created_at_utc": "2026-10-31T02:27:34Z",
+  "code_commit": "0d6b26d1b2fe250312a1fb08bf7a53fd6e482661",
+  "created_at_utc": "2026-10-31T03:11:39Z",
   "date": "2026-10-31",
   "files": [
     {
@@ -40,6 +40,24 @@
       "sha256": "eb1ee76bf906759d3f21632af51b465888b4fc461eb17fabc1d8b631e675e8f5"
     },
     {
+      "bytes": 202321,
+      "category": "apps",
+      "content_id": "mi_appstore_rank@2026-10-31#3cf795cd3bc8",
+      "dataset": "mi_appstore_rank",
+      "path": "data/raw/apps/mi_appstore_rank/2026-10/2026-10-31.csv",
+      "rows": 1748,
+      "sha256": "3cf795cd3bc849fdfd3e48fc32a624e2f8cd6be3b265b5913777eec8d0dbdbe4"
+    },
+    {
+      "bytes": 21368,
+      "category": "apps",
+      "content_id": "steam_cn@2026-10-31#a9ced79addf5",
+      "dataset": "steam_cn",
+      "path": "data/raw/apps/steam_cn/2026-10/2026-10-31.csv",
+      "rows": 125,
+      "sha256": "a9ced79addf5b85531d4ad2234753611ec9da0ca91ea44f7d11106be0cc6f5d0"
+    },
+    {
       "bytes": 296740,
       "category": "media",
       "content_id": "apple_podcasts_cn@2026-10-31#c1056aca218b",
@@ -47,6 +65,24 @@
       "path": "data/raw/media/apple_podcasts_cn/2026-10/2026-10-31.csv",
       "rows": 1900,
       "sha256": "c1056aca218bc76de7f6f1f333480b6900e8013ae7cc9d75f1a4844cc887be1b"
+    },
+    {
+      "bytes": 25313,
+      "category": "real_estate",
+      "content_id": "bj_housing_daily@2026-10-31#7e0a1e0aed62",
+      "dataset": "bj_housing_daily",
+      "path": "data/raw/real_estate/bj_housing_daily/2026-10/2026-10-31.csv",
+      "rows": 213,
+      "sha256": "7e0a1e0aed624a418271801ec8768ea8ea9979ff6377eb977e8d7e3c09ba7568"
+    },
+    {
+      "bytes": 4128,
+      "category": "real_estate",
+      "content_id": "gz_housing_daily@2026-10-31#9749cae4e378",
+      "dataset": "gz_housing_daily",
+      "path": "data/raw/real_estate/gz_housing_daily/2026-10/2026-10-31.csv",
+      "rows": 33,
+      "sha256": "9749cae4e37804eb410f58d134216e543a21d823f7e8817148f71b22d90b0e81"
     },
     {
       "bytes": 88155,
@@ -58,6 +94,15 @@
       "sha256": "ba653c9edf20208f45aba0afdbd59908be364839eb26a8165178946ef4e88d6e"
     },
     {
+      "bytes": 3378024,
+      "category": "weather",
+      "content_id": "cn_city_weather_forecast@2026-10-31#b9c633096a65",
+      "dataset": "cn_city_weather_forecast",
+      "path": "data/raw/weather/cn_city_weather_forecast/2026-10/2026-10-31.csv",
+      "rows": 17689,
+      "sha256": "b9c633096a656a3e18aa76b2a8f9daebb3f2359442d00d3ac43a79a79be6635e"
+    },
+    {
       "bytes": 184530,
       "category": "weather",
       "content_id": "cn_surface_water_quality@2026-10-31#8e34d6caf2af",
@@ -65,6 +110,15 @@
       "path": "data/raw/weather/cn_surface_water_quality/2026-10/2026-10-31.csv",
       "rows": 983,
       "sha256": "8e34d6caf2afeaf92cae3b8996f92b1c744f59702feec934f515ba0f179ae8e0"
+    },
+    {
+      "bytes": 6362064,
+      "category": "weather",
+      "content_id": "cn_weather_hourly_obs@2026-10-31#86a844cd9a2b",
+      "dataset": "cn_weather_hourly_obs",
+      "path": "data/raw/weather/cn_weather_hourly_obs/2026-10/2026-10-31.csv",
+      "rows": 60528,
+      "sha256": "86a844cd9a2be78bf81694a057afb2ec6845ee207a785ccb1fe776b61263cdeb"
     },
     {
       "bytes": 4342,
@@ -98,10 +152,34 @@
       "rows": 14795,
       "runner": "github"
     },
+    "bj_housing_daily": {
+      "fetched_at_utc": "2026-10-31T02:47:09Z",
+      "ok": true,
+      "rows": 213,
+      "runner": "server"
+    },
+    "cn_city_weather_forecast": {
+      "fetched_at_utc": "2026-10-31T02:47:09Z",
+      "ok": true,
+      "rows": 17689,
+      "runner": "server"
+    },
     "cn_surface_water_quality": {
       "fetched_at_utc": "2026-10-31T02:27:09Z",
       "ok": true,
       "rows": 983,
+      "runner": "server"
+    },
+    "cn_weather_hourly_obs": {
+      "fetched_at_utc": "2026-10-31T02:47:09Z",
+      "ok": true,
+      "rows": 60528,
+      "runner": "server"
+    },
+    "gz_housing_daily": {
+      "fetched_at_utc": "2026-10-31T02:47:09Z",
+      "ok": true,
+      "rows": 33,
       "runner": "server"
     },
     "hk_carpark_vacancy": {
@@ -127,6 +205,19 @@
       "ok": true,
       "rows": 456,
       "runner": "github"
+    },
+    "mi_appstore_rank": {
+      "fetched_at_utc": "2026-10-31T02:47:09Z",
+      "ok": true,
+      "rows": 1748,
+      "runner": "server"
+    },
+    "steam_cn": {
+      "fetched_at_utc": "2026-10-31T02:47:09Z",
+      "ok": true,
+      "rows": 125,
+      "runner": "server",
+      "warning": "部分榜单采集中途出错，数据不完整：topsellers: ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='store.steampowered.com', port=443): Max retries exceeded with url: /search/results/?filter=topsellers&cc=cn&l=schinese&start=25&count=25&infinite=1 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x74929"
     }
   }
 }

@@ -6,7 +6,7 @@
 - 状态：采集中
 - 来源：<https://store.steampowered.com/search/?filter=topsellers&cc=cn>
 - 许可：🟡 Steam 商店公开页面（遵守 robots.txt，每日 4 次请求）。仅存档排名、价格、评测数等事实数据；游戏名称归各自权利人。
-- 覆盖：2026-10-22 至 2026-10-30，已存档 6 天，缺失 3 天
+- 覆盖：2026-10-22 至 2026-10-31，已存档 7 天，缺失 3 天
 - 文件：`data/raw/apps/steam_cn/<YYYY-MM>/<YYYY-MM-DD>.csv`，每天一个 CSV（UTF-8，Excel 可直接打开）
 - 频率：每天采集一次（当天首次成功的那次）
 - 采集机器：国内云服务器（阿里云 杭州）
