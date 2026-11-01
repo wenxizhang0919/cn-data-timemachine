@@ -1,0 +1,11 @@
+{
+  "date": "2026-11-02",
+  "runner": "server",
+  "sources": {
+    "cn_surface_water_quality": {
+      "ok": false,
+      "fetched_at_utc": "2026-11-01T16:27:08Z",
+      "error": "RuntimeError('没有采到任何数据')"
+    }
+  }
+}
