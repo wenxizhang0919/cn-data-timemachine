@@ -314,8 +314,8 @@
     },
     "path": "data/raw/weather/cn_surface_water_quality/<YYYY-MM>/<YYYY-MM-DD>.csv",
     "first_snapshot": "2026-10-22",
-    "latest_snapshot": "2026-11-02",
-    "days_archived": 9,
+    "latest_snapshot": "2026-11-03",
+    "days_archived": 10,
     "days_missing": 3
   },
   {
