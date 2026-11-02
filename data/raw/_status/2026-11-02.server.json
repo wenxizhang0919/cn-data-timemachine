@@ -12,6 +12,55 @@
       "fetched": 970,
       "added": 2,
       "runs": 2
+    },
+    "bj_housing_daily": {
+      "ok": true,
+      "rows": 213,
+      "seconds": 0.2,
+      "fetched_at_utc": "2026-11-02T02:47:09Z",
+      "file": "real_estate/bj_housing_daily/2026-11/2026-11-02.csv",
+      "sha256": "7cf9578d09465ba8ef89cb2b5a8031475787e7f9bf9fc1f735357a6fd323f691"
+    },
+    "cn_city_weather_forecast": {
+      "ok": true,
+      "rows": 17689,
+      "seconds": 1061.4,
+      "fetched_at_utc": "2026-11-02T02:47:09Z",
+      "file": "weather/cn_city_weather_forecast/2026-11/2026-11-02.csv",
+      "sha256": "0ac8a7367ece751aa8628fe9f04548050e9f704d80a4a7544dffac6810f1816b"
+    },
+    "cn_weather_hourly_obs": {
+      "ok": true,
+      "rows": 60528,
+      "seconds": 0.5,
+      "fetched_at_utc": "2026-11-02T02:47:09Z",
+      "file": "weather/cn_weather_hourly_obs/2026-11/2026-11-02.csv",
+      "sha256": "8074dcb120cae002d6a4edf6b73c91c9481ac5e2f8bc97fe35b9a85a885616cf"
+    },
+    "gz_housing_daily": {
+      "ok": true,
+      "rows": 33,
+      "seconds": 3.4,
+      "fetched_at_utc": "2026-11-02T02:47:09Z",
+      "file": "real_estate/gz_housing_daily/2026-11/2026-11-02.csv",
+      "sha256": "46b1babb92c351267aa9736691509d056d85377e444bfceda009c9111ec8f417"
+    },
+    "mi_appstore_rank": {
+      "ok": true,
+      "rows": 1748,
+      "seconds": 57.7,
+      "fetched_at_utc": "2026-11-02T02:47:09Z",
+      "file": "apps/mi_appstore_rank/2026-11/2026-11-02.csv",
+      "sha256": "57d0c9b21d5400bbc22bf65565f0d1f704204f6ea700ac6e8e140f5381984ca5"
+    },
+    "steam_cn": {
+      "ok": true,
+      "rows": 150,
+      "seconds": 575.0,
+      "fetched_at_utc": "2026-11-02T02:47:09Z",
+      "file": "apps/steam_cn/2026-11/2026-11-02.csv",
+      "sha256": "bd81e3796db59ac6d7ea8b5a2990b4cc4df4910c379235df33845b9ff26423ac",
+      "warning": "部分榜单采集中途出错，数据不完整：topsellers: ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='store.steampowered.com', port=443): Max retries exceeded with url: /search/results/?filter=topsellers&cc=cn&l=schinese&start=50&count=25&infinite=1 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x77bee"
     }
   }
 }
