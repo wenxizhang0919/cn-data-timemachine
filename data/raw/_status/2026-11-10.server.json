@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-10",
+  "runner": "server",
+  "sources": {
+    "cn_surface_water_quality": {
+      "ok": true,
+      "rows": 62,
+      "seconds": 4.6,
+      "fetched_at_utc": "2026-11-09T16:27:09Z",
+      "file": "weather/cn_surface_water_quality/2026-11/2026-11-10.csv",
+      "sha256": "0c49dfa12c2a4ffc7bfdbabfe07a3c8389ac73590420267c0ebd26212cea3577",
+      "fetched": 62,
+      "added": 62,
+      "runs": 1,
+      "warning": "行数骤降：62 行，前一次为 1545 行，可能是数据源改版"
+    }
+  }
+}
