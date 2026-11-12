@@ -4,14 +4,63 @@
   "sources": {
     "cn_surface_water_quality": {
       "ok": true,
-      "rows": 14344,
-      "seconds": 4.4,
-      "fetched_at_utc": "2026-11-12T02:27:10Z",
+      "rows": 15552,
+      "seconds": 4.0,
+      "fetched_at_utc": "2026-11-12T02:47:09Z",
       "file": "weather/cn_surface_water_quality/2026-11/2026-11-12.csv",
-      "sha256": "2fe3d273c8007b12d6a59437211d0637d57f12be553039fd3ac7d5cf7a86d7fa",
-      "fetched": 1543,
-      "added": 1525,
-      "runs": 11
+      "sha256": "aec87f3ff08d1bb7750afcd7cb263fac92ba4ccc8a12d826d0d032c92c1e0201",
+      "fetched": 1546,
+      "added": 1208,
+      "runs": 12
+    },
+    "bj_housing_daily": {
+      "ok": true,
+      "rows": 213,
+      "seconds": 0.3,
+      "fetched_at_utc": "2026-11-12T02:47:09Z",
+      "file": "real_estate/bj_housing_daily/2026-11/2026-11-12.csv",
+      "sha256": "4b4e3f8adfcad8fe3f420c92023d8618d547f8fe4a6e36fc4a7a0439d3591484"
+    },
+    "cn_city_weather_forecast": {
+      "ok": true,
+      "rows": 17689,
+      "seconds": 1235.9,
+      "fetched_at_utc": "2026-11-12T02:47:09Z",
+      "file": "weather/cn_city_weather_forecast/2026-11/2026-11-12.csv",
+      "sha256": "6d4386c2ff320e92de747e2081609b0943780753d2cd249ec89c5c84a7550bc5"
+    },
+    "cn_weather_hourly_obs": {
+      "ok": true,
+      "rows": 60528,
+      "seconds": 0.5,
+      "fetched_at_utc": "2026-11-12T02:47:09Z",
+      "file": "weather/cn_weather_hourly_obs/2026-11/2026-11-12.csv",
+      "sha256": "3d9d7382e63cf6a8bed0211a7531a9841ffdc4a22e8f66d3a68ef3a6ecf125e5"
+    },
+    "gz_housing_daily": {
+      "ok": true,
+      "rows": 33,
+      "seconds": 3.4,
+      "fetched_at_utc": "2026-11-12T02:47:09Z",
+      "file": "real_estate/gz_housing_daily/2026-11/2026-11-12.csv",
+      "sha256": "a65699b5681cc99e8a6fa42abc48bad05d291a0f7892c04c1dc4fe9f6dddcaa5"
+    },
+    "mi_appstore_rank": {
+      "ok": true,
+      "rows": 1749,
+      "seconds": 56.9,
+      "fetched_at_utc": "2026-11-12T02:47:09Z",
+      "file": "apps/mi_appstore_rank/2026-11/2026-11-12.csv",
+      "sha256": "ccc7277988b974d54f95f92e4fbfbe146f51530b74720f832e200d0163ec2b28"
+    },
+    "steam_cn": {
+      "ok": true,
+      "rows": 150,
+      "seconds": 260.2,
+      "fetched_at_utc": "2026-11-12T02:47:09Z",
+      "file": "apps/steam_cn/2026-11/2026-11-12.csv",
+      "sha256": "b270c15f845be74a3d34c3caad0048bc7e3b9d7709cb57eb2886b1c12b9636b1",
+      "warning": "部分榜单采集中途出错，数据不完整：topsellers: ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='store.steampowered.com', port=443): Max retries exceeded with url: /search/results/?filter=topsellers&cc=cn&l=schinese&start=50&count=25&infinite=1 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7a323"
     }
   }
 }
