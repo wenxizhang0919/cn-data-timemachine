@@ -4,14 +4,14 @@
   "sources": {
     "cn_surface_water_quality": {
       "ok": true,
-      "rows": 18608,
-      "seconds": 3.8,
-      "fetched_at_utc": "2026-11-12T05:27:09Z",
+      "rows": 19818,
+      "seconds": 4.0,
+      "fetched_at_utc": "2026-11-12T06:07:09Z",
       "file": "weather/cn_surface_water_quality/2026-11/2026-11-12.csv",
-      "sha256": "d1c5b1db75c10fd30798510f89f9e5b67d13d97bd9d128a9a73f7ea3bf18e349",
+      "sha256": "94ccfd2bc602608d4bcbb7195b1027cdc6a0aa40e813ac4b27754a78bf4321be",
       "fetched": 1554,
-      "added": 1217,
-      "runs": 15
+      "added": 1210,
+      "runs": 16
     },
     "bj_housing_daily": {
       "ok": true,
@@ -55,12 +55,12 @@
     },
     "steam_cn": {
       "ok": true,
-      "rows": 150,
-      "seconds": 260.2,
-      "fetched_at_utc": "2026-11-12T02:47:09Z",
+      "rows": 175,
+      "seconds": 582.6,
+      "fetched_at_utc": "2026-11-12T06:07:09Z",
       "file": "apps/steam_cn/2026-11/2026-11-12.csv",
-      "sha256": "b270c15f845be74a3d34c3caad0048bc7e3b9d7709cb57eb2886b1c12b9636b1",
-      "warning": "部分榜单采集中途出错，数据不完整：topsellers: ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='store.steampowered.com', port=443): Max retries exceeded with url: /search/results/?filter=topsellers&cc=cn&l=schinese&start=50&count=25&infinite=1 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7a323"
+      "sha256": "c93b4ec066e45f52bd5a4ef930703502fb5215114c43b4572133fea6c9000760",
+      "warning": "部分榜单采集中途出错，数据不完整：topsellers: ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='store.steampowered.com', port=443): Max retries exceeded with url: /search/results/?filter=topsellers&cc=cn&l=schinese&start=75&count=25&infinite=1 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x74df9"
     }
   }
 }
