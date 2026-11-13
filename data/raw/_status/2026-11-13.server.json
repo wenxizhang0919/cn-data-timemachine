@@ -4,14 +4,14 @@
   "sources": {
     "cn_surface_water_quality": {
       "ok": true,
-      "rows": 18682,
-      "seconds": 3.8,
-      "fetched_at_utc": "2026-11-13T05:27:09Z",
+      "rows": 19900,
+      "seconds": 4.1,
+      "fetched_at_utc": "2026-11-13T06:07:10Z",
       "file": "weather/cn_surface_water_quality/2026-11/2026-11-13.csv",
-      "sha256": "1d0d819b97b2f9926457c916153759950ad7a299020095109a102df6fcf57b22",
-      "fetched": 1546,
-      "added": 1217,
-      "runs": 15
+      "sha256": "c9b41f67843640275ed42b2be42a3a2fd44a76dcb1c40d751c76eb7ffac83c29",
+      "fetched": 1549,
+      "added": 1218,
+      "runs": 16
     },
     "bj_housing_daily": {
       "ok": true,
@@ -55,12 +55,11 @@
     },
     "steam_cn": {
       "ok": true,
-      "rows": 173,
-      "seconds": 776.5,
-      "fetched_at_utc": "2026-11-13T02:47:09Z",
+      "rows": 200,
+      "seconds": 256.9,
+      "fetched_at_utc": "2026-11-13T06:07:10Z",
       "file": "apps/steam_cn/2026-11/2026-11-13.csv",
-      "sha256": "6000668210bd2e3e6fbb2c9afb790e25cc4f266ca7d45a174b6b7da28daa787e",
-      "warning": "部分榜单采集中途出错，数据不完整：topsellers: ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='store.steampowered.com', port=443): Read timed out. (read timeout=30)\"))"
+      "sha256": "f149e5e7c1be9f90e513d58804bb30836c6d66b4d36846790dcfbe3576b14a03"
     }
   }
 }
