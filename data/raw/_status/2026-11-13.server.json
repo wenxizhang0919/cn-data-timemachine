@@ -4,14 +4,63 @@
   "sources": {
     "cn_surface_water_quality": {
       "ok": true,
-      "rows": 14412,
-      "seconds": 4.6,
-      "fetched_at_utc": "2026-11-13T02:27:09Z",
+      "rows": 15627,
+      "seconds": 4.2,
+      "fetched_at_utc": "2026-11-13T02:47:09Z",
       "file": "weather/cn_surface_water_quality/2026-11/2026-11-13.csv",
-      "sha256": "36b81e554c6b94102c98dd67ac123f10eab5b85ea677b4766a5236abbd904575",
+      "sha256": "60bcfd910cf792a1658b62f8d3271763a09e10a53daa2d32fcefd8933902e3ba",
       "fetched": 1547,
-      "added": 1537,
-      "runs": 11
+      "added": 1215,
+      "runs": 12
+    },
+    "bj_housing_daily": {
+      "ok": true,
+      "rows": 213,
+      "seconds": 0.2,
+      "fetched_at_utc": "2026-11-13T02:47:09Z",
+      "file": "real_estate/bj_housing_daily/2026-11/2026-11-13.csv",
+      "sha256": "868d43b5f804a17e607cb167cff2b57187523bb81e5707c9715c549d5d153816"
+    },
+    "cn_city_weather_forecast": {
+      "ok": true,
+      "rows": 17689,
+      "seconds": 1136.8,
+      "fetched_at_utc": "2026-11-13T02:47:09Z",
+      "file": "weather/cn_city_weather_forecast/2026-11/2026-11-13.csv",
+      "sha256": "6fd13062ca385401bf5382c6b68cfb1da4da105d47259d27bde7f19710dfa23f"
+    },
+    "cn_weather_hourly_obs": {
+      "ok": true,
+      "rows": 60528,
+      "seconds": 0.5,
+      "fetched_at_utc": "2026-11-13T02:47:09Z",
+      "file": "weather/cn_weather_hourly_obs/2026-11/2026-11-13.csv",
+      "sha256": "e589f0b2f5f593c7ffaf457881e9a468a267a05493e89367a168e1b74a99ef6a"
+    },
+    "gz_housing_daily": {
+      "ok": true,
+      "rows": 33,
+      "seconds": 3.4,
+      "fetched_at_utc": "2026-11-13T02:47:09Z",
+      "file": "real_estate/gz_housing_daily/2026-11/2026-11-13.csv",
+      "sha256": "11c5da3fa54e832b6ca041463be15fb99f86824123a32cb935934989a5916774"
+    },
+    "mi_appstore_rank": {
+      "ok": true,
+      "rows": 1749,
+      "seconds": 58.7,
+      "fetched_at_utc": "2026-11-13T02:47:09Z",
+      "file": "apps/mi_appstore_rank/2026-11/2026-11-13.csv",
+      "sha256": "e80fbce3fe8539dac6710f7d9837ad73d17bf59b8f2942244754c87fecbe765b"
+    },
+    "steam_cn": {
+      "ok": true,
+      "rows": 173,
+      "seconds": 776.5,
+      "fetched_at_utc": "2026-11-13T02:47:09Z",
+      "file": "apps/steam_cn/2026-11/2026-11-13.csv",
+      "sha256": "6000668210bd2e3e6fbb2c9afb790e25cc4f266ca7d45a174b6b7da28daa787e",
+      "warning": "部分榜单采集中途出错，数据不完整：topsellers: ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='store.steampowered.com', port=443): Read timed out. (read timeout=30)\"))"
     }
   }
 }
