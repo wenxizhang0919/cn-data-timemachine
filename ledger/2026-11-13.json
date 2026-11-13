@@ -1,6 +1,6 @@
 {
-  "code_commit": "cbada772edd876893df0a901bd817d87655eecb8",
-  "created_at_utc": "2026-11-13T05:27:49Z",
+  "code_commit": "d2a40819f4c47ff70425670bff81bbfce2c0d677",
+  "created_at_utc": "2026-11-13T06:12:06Z",
   "date": "2026-11-13",
   "files": [
     {
@@ -49,13 +49,13 @@
       "sha256": "e80fbce3fe8539dac6710f7d9837ad73d17bf59b8f2942244754c87fecbe765b"
     },
     {
-      "bytes": 29372,
+      "bytes": 33909,
       "category": "apps",
-      "content_id": "steam_cn@2026-11-13#6000668210bd",
+      "content_id": "steam_cn@2026-11-13#f149e5e7c1be",
       "dataset": "steam_cn",
       "path": "data/raw/apps/steam_cn/2026-11/2026-11-13.csv",
-      "rows": 173,
-      "sha256": "6000668210bd2e3e6fbb2c9afb790e25cc4f266ca7d45a174b6b7da28daa787e"
+      "rows": 200,
+      "sha256": "f149e5e7c1be9f90e513d58804bb30836c6d66b4d36846790dcfbe3576b14a03"
     },
     {
       "bytes": 296043,
@@ -103,13 +103,13 @@
       "sha256": "6fd13062ca385401bf5382c6b68cfb1da4da105d47259d27bde7f19710dfa23f"
     },
     {
-      "bytes": 3552915,
+      "bytes": 3783562,
       "category": "weather",
-      "content_id": "cn_surface_water_quality@2026-11-13#1d0d819b97b2",
+      "content_id": "cn_surface_water_quality@2026-11-13#c9b41f678436",
       "dataset": "cn_surface_water_quality",
       "path": "data/raw/weather/cn_surface_water_quality/2026-11/2026-11-13.csv",
-      "rows": 18682,
-      "sha256": "1d0d819b97b2f9926457c916153759950ad7a299020095109a102df6fcf57b22"
+      "rows": 19900,
+      "sha256": "c9b41f67843640275ed42b2be42a3a2fd44a76dcb1c40d751c76eb7ffac83c29"
     },
     {
       "bytes": 6358113,
@@ -165,9 +165,9 @@
       "runner": "server"
     },
     "cn_surface_water_quality": {
-      "fetched_at_utc": "2026-11-13T05:27:09Z",
+      "fetched_at_utc": "2026-11-13T06:07:10Z",
       "ok": true,
-      "rows": 18682,
+      "rows": 19900,
       "runner": "server"
     },
     "cn_weather_hourly_obs": {
@@ -213,11 +213,10 @@
       "runner": "server"
     },
     "steam_cn": {
-      "fetched_at_utc": "2026-11-13T02:47:09Z",
+      "fetched_at_utc": "2026-11-13T06:07:10Z",
       "ok": true,
-      "rows": 173,
-      "runner": "server",
-      "warning": "部分榜单采集中途出错，数据不完整：topsellers: ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='store.steampowered.com', port=443): Read timed out. (read timeout=30)\"))"
+      "rows": 200,
+      "runner": "server"
     }
   }
 }
