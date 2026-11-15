@@ -1,6 +1,6 @@
 {
-  "code_commit": "0ac86066b98ef3c31be6b49054aa4bbd27b14921",
-  "created_at_utc": "2026-11-15T19:27:55Z",
+  "code_commit": "828781bac55d3fe47bc2fd4a86fa2d2e90505e3e",
+  "created_at_utc": "2026-11-15T20:27:42Z",
   "date": "2026-11-16",
   "files": [
     {
@@ -58,13 +58,13 @@
       "sha256": "fef8b20a3c8e03add96ed22f7d0ab47d82d99d3b4d68ce3ce79216730ed7601f"
     },
     {
-      "bytes": 825361,
+      "bytes": 1113778,
       "category": "weather",
-      "content_id": "cn_surface_water_quality@2026-11-16#8bbe03a7cb34",
+      "content_id": "cn_surface_water_quality@2026-11-16#1d4135f6320d",
       "dataset": "cn_surface_water_quality",
       "path": "data/raw/weather/cn_surface_water_quality/2026-11/2026-11-16.csv",
-      "rows": 4361,
-      "sha256": "8bbe03a7cb34b766be3e50740a236ce8ba70899ec3badb63635f4b4187e66aa2"
+      "rows": 5885,
+      "sha256": "1d4135f6320d5e4edaf21ff6ea7592e26f78c2787d4d2e163e824140c1e38889"
     },
     {
       "bytes": 4982,
@@ -99,9 +99,9 @@
       "runner": "github"
     },
     "cn_surface_water_quality": {
-      "fetched_at_utc": "2026-11-15T19:27:10Z",
+      "fetched_at_utc": "2026-11-15T20:27:09Z",
       "ok": true,
-      "rows": 4361,
+      "rows": 5885,
       "runner": "server"
     },
     "hk_carpark_vacancy": {
