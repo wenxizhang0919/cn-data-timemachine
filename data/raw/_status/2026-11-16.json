@@ -1,0 +1,62 @@
+{
+  "date": "2026-11-16",
+  "runner": "github",
+  "sources": {
+    "apple_podcasts_cn": {
+      "ok": true,
+      "rows": 1896,
+      "seconds": 15.8,
+      "fetched_at_utc": "2026-11-15T16:14:43Z",
+      "file": "media/apple_podcasts_cn/2026-11/2026-11-16.csv",
+      "sha256": "f3b6f21216113324ec104017bc6e10aa3e7fbdd76a266493c18f4ef96ab6ecb5"
+    },
+    "appstore_cn": {
+      "ok": true,
+      "rows": 8377,
+      "seconds": 102.1,
+      "fetched_at_utc": "2026-11-15T16:14:43Z",
+      "file": "apps/appstore_cn/2026-11/2026-11-16.csv",
+      "sha256": "d615427cc9e4121d98355a844b7c9ebade8bd6aa7eafc8bb39241d682d70b43b"
+    },
+    "appstore_global": {
+      "ok": true,
+      "rows": 14799,
+      "seconds": 221.6,
+      "fetched_at_utc": "2026-11-15T16:14:43Z",
+      "file": "apps/appstore_global/2026-11/2026-11-16.csv",
+      "sha256": "d36516b5ea6dd923c834e97e6826e364c1b9eb38989937d21ec2c75ae9de7d1a"
+    },
+    "hk_carpark_vacancy": {
+      "ok": true,
+      "rows": 762,
+      "seconds": 3.4,
+      "fetched_at_utc": "2026-11-15T16:14:43Z",
+      "file": "transport/hk_carpark_vacancy/2026-11/2026-11-16.csv",
+      "sha256": "fef8b20a3c8e03add96ed22f7d0ab47d82d99d3b4d68ce3ce79216730ed7601f"
+    },
+    "hk_weather_forecast": {
+      "ok": true,
+      "rows": 9,
+      "seconds": 2.3,
+      "fetched_at_utc": "2026-11-15T16:14:43Z",
+      "file": "weather/hk_weather_forecast/2026-11/2026-11-16.csv",
+      "sha256": "cf6cb3a9e91ba65ab02d1ca734b585f8f08d7d0c4c515f0a2932d50d8b885a1d"
+    },
+    "huggingface_models": {
+      "ok": true,
+      "rows": 1205,
+      "seconds": 13.7,
+      "fetched_at_utc": "2026-11-15T16:14:43Z",
+      "file": "ai/huggingface_models/2026-11/2026-11-16.csv",
+      "sha256": "a08bb3225989c69995aa4a07ee06464e14ea5dc750f86911e127cee3293435ec"
+    },
+    "llm_api_prices": {
+      "ok": true,
+      "rows": 467,
+      "seconds": 0.1,
+      "fetched_at_utc": "2026-11-15T16:14:43Z",
+      "file": "ai/llm_api_prices/2026-11/2026-11-16.csv",
+      "sha256": "be333f78b394b92791b51676e46d2de12dddc1c8fe3e5764dfac41162f503d1a"
+    }
+  }
+}
