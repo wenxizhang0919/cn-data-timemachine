@@ -1,6 +1,6 @@
 {
-  "code_commit": "cd6a89c67cfee71468fd55ee9c2e3e6b0f93d7d5",
-  "created_at_utc": "2026-11-15T16:20:43Z",
+  "code_commit": "4088b4c9bb2c3e57fa8871ce8d6424ee37285b00",
+  "created_at_utc": "2026-11-15T16:27:44Z",
   "date": "2026-11-16",
   "files": [
     {
@@ -58,6 +58,15 @@
       "sha256": "fef8b20a3c8e03add96ed22f7d0ab47d82d99d3b4d68ce3ce79216730ed7601f"
     },
     {
+      "bytes": 13532,
+      "category": "weather",
+      "content_id": "cn_surface_water_quality@2026-11-16#447dc581e414",
+      "dataset": "cn_surface_water_quality",
+      "path": "data/raw/weather/cn_surface_water_quality/2026-11/2026-11-16.csv",
+      "rows": 65,
+      "sha256": "447dc581e414a976e39bab99c9326975c32397ac7af5c1a6214d5eb36a839f23"
+    },
+    {
       "bytes": 4982,
       "category": "weather",
       "content_id": "hk_weather_forecast@2026-11-16#cf6cb3a9e91b",
@@ -88,6 +97,13 @@
       "ok": true,
       "rows": 14799,
       "runner": "github"
+    },
+    "cn_surface_water_quality": {
+      "fetched_at_utc": "2026-11-15T16:27:10Z",
+      "ok": true,
+      "rows": 65,
+      "runner": "server",
+      "warning": "行数骤降：65 行，前一次为 1564 行，可能是数据源改版"
     },
     "hk_carpark_vacancy": {
       "fetched_at_utc": "2026-11-15T16:14:43Z",
