@@ -1,6 +1,6 @@
 {
-  "code_commit": "5ce60bb6f2bad042b23b0f051ffac3896ef6aae0",
-  "created_at_utc": "2026-11-15T05:27:41Z",
+  "code_commit": "83aef570b9ed980b29f4c1023657672b97aee014",
+  "created_at_utc": "2026-11-15T06:11:29Z",
   "date": "2026-11-15",
   "files": [
     {
@@ -49,13 +49,13 @@
       "sha256": "848c7b621eaa66feb6ba00dab47f2cfc7f24268b8a9260c7c194c1a017cd8454"
     },
     {
-      "bytes": 29761,
+      "bytes": 33948,
       "category": "apps",
-      "content_id": "steam_cn@2026-11-15#1d5deb4ab0b9",
+      "content_id": "steam_cn@2026-11-15#64e1cf09f6fd",
       "dataset": "steam_cn",
       "path": "data/raw/apps/steam_cn/2026-11/2026-11-15.csv",
-      "rows": 175,
-      "sha256": "1d5deb4ab0b90d825252acb8572d0e6066b0e5da8d9ff69cf752828632866c82"
+      "rows": 200,
+      "sha256": "64e1cf09f6fd2913a74700c2e2855451c96d51a099016e3c558e371118255f1d"
     },
     {
       "bytes": 296224,
@@ -103,13 +103,13 @@
       "sha256": "06971603e913acf6da6e6c93cad8d4008f98fcc6aef8deba8037a65413b19fd9"
     },
     {
-      "bytes": 3557299,
+      "bytes": 3788294,
       "category": "weather",
-      "content_id": "cn_surface_water_quality@2026-11-15#880c6a6f61ac",
+      "content_id": "cn_surface_water_quality@2026-11-15#b5750555110f",
       "dataset": "cn_surface_water_quality",
       "path": "data/raw/weather/cn_surface_water_quality/2026-11/2026-11-15.csv",
-      "rows": 18719,
-      "sha256": "880c6a6f61ac5534621a16db5a49b7e31eb41b3580caf7019394d80859cd480e"
+      "rows": 19940,
+      "sha256": "b5750555110f4fe1dde300953e0927c43def8da1a69230f61d7a4dac106271b1"
     },
     {
       "bytes": 6354674,
@@ -165,9 +165,9 @@
       "runner": "server"
     },
     "cn_surface_water_quality": {
-      "fetched_at_utc": "2026-11-15T05:27:09Z",
+      "fetched_at_utc": "2026-11-15T06:07:09Z",
       "ok": true,
-      "rows": 18719,
+      "rows": 19940,
       "runner": "server"
     },
     "cn_weather_hourly_obs": {
@@ -213,11 +213,10 @@
       "runner": "server"
     },
     "steam_cn": {
-      "fetched_at_utc": "2026-11-15T02:47:09Z",
+      "fetched_at_utc": "2026-11-15T06:07:09Z",
       "ok": true,
-      "rows": 175,
-      "runner": "server",
-      "warning": "部分榜单采集中途出错，数据不完整：topsellers: ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='store.steampowered.com', port=443): Max retries exceeded with url: /search/results/?filter=topsellers&cc=cn&l=schinese&start=75&count=25&infinite=1 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x78587"
+      "rows": 200,
+      "runner": "server"
     }
   }
 }
