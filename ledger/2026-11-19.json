@@ -1,6 +1,6 @@
 {
-  "code_commit": "a04d3882715eec660b5d0331025af24e265e20ce",
-  "created_at_utc": "2026-11-19T02:27:53Z",
+  "code_commit": "a9c9840e496adb19bee2c5b4e532bb99da5ac72c",
+  "created_at_utc": "2026-11-19T03:07:25Z",
   "date": "2026-11-19",
   "files": [
     {
@@ -40,6 +40,24 @@
       "sha256": "e97c3d06c9d2c9b240dab8ac1821659ae4165141c97a18f0854ebbea26083a83"
     },
     {
+      "bytes": 202310,
+      "category": "apps",
+      "content_id": "mi_appstore_rank@2026-11-19#3f21659f7e21",
+      "dataset": "mi_appstore_rank",
+      "path": "data/raw/apps/mi_appstore_rank/2026-11/2026-11-19.csv",
+      "rows": 1748,
+      "sha256": "3f21659f7e214ece6d09d3d5c8e82d8a0ff8dfd722e940386f0ba1ec5e9a5f4f"
+    },
+    {
+      "bytes": 34129,
+      "category": "apps",
+      "content_id": "steam_cn@2026-11-19#88a9df4d6a16",
+      "dataset": "steam_cn",
+      "path": "data/raw/apps/steam_cn/2026-11/2026-11-19.csv",
+      "rows": 200,
+      "sha256": "88a9df4d6a16f70895d1a3e44437a871de8f107c2292f69bc3354db76a2bf0b2"
+    },
+    {
       "bytes": 295111,
       "category": "media",
       "content_id": "apple_podcasts_cn@2026-11-19#abaff28b6b1d",
@@ -47,6 +65,24 @@
       "path": "data/raw/media/apple_podcasts_cn/2026-11/2026-11-19.csv",
       "rows": 1893,
       "sha256": "abaff28b6b1d5ac85ac36f8f4643944b83614414ef873352bf9b7ebf8fbd15f3"
+    },
+    {
+      "bytes": 25303,
+      "category": "real_estate",
+      "content_id": "bj_housing_daily@2026-11-19#3c192b88e3dd",
+      "dataset": "bj_housing_daily",
+      "path": "data/raw/real_estate/bj_housing_daily/2026-11/2026-11-19.csv",
+      "rows": 213,
+      "sha256": "3c192b88e3ddfdd0fd3dbffe0c84ae066aab05de1d1b9fbe621d830e7b2ac80e"
+    },
+    {
+      "bytes": 4088,
+      "category": "real_estate",
+      "content_id": "gz_housing_daily@2026-11-19#8faac7e0c758",
+      "dataset": "gz_housing_daily",
+      "path": "data/raw/real_estate/gz_housing_daily/2026-11/2026-11-19.csv",
+      "rows": 33,
+      "sha256": "8faac7e0c75813d774e875ce7bd53cc0870e8f732c1f5f6338e8063efb332607"
     },
     {
       "bytes": 88926,
@@ -58,13 +94,31 @@
       "sha256": "e6b181fe74ca1d31ed8847bc2f07c7a7486a4ea4d03826f5db1d70bd6fdd7672"
     },
     {
-      "bytes": 2713015,
+      "bytes": 4203515,
       "category": "weather",
-      "content_id": "cn_surface_water_quality@2026-11-19#13a70d1141d3",
+      "content_id": "cn_city_weather_forecast@2026-11-19#b18c8dbc3600",
+      "dataset": "cn_city_weather_forecast",
+      "path": "data/raw/weather/cn_city_weather_forecast/2026-11/2026-11-19.csv",
+      "rows": 17689,
+      "sha256": "b18c8dbc36003aacf5109dd387452eaa5668e70f062f3fdd2f00e1c8e25a24dd"
+    },
+    {
+      "bytes": 3008701,
+      "category": "weather",
+      "content_id": "cn_surface_water_quality@2026-11-19#d32a97025467",
       "dataset": "cn_surface_water_quality",
       "path": "data/raw/weather/cn_surface_water_quality/2026-11/2026-11-19.csv",
-      "rows": 14308,
-      "sha256": "13a70d1141d39a82924b337d751ea5ebe70ce1171aa24702104f9b3b101ffc5a"
+      "rows": 15855,
+      "sha256": "d32a97025467b191e7573855a6ecd11cdc872ef60faee0f05382cf9ea6e8724a"
+    },
+    {
+      "bytes": 6364370,
+      "category": "weather",
+      "content_id": "cn_weather_hourly_obs@2026-11-19#a10b80527d74",
+      "dataset": "cn_weather_hourly_obs",
+      "path": "data/raw/weather/cn_weather_hourly_obs/2026-11/2026-11-19.csv",
+      "rows": 60528,
+      "sha256": "a10b80527d744ccd9e7ae0cf562804472239d7e80bc4cf939dab13d8e03aa978"
     },
     {
       "bytes": 6174,
@@ -98,10 +152,34 @@
       "rows": 14800,
       "runner": "github"
     },
-    "cn_surface_water_quality": {
-      "fetched_at_utc": "2026-11-19T02:27:09Z",
+    "bj_housing_daily": {
+      "fetched_at_utc": "2026-11-19T02:47:09Z",
       "ok": true,
-      "rows": 14308,
+      "rows": 213,
+      "runner": "server"
+    },
+    "cn_city_weather_forecast": {
+      "fetched_at_utc": "2026-11-19T02:47:09Z",
+      "ok": true,
+      "rows": 17689,
+      "runner": "server"
+    },
+    "cn_surface_water_quality": {
+      "fetched_at_utc": "2026-11-19T02:47:09Z",
+      "ok": true,
+      "rows": 15855,
+      "runner": "server"
+    },
+    "cn_weather_hourly_obs": {
+      "fetched_at_utc": "2026-11-19T02:47:09Z",
+      "ok": true,
+      "rows": 60528,
+      "runner": "server"
+    },
+    "gz_housing_daily": {
+      "fetched_at_utc": "2026-11-19T02:47:09Z",
+      "ok": true,
+      "rows": 33,
       "runner": "server"
     },
     "hk_carpark_vacancy": {
@@ -127,6 +205,18 @@
       "ok": true,
       "rows": 478,
       "runner": "github"
+    },
+    "mi_appstore_rank": {
+      "fetched_at_utc": "2026-11-19T02:47:09Z",
+      "ok": true,
+      "rows": 1748,
+      "runner": "server"
+    },
+    "steam_cn": {
+      "fetched_at_utc": "2026-11-19T02:47:09Z",
+      "ok": true,
+      "rows": 200,
+      "runner": "server"
     }
   }
 }
