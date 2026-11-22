@@ -55,12 +55,11 @@
     },
     "steam_cn": {
       "ok": true,
-      "rows": 150,
-      "seconds": 404.0,
-      "fetched_at_utc": "2026-11-22T02:47:09Z",
+      "rows": 200,
+      "seconds": 17.8,
+      "fetched_at_utc": "2026-11-22T09:37:09Z",
       "file": "apps/steam_cn/2026-11/2026-11-22.csv",
-      "sha256": "67067a335c16616178e1f189d5210bdab23c6f4e267b4fd2077c636e65359e3c",
-      "warning": "部分榜单采集中途出错，数据不完整：popularnew: ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='store.steampowered.com', port=443): Max retries exceeded with url: /search/results/?filter=popularnew&cc=cn&l=schinese&start=50&count=25&infinite=1 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x774df"
+      "sha256": "a5242f453a66eaac8a9f27c1d1f5d0a40b8bbb4ea702b55434b34fbcaa71a20d"
     }
   }
 }
