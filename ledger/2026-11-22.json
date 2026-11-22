@@ -1,6 +1,6 @@
 {
-  "code_commit": "e9fb122b08c20aa2f2687e810d04151b8b2f9167",
-  "created_at_utc": "2026-11-22T04:28:00Z",
+  "code_commit": "7d50d50739242181d2846655d4e0325ba96f9575",
+  "created_at_utc": "2026-11-22T05:27:56Z",
   "date": "2026-11-22",
   "files": [
     {
@@ -103,13 +103,13 @@
       "sha256": "f893aa0a3c2ce731f5269d80a21c57fac8bdc5f1459980d0a4aca18c0b4b9251"
     },
     {
-      "bytes": 3296666,
+      "bytes": 3528497,
       "category": "weather",
-      "content_id": "cn_surface_water_quality@2026-11-22#a31719a5849f",
+      "content_id": "cn_surface_water_quality@2026-11-22#17b3a37e008e",
       "dataset": "cn_surface_water_quality",
       "path": "data/raw/weather/cn_surface_water_quality/2026-11/2026-11-22.csv",
-      "rows": 17375,
-      "sha256": "a31719a5849ffaafe617fa127b8f8accc9ecd5390b5794515035778b20d6ce81"
+      "rows": 18586,
+      "sha256": "17b3a37e008e305ac4345416d9b54a6e2a47a75840516cdd61c4aa786cafa583"
     },
     {
       "bytes": 6239759,
@@ -165,9 +165,9 @@
       "runner": "server"
     },
     "cn_surface_water_quality": {
-      "fetched_at_utc": "2026-11-22T04:27:10Z",
+      "fetched_at_utc": "2026-11-22T05:27:09Z",
       "ok": true,
-      "rows": 17375,
+      "rows": 18586,
       "runner": "server"
     },
     "cn_weather_hourly_obs": {
