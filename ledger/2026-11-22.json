@@ -1,6 +1,6 @@
 {
-  "code_commit": "0e72e5eae584fe601ba0e6e3518b7e6a1a943d50",
-  "created_at_utc": "2026-11-22T09:28:01Z",
+  "code_commit": "98a158dce4ef627fc6beed13d1fbac5cdaee1ef4",
+  "created_at_utc": "2026-11-22T09:38:13Z",
   "date": "2026-11-22",
   "files": [
     {
@@ -49,13 +49,13 @@
       "sha256": "e5893cb2f97f188f96cffbdc761fa4a8e893a3c9fa885bf5a4ecf5814fb04921"
     },
     {
-      "bytes": 25480,
+      "bytes": 33821,
       "category": "apps",
-      "content_id": "steam_cn@2026-11-22#67067a335c16",
+      "content_id": "steam_cn@2026-11-22#a5242f453a66",
       "dataset": "steam_cn",
       "path": "data/raw/apps/steam_cn/2026-11/2026-11-22.csv",
-      "rows": 150,
-      "sha256": "67067a335c16616178e1f189d5210bdab23c6f4e267b4fd2077c636e65359e3c"
+      "rows": 200,
+      "sha256": "a5242f453a66eaac8a9f27c1d1f5d0a40b8bbb4ea702b55434b34fbcaa71a20d"
     },
     {
       "bytes": 297164,
@@ -213,11 +213,10 @@
       "runner": "server"
     },
     "steam_cn": {
-      "fetched_at_utc": "2026-11-22T02:47:09Z",
+      "fetched_at_utc": "2026-11-22T09:37:09Z",
       "ok": true,
-      "rows": 150,
-      "runner": "server",
-      "warning": "部分榜单采集中途出错，数据不完整：popularnew: ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='store.steampowered.com', port=443): Max retries exceeded with url: /search/results/?filter=popularnew&cc=cn&l=schinese&start=50&count=25&infinite=1 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x774df"
+      "rows": 200,
+      "runner": "server"
     }
   }
 }
