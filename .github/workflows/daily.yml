@@ -101,7 +101,12 @@ jobs:
           # 当日版本标签：论文可引用到某一天的确切版本
           tag="snapshot-${{ steps.d.outputs.date }}"
           git tag -f "$tag"
-          git push -f origin "refs/tags/$tag"
+          # 标签只是锦上添花：GitHub 偶发存储错误（remote unpack failed）时重试，仍失败也不让任务标红（数据已推到 main）
+          for i in 1 2 3; do
+            git push -f origin "refs/tags/$tag" && break
+            echo "::warning::标签 $tag 推送失败（第 $i 次）"
+            sleep 10
+          done
 
       # 有数据源失败时让整个任务标红，GitHub 会发邮件提醒仓库主人
       - name: Fail if any source failed
