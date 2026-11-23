@@ -1,6 +1,6 @@
 {
-  "code_commit": "d7abf2b3ecceccb45be5be705788266e1f5427d7",
-  "created_at_utc": "2026-11-23T16:33:20Z",
+  "code_commit": "1efc458d7fd447b0ed0654debc72a3852f585683",
+  "created_at_utc": "2026-11-23T17:28:04Z",
   "date": "2026-11-24",
   "files": [
     {
@@ -58,6 +58,15 @@
       "sha256": "bfde7a3ed59c95b0e16f2e4ec277088b9cc4d702504d534724077726f650b859"
     },
     {
+      "bytes": 231911,
+      "category": "weather",
+      "content_id": "cn_surface_water_quality@2026-11-24#6401bc1c8ec0",
+      "dataset": "cn_surface_water_quality",
+      "path": "data/raw/weather/cn_surface_water_quality/2026-11/2026-11-24.csv",
+      "rows": 1222,
+      "sha256": "6401bc1c8ec0ed5255d3ff3113299a3cbeaf6df9c582238ecdb3cd6ebb5bb590"
+    },
+    {
       "bytes": 5497,
       "category": "weather",
       "content_id": "hk_weather_forecast@2026-11-24#8c8488feaa66",
@@ -88,6 +97,12 @@
       "ok": true,
       "rows": 14800,
       "runner": "github"
+    },
+    "cn_surface_water_quality": {
+      "fetched_at_utc": "2026-11-23T17:27:10Z",
+      "ok": true,
+      "rows": 1222,
+      "runner": "server"
     },
     "hk_carpark_vacancy": {
       "fetched_at_utc": "2026-11-23T16:27:57Z",
