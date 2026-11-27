@@ -4,14 +4,62 @@
   "sources": {
     "cn_surface_water_quality": {
       "ok": true,
-      "rows": 14463,
-      "seconds": 4.2,
-      "fetched_at_utc": "2026-11-27T02:27:09Z",
+      "rows": 15750,
+      "seconds": 4.3,
+      "fetched_at_utc": "2026-11-27T02:47:09Z",
       "file": "weather/cn_surface_water_quality/2026-11/2026-11-27.csv",
-      "sha256": "ccfe4a0789c1bd84a3b7db8e91759b3704cc10124d694775c1fb1ae8b731f76a",
-      "fetched": 1562,
-      "added": 1547,
-      "runs": 11
+      "sha256": "254fcac2224d451699437d2aaa64dce518441f2e18dfafe41e79a440f4b251b5",
+      "fetched": 1563,
+      "added": 1287,
+      "runs": 12
+    },
+    "bj_housing_daily": {
+      "ok": true,
+      "rows": 213,
+      "seconds": 0.3,
+      "fetched_at_utc": "2026-11-27T02:47:09Z",
+      "file": "real_estate/bj_housing_daily/2026-11/2026-11-27.csv",
+      "sha256": "e428b51ea62cd7a18aacfaf3c8aa3f8d3eb0922796a61cd65e46f7a9e73a0801"
+    },
+    "cn_city_weather_forecast": {
+      "ok": true,
+      "rows": 17689,
+      "seconds": 784.7,
+      "fetched_at_utc": "2026-11-27T02:47:09Z",
+      "file": "weather/cn_city_weather_forecast/2026-11/2026-11-27.csv",
+      "sha256": "9a01bac08125a6991a420be1d90e9682e540bf191cfa178a9af98fb12df7eb47"
+    },
+    "cn_weather_hourly_obs": {
+      "ok": true,
+      "rows": 60528,
+      "seconds": 0.5,
+      "fetched_at_utc": "2026-11-27T02:47:09Z",
+      "file": "weather/cn_weather_hourly_obs/2026-11/2026-11-27.csv",
+      "sha256": "6f9611cbfc8cd2ef44c0d69ff398e9b4eb520bf244b6b5a33fce220565334d67"
+    },
+    "gz_housing_daily": {
+      "ok": true,
+      "rows": 33,
+      "seconds": 3.4,
+      "fetched_at_utc": "2026-11-27T02:47:09Z",
+      "file": "real_estate/gz_housing_daily/2026-11/2026-11-27.csv",
+      "sha256": "4223b3d7eb91bba71018300ab46248c2d0dbb0be828e59620edced47097de282"
+    },
+    "mi_appstore_rank": {
+      "ok": true,
+      "rows": 1746,
+      "seconds": 57.5,
+      "fetched_at_utc": "2026-11-27T02:47:09Z",
+      "file": "apps/mi_appstore_rank/2026-11/2026-11-27.csv",
+      "sha256": "ad97599b0ff6466c6590b691c84b516fb773394db487ade4b0b1eab8ced8a1c2"
+    },
+    "steam_cn": {
+      "ok": true,
+      "rows": 200,
+      "seconds": 18.4,
+      "fetched_at_utc": "2026-11-27T02:47:09Z",
+      "file": "apps/steam_cn/2026-11/2026-11-27.csv",
+      "sha256": "d7b40e93a934ac77666e8b073ba0a9454d7bd9a923a748992e2eed6963c9e566"
     }
   }
 }
