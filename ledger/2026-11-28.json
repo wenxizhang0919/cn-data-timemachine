@@ -1,0 +1,133 @@
+{
+  "code_commit": "fa4c2149f625b692a160a86ab686de78722a5997",
+  "created_at_utc": "2026-11-27T16:33:05Z",
+  "date": "2026-11-28",
+  "files": [
+    {
+      "bytes": 166977,
+      "category": "ai",
+      "content_id": "huggingface_models@2026-11-28#4e3f1bde020e",
+      "dataset": "huggingface_models",
+      "path": "data/raw/ai/huggingface_models/2026-11/2026-11-28.csv",
+      "rows": 1208,
+      "sha256": "4e3f1bde020e889e4550b2f9cc7fb0bab5b29b7cc2bfe319cac2e3be09a4421a"
+    },
+    {
+      "bytes": 66080,
+      "category": "ai",
+      "content_id": "llm_api_prices@2026-11-28#eba98f4974a5",
+      "dataset": "llm_api_prices",
+      "path": "data/raw/ai/llm_api_prices/2026-11/2026-11-28.csv",
+      "rows": 477,
+      "sha256": "eba98f4974a5bde90694240a52c1a3b8f89c35aab521ad58796534812ba7fd90"
+    },
+    {
+      "bytes": 1756106,
+      "category": "apps",
+      "content_id": "appstore_cn@2026-11-28#0e88181b4f9a",
+      "dataset": "appstore_cn",
+      "path": "data/raw/apps/appstore_cn/2026-11/2026-11-28.csv",
+      "rows": 8353,
+      "sha256": "0e88181b4f9a1c5bb741f414ceceb750bbe41de6c824714bdf23257626be813e"
+    },
+    {
+      "bytes": 2273699,
+      "category": "apps",
+      "content_id": "appstore_global@2026-11-28#ff10541ebb15",
+      "dataset": "appstore_global",
+      "path": "data/raw/apps/appstore_global/2026-11/2026-11-28.csv",
+      "rows": 14800,
+      "sha256": "ff10541ebb156b4c63dd96361931e60b235484e22140683022327c29e59d4be0"
+    },
+    {
+      "bytes": 291988,
+      "category": "media",
+      "content_id": "apple_podcasts_cn@2026-11-28#73ae069ae57c",
+      "dataset": "apple_podcasts_cn",
+      "path": "data/raw/media/apple_podcasts_cn/2026-11/2026-11-28.csv",
+      "rows": 1871,
+      "sha256": "73ae069ae57cb1b2e49b09f2ad5297f9b1858d31e587710072a84c5108ec7220"
+    },
+    {
+      "bytes": 89473,
+      "category": "transport",
+      "content_id": "hk_carpark_vacancy@2026-11-28#2eb3433156b0",
+      "dataset": "hk_carpark_vacancy",
+      "path": "data/raw/transport/hk_carpark_vacancy/2026-11/2026-11-28.csv",
+      "rows": 764,
+      "sha256": "2eb3433156b0b58650c871d7202ae7a1ce76f768a03bd15bd90646bd743eec52"
+    },
+    {
+      "bytes": 5348,
+      "category": "weather",
+      "content_id": "cn_surface_water_quality@2026-11-28#e76f11774c05",
+      "dataset": "cn_surface_water_quality",
+      "path": "data/raw/weather/cn_surface_water_quality/2026-11/2026-11-28.csv",
+      "rows": 23,
+      "sha256": "e76f11774c05a44a9d46668d8209a929025179e0f4c8fb5bed995ccce86cf3d0"
+    },
+    {
+      "bytes": 4940,
+      "category": "weather",
+      "content_id": "hk_weather_forecast@2026-11-28#99c045707fb2",
+      "dataset": "hk_weather_forecast",
+      "path": "data/raw/weather/hk_weather_forecast/2026-11/2026-11-28.csv",
+      "rows": 9,
+      "sha256": "99c045707fb2fedf5f4d7257e9c21081596d86c5c5610aedb13b2462c1675820"
+    }
+  ],
+  "prev_date": "2026-11-27",
+  "prev_ledger_sha256": "4a14f5efe8f67d5b5e822a770087374ea7946463bdd7222073afb61e6d678044",
+  "schema": "cn-data-timemachine/ledger/v1",
+  "sources": {
+    "apple_podcasts_cn": {
+      "fetched_at_utc": "2026-11-27T16:28:03Z",
+      "ok": true,
+      "rows": 1871,
+      "runner": "github"
+    },
+    "appstore_cn": {
+      "fetched_at_utc": "2026-11-27T16:28:03Z",
+      "ok": true,
+      "rows": 8353,
+      "runner": "github"
+    },
+    "appstore_global": {
+      "fetched_at_utc": "2026-11-27T16:28:03Z",
+      "ok": true,
+      "rows": 14800,
+      "runner": "github"
+    },
+    "cn_surface_water_quality": {
+      "fetched_at_utc": "2026-11-27T16:27:09Z",
+      "ok": true,
+      "rows": 23,
+      "runner": "server",
+      "warning": "行数骤降：23 行，前一次为 1569 行，可能是数据源改版"
+    },
+    "hk_carpark_vacancy": {
+      "fetched_at_utc": "2026-11-27T16:28:03Z",
+      "ok": true,
+      "rows": 764,
+      "runner": "github"
+    },
+    "hk_weather_forecast": {
+      "fetched_at_utc": "2026-11-27T16:28:03Z",
+      "ok": true,
+      "rows": 9,
+      "runner": "github"
+    },
+    "huggingface_models": {
+      "fetched_at_utc": "2026-11-27T16:28:03Z",
+      "ok": true,
+      "rows": 1208,
+      "runner": "github"
+    },
+    "llm_api_prices": {
+      "fetched_at_utc": "2026-11-27T16:28:03Z",
+      "ok": true,
+      "rows": 477,
+      "runner": "github"
+    }
+  }
+}
